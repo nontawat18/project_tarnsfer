@@ -15,7 +15,7 @@
 
       <NavigationSideBar />
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar :clipped-left="clipped" fixed app elevation="0">
       <v-app-bar-nav-icon @click.stop="miniVariant = !miniVariant" />
       <v-spacer></v-spacer>
       <v-btn icon @click="toggleTheme">
