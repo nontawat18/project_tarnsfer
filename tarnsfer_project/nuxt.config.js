@@ -15,7 +15,11 @@ export default {
             { name: 'format-detection', content: 'telephone=no' }
         ],
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {
+                rel: "stylesheet",
+                href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100&family=Prompt:wght@300&display=swa",
+            },
         ]
     },
 
@@ -39,7 +43,8 @@ export default {
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
-        customVariables: ['~/assets/variables.scss'],
+        customVariables: ["~/assets/variables.scss"],
+        treeShake: true,
         theme: {
             dark: false,
             themes: {

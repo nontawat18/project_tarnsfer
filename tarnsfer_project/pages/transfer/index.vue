@@ -41,7 +41,7 @@
                   value="ขอเทียบโอนรายวิชา"
                 ></v-checkbox>
               </v-col>
-              <v-col ols="6" class="pb-0 ">
+              <v-col ols="6" class="pb-0">
                 <v-checkbox
                   v-model="selected"
                   label="ขอเทียบเพื่อเรียนแทน"
@@ -56,7 +56,81 @@
           <v-col v-else>
             <TransferStudyInstead />
           </v-col>
-
+          <v-col>
+            <v-col class="pb-8">
+              <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
+            </v-col>
+            <v-col>
+              <v-row>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 1"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvOne"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 2"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvTwo"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 3"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvThree"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 4"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvFour"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 5"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvFive"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 6"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="name"
+                    item-value="id"
+                    v-model="approvSix"
+                  ></v-combobox>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-col>
 
           <v-divider></v-divider>
 
@@ -103,6 +177,21 @@ export default {
       { text: "TF0006", value: "univercity", sortable: false },
       { text: "TF0007", value: "actions", sortable: false },
     ],
+    teacher: [
+      { name: "nontawat", id: 1 },
+      { name: "thawat", id: 2 },
+      { name: "worachet", id: 3 },
+      { name: "piyawat", id: 4 },
+      { name: "chalermchai", id: 5 },
+      { name: "anantachai", id: 6 },
+      { name: "weerawat", id: 7 },
+    ],
+    approvOne: "",
+    approvTwo: "",
+    approvThree: "",
+    approvFour: "",
+    approvFive: "",
+    approvSix: "",
   }),
 };
 </script>
