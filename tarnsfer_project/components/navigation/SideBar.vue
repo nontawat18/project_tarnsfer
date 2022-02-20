@@ -33,14 +33,14 @@
         <v-list-item-title v-text="`หน้าแรก`" />
       </v-list-item>
     </div>
-    <!-- <div>
+    <div>
       <v-list-item :to="`/subject/`" class="v-list-item">
         <v-list-item-icon>
           <v-icon>mdi-database</v-icon>
         </v-list-item-icon>
         <v-list-item-title v-text="`คลังวิชา`" />
       </v-list-item>
-    </div> -->
+    </div>
     <div>
       <v-list-item :to="`/transfer/`" class="v-list-item">
         <v-list-item-icon>

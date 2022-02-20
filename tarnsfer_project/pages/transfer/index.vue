@@ -10,16 +10,64 @@
       ></v-text-field>
     </v-col>
     <v-col class="text-right">
-      <v-btn
-        color=""
-        elevation="0"
-        fab
-        small
-        class="mb-2"
-
-      >
+      <!-- <v-btn color="" elevation="0" fab small class="mb-2">
         <v-icon> mdi-plus</v-icon>
-      </v-btn>
+      </v-btn> -->
+
+      <v-dialog v-model="dialog" width="90%">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color=""
+            elevation="0"
+            fab
+            small
+            class="mb-2"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon> mdi-plus</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
+          <v-divider></v-divider>
+          <v-col>
+            <v-row>
+              <v-col cols="6" class="pb-0 pl-7">
+                <v-checkbox
+                  v-model="selected"
+                  label="ขอเทียบโอนรายวิชา"
+                  value="ขอเทียบโอนรายวิชา"
+                ></v-checkbox>
+              </v-col>
+              <v-col ols="6" class="pb-0 ">
+                <v-checkbox
+                  v-model="selected"
+                  label="ขอเทียบเพื่อเรียนแทน"
+                  value="ขอเทียบเพื่อเรียนแทน"
+                ></v-checkbox>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">
+            <TransferSubject />
+          </v-col>
+          <v-col v-else>
+            <TransferStudyInstead />
+          </v-col>
+
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="dialog = false">
+              I accept
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-col>
 
     <div>
@@ -40,6 +88,7 @@ export default {
   data: () => ({
     dialog: false,
     search: "",
+    selected: "",
     headers: [
       {
         text: "TF0001",
