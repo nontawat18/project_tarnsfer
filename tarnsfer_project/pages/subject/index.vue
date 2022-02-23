@@ -2,7 +2,7 @@
   <div class="pt-4">
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="myCourse"
       :search="search"
       class="elevation-1"
     >
@@ -106,8 +106,12 @@
         </v-col>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small color="primary" class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small color="red"  @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-icon small color="primary" class="mr-2" @click="editItem(item)">
+          mdi-pencil
+        </v-icon>
+        <v-icon small color="red" @click="deleteItem(item)">
+          mdi-delete
+        </v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -116,6 +120,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   data: () => ({
     dialog: false,
@@ -126,10 +132,10 @@ export default {
         text: "รหัสวิชา",
         align: "start",
         sortable: false,
-        value: "serail_subject",
+        value: "course_code",
       },
-      { text: "ชื่อ", value: "subject_name", sortable: false },
-      { text: "คำอธิบายรายวิชา", value: "description", sortable: false },
+      { text: "ชื่อ", value: "subject", sortable: false },
+      { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
       { text: "เกรด", value: "grade", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
       { text: "มหาวิทยาลัย/วิทยาลัย", value: "univercity", sortable: false },
@@ -159,6 +165,16 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
+    myCourse: {
+      get() {
+        if (this.$store.state.subject.myCourse) {
+          return this.$store.state.subject.myCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
 
   watch: {
@@ -173,8 +189,13 @@ export default {
   created() {
     this.initialize();
   },
-
+  mounted() {
+    this.getMyCourse();
+  },
   methods: {
+    ...mapActions({
+      getMyCourse: "subject/getMyCourse",
+    }),
     initialize() {
       this.desserts = [
         {

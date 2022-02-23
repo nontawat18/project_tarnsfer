@@ -27,8 +27,13 @@ export default {
     css: [],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+    plugins: [
+        { src: "~/plugins/axios.js", ssr: false },
+        { src: "~/plugins/persistedState.client.js" },
+    ],
+    ssr: false,
 
+    target: "static",
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
 
@@ -37,9 +42,14 @@ export default {
         // https://go.nuxtjs.dev/vuetify
         '@nuxtjs/vuetify',
     ],
-
+    axios: {
+        // proxy: true
+    },
     // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [],
+    modules: [
+        '@nuxtjs/axios',
+
+    ],
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
