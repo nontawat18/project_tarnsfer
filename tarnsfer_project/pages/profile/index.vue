@@ -1,13 +1,7 @@
 <template>
   <div>
     <v-col class="text-right pa-0">
-      <v-btn
-        color="red"
-        elevation="0"
-        small
-        icon
-        class="mb-2"
-      >
+      <v-btn color="red" elevation="0" small icon class="mb-2" outlined>
         <v-icon> mdi-pencil</v-icon>
       </v-btn>
     </v-col>
@@ -22,14 +16,14 @@
         <h3 class="">John Doe</h3>
       </v-col>
     </v-col>
-    <v-card elevation="1">
+    <v-card elevation="0" outlined>
       <v-card-text>
         <v-row>
           <v-col cols="3">
             <strong>ชื่อ - สกุล</strong>
           </v-col>
           <v-col cols="9">
-            <span>John Doe</span>
+            <span>{{userLogin.first_name}} {{userLogin.last_name}}</span>
           </v-col>
         </v-row>
         <v-row>
@@ -92,3 +86,19 @@
     </v-card>
   </div>
 </template>
+<script>
+export default {
+   computed: {
+    userLogin: {
+      get() {
+        if (this.$store.state.users.userLogin) {
+          return this.$store.state.users.userLogin.user;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+  },
+}
+</script>

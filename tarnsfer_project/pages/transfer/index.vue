@@ -9,6 +9,7 @@
         class=""
       ></v-text-field>
     </v-col>
+    {{ equivalentCourse }}
     <v-col class="text-right">
       <!-- <v-btn color="" elevation="0" fab small class="mb-2">
         <v-icon> mdi-plus</v-icon>
@@ -146,18 +147,23 @@
 
     <div>
       <v-row>
-        <v-col v-for="(menu, i) in headers" :key="i" cols="12" sm="3">
-          <v-card elevation="1" height="75" width="100%">
+        <v-col v-for="(menu, i) in equivalentCourse" :key="i" cols="12" sm="3">
+          <v-card outlined height="75" width="100%">
             <v-col>
               {{ menu.text }}
             </v-col>
           </v-card>
         </v-col>
       </v-row>
+      <v-col v-if="count == 0">
+        <strong>ไม่มีใบเทียบโอน</strong>
+      </v-col>
     </div>
   </div>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   data: () => ({
     dialog: false,
@@ -193,5 +199,39 @@ export default {
     approvFive: "",
     approvSix: "",
   }),
+    computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+    },
+    equivalentCourse: {
+      get() {
+        if (this.$store.state.subject.equivalentCourse) {
+          return this.$store.state.subject.equivalentCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    count: {
+      get() {
+        if (this.$store.state.subject.equivalentCourse) {
+          return this.$store.state.subject.equivalentCourse.count;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+  },
+  mounted() {
+    this.getEquivalentCourse();
+  },
+  methods: {
+    ...mapActions({
+      getEquivalentCourse: "transfer/getEquivalentCourse",
+    }),
+
+  },
 };
 </script>

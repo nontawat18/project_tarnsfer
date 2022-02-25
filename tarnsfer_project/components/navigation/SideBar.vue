@@ -36,9 +36,17 @@
     <div>
       <v-list-item :to="`/subject/`" class="v-list-item">
         <v-list-item-icon>
-          <v-icon>mdi-database</v-icon>
+          <v-icon>mdi-book</v-icon>
         </v-list-item-icon>
         <v-list-item-title v-text="`คลังวิชา`" />
+      </v-list-item>
+    </div>
+        <div>
+      <v-list-item :to="`/basesubject/`" class="v-list-item">
+        <v-list-item-icon>
+          <v-icon>mdi-book-plus</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title v-text="`เพิ่มรายวิชามหาวิทยาลัย`" />
       </v-list-item>
     </div>
     <div>
@@ -58,7 +66,7 @@
       </v-list-item>
     </div>
     <div>
-      <v-list-item :to="`/logout/`" class="v-list-item">
+      <v-list-item @click="userLogout()" class="v-list-item">
         <v-list-item-icon>
           <v-icon>mdi-logout</v-icon>
         </v-list-item-icon>
@@ -85,6 +93,15 @@ export default {
     //   set() {},
     // },
   },
+  methods:{
+    userLogout() {
+      this.$store.dispatch("users/setPartnerId", 0);
+      this.$store.dispatch("users/setUserId", 0);
+
+      this.$store.dispatch("users/saveUser", null);
+      this.$router.push("/");
+    },
+  }
 };
 </script>
 
