@@ -1,5 +1,5 @@
 <template>
-  <v-list expand nav dense elevation="0" >
+  <v-list expand nav dense elevation="0">
     <!-- <div v-for="(menu, i) in menus" :key="i">
       <v-list-item v-if="!menu.sub_menus" :to="menu.route" avatar class="v-list-item">
         <v-list-item-icon>
@@ -41,7 +41,7 @@
         <v-list-item-title v-text="`คลังวิชา`" />
       </v-list-item>
     </div>
-        <div>
+    <div>
       <v-list-item :to="`/basesubject/`" class="v-list-item">
         <v-list-item-icon>
           <v-icon>mdi-book-plus</v-icon>
@@ -49,6 +49,15 @@
         <v-list-item-title v-text="`เพิ่มรายวิชามหาวิทยาลัย`" />
       </v-list-item>
     </div>
+
+    <!-- <div>
+      <v-list-item :to="`/course/`" class="v-list-item">
+        <v-list-item-icon>
+          <v-icon>mdi-database</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title v-text="`หลักสูตร`" />
+      </v-list-item>
+    </div> -->
     <div>
       <v-list-item :to="`/transfer/`" class="v-list-item">
         <v-list-item-icon>
@@ -93,7 +102,7 @@ export default {
     //   set() {},
     // },
   },
-  methods:{
+  methods: {
     userLogout() {
       this.$store.dispatch("users/setPartnerId", 0);
       this.$store.dispatch("users/setUserId", 0);
@@ -101,7 +110,7 @@ export default {
       this.$store.dispatch("users/saveUser", null);
       this.$router.push("/");
     },
-  }
+  },
 };
 </script>
 

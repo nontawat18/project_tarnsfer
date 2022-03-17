@@ -8,10 +8,11 @@
       :mini-variant.sync="miniVariant"
       permanent
     >
-    <div class="text-center">
+      <v-col class="text-center">
+          <img height="50%" width="100%" src="~/assets/logo.png" @click="to"/>
 
-      <v-img class="pa-3 VuetifyRotateY" height="150" width="75" :src="image"></v-img>
-    </div>
+        <!-- <v-img class="pa-3 VuetifyRotateY" height="150" width="75" :src="image"></v-img> -->
+      </v-col>
 
       <NavigationSideBar />
     </v-navigation-drawer>
@@ -76,6 +77,10 @@ export default {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem("useDarkTheme", this.$vuetify.theme.dark.toString());
     },
+    to(){
+            this.$router.push("/");
+
+    }
   },
 };
 </script>

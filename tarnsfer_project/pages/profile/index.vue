@@ -13,7 +13,7 @@
         />
       </v-avatar>
       <v-col>
-        <h3 class="">John Doe</h3>
+        <h3 class="">{{userLogin.first_name}} {{userLogin.last_name}}</h3>
       </v-col>
     </v-col>
     <v-card elevation="0" outlined>
