@@ -2,7 +2,7 @@
   <div class="pt-4">
     <v-data-table
       :headers="headers"
-      :items="myCourse"
+      :items="schoolCourse"
       :search="search"
       class="elevation-1"
     >
@@ -28,7 +28,7 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
+                <span class="text-h5">รายวิชาในมหาวิทยาลัย</span>
               </v-card-title>
 
               <v-card-text>
@@ -36,32 +36,77 @@
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.serail_subject"
-                        label="Dessert serail_subject"
+                        v-model="editedItem.course_code"
+                        label="รหัสวิชา"
+                        outlined
+                        dense
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.subject_name"
-                        label="subject_name"
+                        v-model="editedItem.course_title"
+                        label="ชื่อวิชา"
+                        outlined
+                        dense
                       ></v-text-field>
                     </v-col>
+
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.description"
-                        label="description (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.grade"
-                        label="grade (g)"
-                      ></v-text-field>
+                      <v-select
+                        v-model="editedItem.credit_type"
+                        label="ประเภทรายวิชา"
+                        :items="type"
+                        item-text="name"
+                        item-value="id"
+                        outlined
+                        dense
+                      ></v-select>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.credit"
-                        label="credit (g)"
+                        label="หน่วยกิจ"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <!-- <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.course"
+                        label="หลักสูตร"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.subject"
+                        label="สาขาวิชา"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col> -->
+                    <v-col cols="12" sm="6" md="4">
+                      <!-- <v-text-field
+                        v-model="editedItem.description_file"
+                        label="คำอธิบายรายวิชา"
+                        outlined
+                        dense
+                      ></v-text-field> -->
+                      <v-file-input
+                        outlined
+                        dense
+                        label="คำอธิบายรายวิชา"
+                        v-model="image"
+                        @change="uploadImage(image)"
+                      ></v-file-input>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.course_year"
+                        label="ปี พ.ศ"
+                        outlined
+                        dense
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -70,25 +115,21 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> บันทึก </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
-                >Are you sure you want to delete this item?</v-card-title
+                >ยืนยันต้องการลบรายวิชานี้ออกจากรายวิชาของมหาวิทยาลัย?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
+                <v-btn color="error" text @click="closeDelete">ยกเลิก</v-btn>
                 <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
+                  >ตกลง</v-btn
                 >
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -113,6 +154,13 @@
           mdi-delete
         </v-icon>
       </template>
+      <template v-slot:[`item.description_file`]="{ item }">
+        <div>
+            <v-btn class="" small elevation="0" @click="download(item)" dark color="grey">
+              <v-icon left> mdi-download</v-icon> Download
+            </v-btn>
+          </div>
+      </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
       </template>
@@ -121,12 +169,76 @@
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+const dataURItoBlob = (dataURI) => {
+  const bytes =
+    dataURI.split(",")[0].indexOf("base64") >= 0
+      ? atob(dataURI.split(",")[1])
+      : unescape(dataURI.split(",")[1]);
+  const mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
+  const max = bytes.length;
+  const ia = new Uint8Array(max);
+  for (let i = 0; i < max; i += 1) ia[i] = bytes.charCodeAt(i);
+  return new Blob([ia], { type: mime });
+};
 
+const resizeImage = ({ file, maxSize }) => {
+  const reader = new FileReader();
+  const image = new Image();
+  const canvas = document.createElement("canvas");
+
+  const resize = () => {
+    let { width, height } = image;
+
+    if (width > height) {
+      if (width > maxSize) {
+        height *= maxSize / width;
+        width = maxSize;
+      }
+    } else if (height > maxSize) {
+      width *= maxSize / height;
+      height = maxSize;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+
+    const dataUrl = canvas.toDataURL("image/jpeg");
+
+    return dataURItoBlob(dataUrl);
+  };
+
+  return new Promise((ok, no) => {
+    // if (!file.type.match(/image.*/)) {
+    //   no(new Error("Not an image"));
+    //   return;
+    // }
+
+    reader.onload = (readerEvent) => {
+      image.onload = () => ok(resize());
+      image.src = readerEvent.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+};
 export default {
   data: () => ({
     dialog: false,
     search: "",
     dialogDelete: false,
+    image: null,
+    base64: "",
+    type: [
+      {
+        id: "ท",
+        name: "ทฤษฎี",
+      },
+      {
+        id: "ป",
+        name: "ปฏิบัติ",
+      },
+    ],
     headers: [
       {
         text: "รหัสวิชา",
@@ -134,30 +246,30 @@ export default {
         sortable: false,
         value: "course_code",
       },
-      { text: "ชื่อ", value: "subject", sortable: false },
+      { text: "ชื่อวิชา", value: "course_title", sortable: false },
       { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
-      { text: "เกรด", value: "grade", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
-      { text: "มหาวิทยาลัย/วิทยาลัย", value: "univercity", sortable: false },
+      { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
+      // { text: "หลักสูตร", value: "course", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      serail_subject: "",
-      subject_name: 0,
-      description: 0,
-      grade: 0,
+      course_code: "",
+      course_title: "",
+      course: 0,
+      credit_type: 0,
       credit: 0,
-      univercity: "",
+      description_file: "",
     },
     defaultItem: {
-      serail_subject: "",
-      subject_name: 0,
-      description: 0,
-      grade: 0,
+      course_code: "",
+      course_title: "",
+      course: 0,
+      credit_type: 0,
       credit: 0,
-      univercity: "",
+      description_file: "",
     },
   }),
 
@@ -165,10 +277,10 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
-    myCourse: {
+    schoolCourse: {
       get() {
-        if (this.$store.state.subject.myCourse) {
-          return this.$store.state.subject.myCourse.results;
+        if (this.$store.state.subject.schoolCourse) {
+          return this.$store.state.subject.schoolCourse.results;
         } else {
           return null;
         }
@@ -190,93 +302,131 @@ export default {
     this.initialize();
   },
   mounted() {
-    this.getMyCourse();
+    this.getSchoolCourse();
   },
   methods: {
     ...mapActions({
-      getMyCourse: "subject/getMyCourse",
+      getSchoolCourse: "subject/getSchoolCourse",
     }),
+     download(item) {
+      // const url = "/users/download";
+      console.log("item",item)
+      // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
+      // document.location.href = url;
+      // window.open("data:application/pdf;base64, " + this.abilityById.file);
+
+      const linkSource = item.description_file;
+      const downloadLink = document.createElement("a");
+      const fileName = "คำอธิบายรายวิชา.pdf";
+
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
+    },
+    async uploadImage(image) {
+      console.log("image", image);
+      if (image) {
+        let file = await image;
+        // if (!file.type.match(/image.*/)) {
+        //   no(new Error("Not an image"));
+        //   return;
+        // }
+
+        const reader = new FileReader();
+        // reader.onload = (e) => (this.originalImg = e.target.result);
+        reader.readAsDataURL(file);
+
+        reader.onload = function () {
+          console.log(reader.result);
+        };
+        reader.onerror = function (error) {
+          console.log("Error: ", error);
+        };
+        this.base64 = reader;
+        console.log("base64", this.base64);
+      }
+    },
     initialize() {
       this.desserts = [
         {
-          serail_subject: "Frozen Yogurt",
-          subject_name: 159,
-          description: 6.0,
-          grade: 24,
+          course_code: "Frozen Yogurt",
+          course_title: 159,
+          course: 6.0,
+          credit_type: 24,
           credit: 4.0,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Ice cream sandwich",
-          subject_name: 237,
-          description: 9.0,
-          grade: 37,
+          course_code: "Ice cream sandwich",
+          course_title: 237,
+          course: 9.0,
+          credit_type: 37,
           credit: 4.3,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Eclair",
-          subject_name: 262,
-          description: 16.0,
-          grade: 23,
+          course_code: "Eclair",
+          course_title: 262,
+          course: 16.0,
+          credit_type: 23,
           credit: 6.0,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Cupcake",
-          subject_name: 305,
-          description: 3.7,
-          grade: 67,
+          course_code: "Cupcake",
+          course_title: 305,
+          course: 3.7,
+          credit_type: 67,
           credit: 4.3,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Gingerbread",
-          subject_name: 356,
-          description: 16.0,
-          grade: 49,
+          course_code: "Gingerbread",
+          course_title: 356,
+          course: 16.0,
+          credit_type: 49,
           credit: 3.9,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Jelly bean",
-          subject_name: 375,
-          description: 0.0,
-          grade: 94,
+          course_code: "Jelly bean",
+          course_title: 375,
+          course: 0.0,
+          credit_type: 94,
           credit: 0.0,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Lollipop",
-          subject_name: 392,
-          description: 0.2,
-          grade: 98,
+          course_code: "Lollipop",
+          course_title: 392,
+          course: 0.2,
+          credit_type: 98,
           credit: 0,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Honeycomb",
-          subject_name: 408,
-          description: 3.2,
-          grade: 87,
+          course_code: "Honeycomb",
+          course_title: 408,
+          course: 3.2,
+          credit_type: 87,
           credit: 6.5,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "Donut",
-          subject_name: 452,
-          description: 25.0,
-          grade: 51,
+          course_code: "Donut",
+          course_title: 452,
+          course: 25.0,
+          credit_type: 51,
           credit: 4.9,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
         {
-          serail_subject: "KitKat",
-          subject_name: 518,
-          description: 26.0,
-          grade: 65,
+          course_code: "KitKat",
+          course_title: 518,
+          course: 26.0,
+          credit_type: 65,
           credit: 7,
-          univercity: "RMUTI KKC",
+          description_file: "RMUTI KKC",
         },
       ];
     },
@@ -318,9 +468,25 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        let data = {
+          course_code: this.editedItem.course_code,
+          course_title: this.editedItem.course_title,
+          credit_type: this.editedItem.credit_type,
+          credit: this.editedItem.credit,
+          course: null,
+          subject: null,
+          course_year: this.editedItem.course_year,
+          description_file: this.base64.result,
+          created_user: 1,
+        };
+        this.$fixedKeyApi.post(`/school-course/`, data).then((response) => {
+          if (response.data) {
+            console.log("post", response.data);
+            this.close();
+            this.getSchoolCourse();
+          }
+        });
       }
-      this.close();
     },
   },
 };

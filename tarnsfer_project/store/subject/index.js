@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const state = () => ({
     myCourse: [],
+    schoolCourse: []
 });
 
 /* getters */
@@ -18,6 +19,12 @@ export const mutations = {
     getMyCourse(state, data) {
         state.myCourse = {
             ...state.myCourse,
+            ...data,
+        };
+    },
+    getSchoolCourse(state, data) {
+        state.schoolCourse = {
+            ...state.schoolCourse,
             ...data,
         };
     },
@@ -37,6 +44,19 @@ export const actions = {
                 console.log("getMyCourse", response.data);
 
                 commit("getMyCourse", response.data);
+            });
+    },
+    async getSchoolCourse({ commit }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+
+        await this.$fixedKeyApi
+            .get(`/school-course`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getSchoolCourse", response.data);
+
+                commit("getSchoolCourse", response.data);
             });
     },
 
