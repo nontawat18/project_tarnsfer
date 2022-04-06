@@ -6,6 +6,7 @@ export const state = () => ({
     userLogin: null,
     userId: 0,
     key: '',
+    teacher: []
 });
 
 /* getters */
@@ -28,6 +29,9 @@ export const mutations = {
     setUserId(state, data) {
         state.userId = data;
     },
+    getTeacher(state, data) {
+        state.teacher = data;
+    },
 
 };
 
@@ -43,7 +47,21 @@ export const actions = {
     },
     setUserId({ commit }, data) {
         commit("setUserId", data);
-    }
+    },
+
+    getTeacher({ commit }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+
+        this.$fixedKeyApi
+            .get(`/profile/?role=teacher`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getTeacher", response.data);
+
+                commit("getTeacher", response.data);
+            });
+    },
 
 };
 

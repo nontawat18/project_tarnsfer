@@ -156,10 +156,17 @@
       </template>
       <template v-slot:[`item.description_file`]="{ item }">
         <div>
-            <v-btn class="" small elevation="0" @click="download(item)" dark color="grey">
-              <v-icon left> mdi-download</v-icon> Download
-            </v-btn>
-          </div>
+          <v-btn
+            class=""
+            small
+            elevation="0"
+            @click="download(item)"
+            dark
+            color="grey"
+          >
+            <v-icon left> mdi-download</v-icon> Download
+          </v-btn>
+        </div>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -229,6 +236,8 @@ export default {
     dialogDelete: false,
     image: null,
     base64: "",
+    idSubject: "",
+
     type: [
       {
         id: "ท",
@@ -256,6 +265,7 @@ export default {
     desserts: [],
     editedIndex: -1,
     editedItem: {
+      id: 0,
       course_code: "",
       course_title: "",
       course: 0,
@@ -264,6 +274,7 @@ export default {
       description_file: "",
     },
     defaultItem: {
+      id: 0,
       course_code: "",
       course_title: "",
       course: 0,
@@ -308,9 +319,9 @@ export default {
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
     }),
-     download(item) {
+    download(item) {
       // const url = "/users/download";
-      console.log("item",item)
+      console.log("item", item);
       // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
       // document.location.href = url;
       // window.open("data:application/pdf;base64, " + this.abilityById.file);
@@ -432,21 +443,25 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.schoolCourse.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
+      this.idSubject = item.id;
+      console.log("item", this.idSubject, item);
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.schoolCourse.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
+      this.idSubject = item.id;
+      console.log("item", this.idSubject, item);
     },
 
-    deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
+    // deleteItemConfirm() {
+    //   this.desserts.splice(this.editedIndex, 1);
+    //   this.closeDelete();
+    // },
 
     close() {
       this.dialog = false;
@@ -463,10 +478,44 @@ export default {
         this.editedIndex = -1;
       });
     },
+    deleteItemConfirm() {
+      // this.desserts.splice(this.editedIndex, 1);
+      let id = this.idSubject;
+      // Object.assign(this.desserts[this.editedIndex], this.editedItem);
 
+      this.$fixedKeyApi.delete(`/school-course/${id}`).then((response) => {
+        console.log("delete", response);
+        if (response.status == 204) {
+          this.closeDelete();
+          this.getSchoolCourse();
+        }
+      });
+    },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        let id = this.idSubject;
+
+        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        let data = {
+          course_code: this.editedItem.course_code,
+          course_title: this.editedItem.course_title,
+          credit_type: this.editedItem.credit_type,
+          credit: this.editedItem.credit,
+          course: null,
+          subject: null,
+          course_year: this.editedItem.course_year,
+          description_file: this.base64.result,
+          created_user: 1,
+        };
+        this.$fixedKeyApi
+          .patch(`/school-course/${id}/`, data)
+          .then((response) => {
+            if (response.data) {
+              console.log("patch", response.data);
+              this.close();
+              this.getSchoolCourse();
+            }
+          });
       } else {
         let data = {
           course_code: this.editedItem.course_code,

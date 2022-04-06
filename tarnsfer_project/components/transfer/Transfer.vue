@@ -2,7 +2,7 @@
   <div>
     <v-card class="ma-2 pa-3" elevation="0">
       <v-row>
-        <v-col cols="12" class="pl-2 pr-2 pt-2 pb-0">
+        <!-- <v-col cols="12" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="หลักสูตร"
             :items="course"
@@ -14,12 +14,12 @@
             @change="send(nameCourse)"
             v-model="nameCourse"
           ></v-combobox>
-        </v-col>
+        </v-col> -->
         <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบ"
-            :items="subjectStorage"
-            item-text="name"
+            :items="myCourse"
+            item-text="course_title"
             item-value="id"
             outlined
             dense
@@ -31,8 +31,8 @@
           <v-combobox
             label="วิชาตามหลักสูตร"
             outlined
-            :items="subject"
-            item-text="name"
+            :items="schoolCourse"
+            item-text="course_title"
             item-value="id"
             dense
             v-on:change="onChange()"
@@ -105,15 +105,37 @@ export default {
     //   },
     //   set() {},
     //},
+    schoolCourse: {
+      get() {
+        if (this.$store.state.subject.schoolCourse) {
+          return this.$store.state.subject.schoolCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    myCourse: {
+      get() {
+        if (this.$store.state.subject.myCourse) {
+          return this.$store.state.subject.myCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   mounted() {
+    this.getSchoolCourse();
+          this.getMyCourse();
+
     // this.getSubject(
     //    this.$store.dispatch(`subjects/getSubject`, {
     //     id: '',
     //   })
     // );
     // this.getCourse();
-
   },
   methods: {
     // ...mapActions({
@@ -126,6 +148,11 @@ export default {
     //     id: id.id,
     //   });
     // },
+    ...mapActions({
+      getSchoolCourse: "subject/getSchoolCourse",
+            getMyCourse: "subject/getMyCourse",
+
+    }),
     removeFormElement() {
       console.log("delete", this.lengths, this.index);
       let lengths = this.lengths;

@@ -9,8 +9,8 @@
           <v-combobox
             label="วิชาเดิมที่ขอเทียบ"
             outlined
-            :items="subject"
-            item-text="name"
+            :items="schoolCourse"
+            item-text="course_title"
             dense
             item-value="id"
             v-model="subjectOld"
@@ -58,8 +58,8 @@
             label="รายวิชาที่ขอเรียนแทน"
             outlined
             dense
-            :items="subject"
-            item-text="name"
+            :items="schoolCourse"
+            item-text="course_title"
             item-value="id"
             v-model="subjectNew"
           ></v-combobox>
@@ -99,6 +99,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -120,6 +122,26 @@ export default {
         { name: "digiton", id: 7 },
       ],
     };
+  },
+  computed: {
+    schoolCourse: {
+      get() {
+        if (this.$store.state.subject.schoolCourse) {
+          return this.$store.state.subject.schoolCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+  },
+  mounted() {
+    this.getSchoolCourse();
+  },
+  methods: {
+    ...mapActions({
+      getSchoolCourse: "subject/getSchoolCourse",
+    }),
   },
 };
 </script>

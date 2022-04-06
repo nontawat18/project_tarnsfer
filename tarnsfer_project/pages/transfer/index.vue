@@ -9,7 +9,7 @@
         class=""
       ></v-text-field>
     </v-col>
-    {{ equivalentCourse }}
+    <!-- {{ equivalentCourse }} -->
     <v-col class="text-right">
       <!-- <v-btn color="" elevation="0" fab small class="mb-2">
         <v-icon> mdi-plus</v-icon>
@@ -69,7 +69,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvOne"
                   ></v-combobox>
@@ -80,7 +80,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvTwo"
                   ></v-combobox>
@@ -91,7 +91,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvThree"
                   ></v-combobox>
@@ -102,7 +102,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvFour"
                   ></v-combobox>
@@ -113,7 +113,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvFive"
                   ></v-combobox>
@@ -124,7 +124,7 @@
                     outlined
                     dense
                     :items="teacher"
-                    item-text="name"
+                    item-text="full_name"
                     item-value="id"
                     v-model="approvSix"
                   ></v-combobox>
@@ -142,13 +142,20 @@
         </v-card>
       </v-dialog>
     </v-col>
-
     <div>
       <v-row>
         <v-col v-for="(menu, i) in equivalentCourse" :key="i" cols="12" sm="3">
-          <v-card outlined height="75" width="100%">
+          <v-card outlined  width="100%">
             <v-col>
-              {{ menu.text }}
+              <v-chip class="" small>
+                {{ menu.registrar_officer_approve }}
+              </v-chip>
+            </v-col>
+
+            <v-divider></v-divider>
+
+            <v-col>
+              {{ menu.equivalent_type }}
             </v-col>
           </v-card>
         </v-col>
@@ -181,15 +188,15 @@ export default {
       { text: "TF0006", value: "univercity", sortable: false },
       { text: "TF0007", value: "actions", sortable: false },
     ],
-    teacher: [
-      { name: "nontawat", id: 1 },
-      { name: "thawat", id: 2 },
-      { name: "worachet", id: 3 },
-      { name: "piyawat", id: 4 },
-      { name: "chalermchai", id: 5 },
-      { name: "anantachai", id: 6 },
-      { name: "weerawat", id: 7 },
-    ],
+    // teacher: [
+    //   { name: "nontawat", id: 1 },
+    //   { name: "thawat", id: 2 },
+    //   { name: "worachet", id: 3 },
+    //   { name: "piyawat", id: 4 },
+    //   { name: "chalermchai", id: 5 },
+    //   { name: "anantachai", id: 6 },
+    //   { name: "weerawat", id: 7 },
+    // ],
     approvOne: "",
     approvTwo: "",
     approvThree: "",
@@ -203,8 +210,8 @@ export default {
     },
     equivalentCourse: {
       get() {
-        if (this.$store.state.subject.equivalentCourse) {
-          return this.$store.state.subject.equivalentCourse.results;
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.results;
         } else {
           return null;
         }
@@ -213,8 +220,28 @@ export default {
     },
     count: {
       get() {
-        if (this.$store.state.subject.equivalentCourse) {
-          return this.$store.state.subject.equivalentCourse.count;
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.count;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    teacher: {
+      get() {
+        if (this.$store.state.users.teacher) {
+          return this.$store.state.users.teacher.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    schoolCourse: {
+      get() {
+        if (this.$store.state.subject.schoolCourse) {
+          return this.$store.state.subject.schoolCourse.results;
         } else {
           return null;
         }
@@ -224,10 +251,14 @@ export default {
   },
   mounted() {
     this.getEquivalentCourse();
+    this.getTeacher();
+    this.getSchoolCourse();
   },
   methods: {
     ...mapActions({
       getEquivalentCourse: "transfer/getEquivalentCourse",
+      getTeacher: "users/getTeacher",
+      getSchoolCourse: "subject/getSchoolCourse",
     }),
   },
 };

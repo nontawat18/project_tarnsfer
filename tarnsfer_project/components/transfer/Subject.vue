@@ -235,7 +235,7 @@ export default {
         component: Transfer,
         nameSubjectTransfer: null,
         nameSubject: null,
-        nameCourse: null,
+        // nameCourse: null,
       });
     },
 
@@ -247,7 +247,7 @@ export default {
         component: Ability,
         nameSubjectTransfer: null,
         nameSubject: null,
-        nameCourse: null,
+        // nameCourse: null,
       });
     },
     setUUID() {
@@ -259,8 +259,8 @@ export default {
           data.nameSubjectTransfer.id.toFixed(0);
         this.lengths[data.index].nameSubject = data.nameSubject.id.toFixed(0);
         console.log(this.lengths);
-        this.lengths[data.index].nameCourse = data.nameCourse.id.toFixed(0);
-        console.log(this.lengths);
+        // this.lengths[data.index].nameCourse = data.nameCourse.id.toFixed(0);
+        // console.log(this.lengths);
       }
     },
 
@@ -271,9 +271,9 @@ export default {
         this.lengthsAbility[data.index].nameSubject =
           data.nameSubject.id.toFixed(0);
         console.log(this.lengthsAbility);
-        this.lengthsAbility[data.index].nameCourse =
-          data.nameCourse.id.toFixed(0);
-        console.log(this.lengthsAbility);
+        // this.lengthsAbility[data.index].nameCourse =
+        //   data.nameCourse.id.toFixed(0);
+        // console.log(this.lengthsAbility);
       }
     },
     // async save() {

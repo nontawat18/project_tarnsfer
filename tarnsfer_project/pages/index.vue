@@ -10,7 +10,7 @@
         </v-card>
       </v-col>
       <v-col cols="6" class="text-center">
-        <v-card class="" width="260" outlined height="120">
+        <v-card class="" width="260" outlined height="120" to="/transfer/">
           <v-col>
             <strong>5</strong>
           </v-col>
