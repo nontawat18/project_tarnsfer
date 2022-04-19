@@ -34,6 +34,89 @@
           <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
           <v-divider></v-divider>
           <v-col>
+            <v-col>
+              <v-row>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="อาจารย์ที่ปรึกษา"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="advisor"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าสาขาวิชา"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="head_department"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าสำนักงานคณบดี"
+                    outlined
+                    dense
+                    :items="head_educational"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvThree"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="รองคณบดีฝ่ายวิชาการและวิจัย"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="deputy_dean_a_r"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณบดี"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="dean"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าแผนกงานส่งเสริมวิาการและงานทะเบียน"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="head_academic_p_r"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label=" เจ้าหน้าที่ทะเบียน"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="registrar_officer"
+                  ></v-combobox>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-col>
+          <v-col>
             <v-row>
               <v-col cols="6" class="pb-0 pl-7">
                 <v-checkbox
@@ -145,7 +228,7 @@
     <div>
       <v-row>
         <v-col v-for="(menu, i) in equivalentCourse" :key="i" cols="12" sm="3">
-          <v-card outlined  width="100%">
+          <v-card outlined width="100%">
             <v-col>
               <v-chip class="" small>
                 {{ menu.registrar_officer_approve }}
@@ -203,6 +286,13 @@ export default {
     approvFour: "",
     approvFive: "",
     approvSix: "",
+    registrar_officer: "",
+    head_academic_p_r: "",
+    dean: "",
+    deputy_dean_a_r: "",
+    head_educational: "",
+    head_department: "",
+    advisor: "",
   }),
   computed: {
     formTitle() {
