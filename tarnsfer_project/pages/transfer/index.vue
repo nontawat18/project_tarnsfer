@@ -33,7 +33,7 @@
         <v-card>
           <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
           <v-divider></v-divider>
-          <v-col>
+          <!-- <v-col>
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
@@ -115,7 +115,7 @@
                 </v-col>
               </v-row>
             </v-col>
-          </v-col>
+          </v-col> -->
           <v-col>
             <v-row>
               <v-col cols="6" class="pb-0 pl-7">
@@ -140,7 +140,7 @@
           <v-col v-else>
             <TransferStudyInstead />
           </v-col>
-          <v-col>
+          <!-- <v-col>
             <v-col class="pb-8">
               <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
             </v-col>
@@ -214,7 +214,7 @@
                 </v-col>
               </v-row>
             </v-col>
-          </v-col>
+          </v-col> -->
 
           <v-divider></v-divider>
 
@@ -256,7 +256,7 @@ export default {
   data: () => ({
     dialog: false,
     search: "",
-    selected: "",
+    selected: "ขอเทียบโอนรายวิชา",
     headers: [
       {
         text: "TF0001",

@@ -26,7 +26,89 @@
       ></v-file-input>
 
     </v-col> -->
-
+    <v-col>
+      <v-col>
+        <v-row>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="อาจารย์ที่ปรึกษา"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="advisor"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="หัวหน้าสาขาวิชา"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="head_department"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="หัวหน้าสำนักงานคณบดี"
+              outlined
+              dense
+              :items="head_educational"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvThree"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="รองคณบดีฝ่ายวิชาการและวิจัย"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="deputy_dean_a_r"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณบดี"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="dean"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="หัวหน้าแผนกงานส่งเสริมวิาการและงานทะเบียน"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="head_academic_p_r"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label=" เจ้าหน้าที่ทะเบียน"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="registrar_officer"
+            ></v-combobox>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-col>
     <v-form ref="form2" v-model="valid2" lazy-validation>
       <div>
         <component
@@ -41,14 +123,94 @@
           :_uuid="_uuid"
         />
         <v-col cols="12" class="text-center">
-          <v-btn color="grey" elevation="0" small class="" dark @click="addLength">
+          <v-btn
+            color="grey"
+            elevation="0"
+            small
+            class=""
+            dark
+            @click="addLength"
+          >
             เพิ่มวิชา
           </v-btn>
         </v-col>
       </div>
     </v-form>
-
-
+    <v-col>
+      <v-col class="pb-8">
+        <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
+      </v-col>
+      <v-col>
+        <v-row>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 1"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvOne"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 2"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvTwo"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 3"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvThree"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 4"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvFour"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 5"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvFive"
+            ></v-combobox>
+          </v-col>
+          <v-col cols="12" sm="6" class="pt-0 pb-0">
+            <v-combobox
+              label="คณะกรรมการที่ 6"
+              outlined
+              dense
+              :items="teacher"
+              item-text="full_name"
+              item-value="id"
+              v-model="approvSix"
+            ></v-combobox>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-col>
 
     <!-- <v-col cols="12" class="mt-6 pb-0">
       <v-checkbox
@@ -154,6 +316,19 @@ export default {
         "การศึกษาตามอัธยาศัย",
         "ประสบการณ์บุคคล",
       ],
+      approvOne: "",
+      approvTwo: "",
+      approvThree: "",
+      approvFour: "",
+      approvFive: "",
+      approvSix: "",
+      registrar_officer: "",
+      head_academic_p_r: "",
+      dean: "",
+      deputy_dean_a_r: "",
+      head_educational: "",
+      head_department: "",
+      advisor: "",
     };
   },
   computed: {
