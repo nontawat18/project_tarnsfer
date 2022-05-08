@@ -30,10 +30,10 @@
               label="หัวหน้าสำนักงานคณบดี"
               outlined
               dense
-              :items="head_educational"
+              :items="teacher"
               item-text="full_name"
               item-value="id"
-              v-model="approvThree"
+              v-model="head_educational"
             ></v-combobox>
           </v-col>
           <v-col cols="12" sm="6" class="pt-0 pb-0">
@@ -254,6 +254,11 @@
         </v-row>
       </v-col>
     </v-col>
+    <v-col class="text-center">
+      <v-btn @click="save()" elevation="0" color="grey" dark>
+        บันทึกการเทียบโอน
+      </v-btn>
+    </v-col>
   </div>
 </template>
 <script>
@@ -262,14 +267,14 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      subjectOld: "",
-      subjectNew: "",
-      couseOld: "",
-      couseNew: "",
-      branceOld: "",
-      branceNew: "",
-      yearOld: "",
-      yearNew: "",
+      subjectOld: null,
+      subjectNew: null,
+      couseOld: null,
+      couseNew: null,
+      branceOld: null,
+      branceNew: null,
+      yearOld: null,
+      yearNew: null,
       subject: [
         { name: "calculus 1 ", id: 1 },
         { name: "python", id: 2 },
@@ -279,19 +284,19 @@ export default {
         { name: "math", id: 6 },
         { name: "digiton", id: 7 },
       ],
-      approvOne: "",
-      approvTwo: "",
-      approvThree: "",
-      approvFour: "",
-      approvFive: "",
-      approvSix: "",
-      registrar_officer: "",
-      head_academic_p_r: "",
-      dean: "",
-      deputy_dean_a_r: "",
-      head_educational: "",
-      head_department: "",
-      advisor: "",
+      approvOne: null,
+      approvTwo: null,
+      approvThree: null,
+      approvFour: null,
+      approvFive: null,
+      approvSix: null,
+      registrar_officer:null,
+      head_academic_p_r: null,
+      dean: null,
+      deputy_dean_a_r: null,
+      head_educational: null,
+      head_department: null,
+      advisor: null,
     };
   },
   computed: {
@@ -305,14 +310,94 @@ export default {
       },
       set() {},
     },
+    equivalentCourse: {
+      get() {
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    count: {
+      get() {
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.count;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    teacher: {
+      get() {
+        if (this.$store.state.users.teacher) {
+          return this.$store.state.users.teacher.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    userId: {
+      get() {
+        if (this.$store.state.users) {
+          return this.$store.state.users.userId;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   mounted() {
     this.getSchoolCourse();
+    this.getEquivalentCourse();
+    this.getTeacher();
   },
   methods: {
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
+      getEquivalentCourse: "transfer/getEquivalentCourse",
+      getTeacher: "users/getTeacher",
     }),
+    save() {
+      let data = {
+        equivalent_type: "ขอเทียบเพื่อนเรียนแทน",
+        equivalent_item: [
+          {
+            status: "รอตรวจสอบ",
+            semester: 1,
+            student_course: this.subjectOld.id,
+            course_enroll: this.subjectNew.id,
+          },
+        ],
+        studied_from: null,
+        number_of_equivalent: null,
+        number_of_credit: 3,
+        name_committee1: this.approvOne.id,
+        name_committee2: this.approvTwo.id,
+        name_committee3: this.approvThree.id,
+        name_committee4: this.approvFour.id,
+        name_committee5: this.approvFive.id,
+        name_committee6: this.approvSix.id,
+        advisor: this.advisor.id,
+        head_department: this.head_department.id,
+        head_educational: this.head_educational.id,
+        deputy_dean_a_r: this.deputy_dean_a_r.id,
+        dean: this.dean.id,
+        head_academic_p_r: this.head_academic_p_r.id,
+        registrar_officer: this.registrar_officer.id,
+        created_user: 1,
+      };
+
+      this.$fixedKeyApi.post(`/equivalent_course/`, data).then((response) => {
+        if (response.data) {
+          console.log("post", response.data);
+        }
+      });
+    },
   },
 };
 </script>

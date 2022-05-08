@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="mt-16" align="center" justify="center">
-      <v-card height="90%" width="40%" outlined>
+      <v-card height="90%" width="400" outlined>
         <v-col class="text-center">
 
         <img height="50%" width="45%" src="~/assets/logo.png" />

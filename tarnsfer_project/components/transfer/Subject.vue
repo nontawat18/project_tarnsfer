@@ -211,7 +211,9 @@
         </v-row>
       </v-col>
     </v-col>
-
+    <v-col class="text-center" >
+      <v-btn @click="save()" elevation="0" color="grey" dark> บันทึกการเทียบโอน </v-btn>
+    </v-col>
     <!-- <v-col cols="12" class="mt-6 pb-0">
       <v-checkbox
         v-if="lengths != '' || lengthsAbility != ''"
