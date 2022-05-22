@@ -56,10 +56,10 @@
               label="หัวหน้าสำนักงานคณบดี"
               outlined
               dense
-              :items="head_educational"
+              :items="teacher"
               item-text="full_name"
               item-value="id"
-              v-model="approvThree"
+              v-model="head_educational"
             ></v-combobox>
           </v-col>
           <v-col cols="12" sm="6" class="pt-0 pb-0">
@@ -122,6 +122,7 @@
           ref="callAddServiceInsulationTocart"
           :_uuid="_uuid"
         />
+        <!-- {{ lengths }} -->
         <v-col cols="12" class="text-center">
           <v-btn
             color="grey"
@@ -211,8 +212,10 @@
         </v-row>
       </v-col>
     </v-col>
-    <v-col class="text-center" >
-      <v-btn @click="save()" elevation="0" color="grey" dark> บันทึกการเทียบโอน </v-btn>
+    <v-col class="text-center">
+      <v-btn @click="save()" elevation="0" color="grey" dark>
+        บันทึกการเทียบโอน
+      </v-btn>
     </v-col>
     <!-- <v-col cols="12" class="mt-6 pb-0">
       <v-checkbox
@@ -334,53 +337,49 @@ export default {
     };
   },
   computed: {
-    // users: {
-    //   get() {
-    //     if (this.$store.state.users.users) {
-    //       return this.$store.state.users.users.result;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    // },
-    // partnerId: {
-    //   get() {
-    //     if (this.$store.state.users.partnerId) {
-    //       return this.$store.state.users.partnerId;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    // },
-    // IdTransfer: {
-    //   get() {
-    //     if (this.$store.state.transfers.IdTransfer) {
-    //       return this.$store.state.transfers.IdTransfer;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    // },
-    // idSubject() {
-    //   let ids = [];
-    //   this.$store.state.transfers.IdTransfer.forEach((element) => {
-    //     ids.push(element);
-    //   });
-    //   return ids;
-    // },
+
+    schoolCourse: {
+      get() {
+        if (this.$store.state.subject.schoolCourse) {
+          return this.$store.state.subject.schoolCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    equivalentCourse: {
+      get() {
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    teacher: {
+      get() {
+        if (this.$store.state.users.teacher) {
+          return this.$store.state.users.teacher.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   async mounted() {
-    // await this.getUsers();
-    // await this.saveIdTransfer();
+    this.getSchoolCourse();
+    this.getEquivalentCourse();
+    this.getTeacher();
   },
   methods: {
-    // ...mapActions({
-    //   getUsers: "users/getUsers",
-    //   saveIdTransfer: "transfers/saveIdTransfer",
-    // }),
+    ...mapActions({
+      getSchoolCourse: "subject/getSchoolCourse",
+      getEquivalentCourse: "transfer/getEquivalentCourse",
+      getTeacher: "users/getTeacher",
+    }),
     async uploadImage(image) {
       console.log("image", image);
       if (image) {
@@ -508,32 +507,46 @@ export default {
     //   console.log("this.id", this.id, this.idAbility);
     // },
 
-    // async createTransfer() {
-    //   console.log("createTransfer", this.id);
-    //   let pictureNew = this.base64.result.split(",");
 
-    //   let data = {
-    //     params: {
-    //       data: {
-    //         // course_name: this.nameCourse,
-    //         type_transfer: this.type,
-    //         status_transfer: "ยังไม่ตรวจสอบ",
-    //         partner_id: this.partnerId,
-    //         credit_transfer_ids: this.id,
-    //         ability_transfer_ids: this.idAbility,
-    //         file_transcript: pictureNew[1],
-    //         year: this.year,
-    //       },
-    //     },
-    //   };
+    save() {
+      this.lengths.forEach((element) => {
+        let data = {
+          equivalent_type: "ขอเทียบโอนรายวิชา",
+          equivalent_item: [
+            {
+              status: "รอตรวจสอบ",
+              semester: 1,
+              student_course: element.nameSubjectTransfer,
+              course_enroll: element.nameSubject,
+            },
+          ],
+          studied_from: null,
+          number_of_equivalent: null,
+          number_of_credit: 3,
+          name_committee1: this.approvOne.id,
+          name_committee2: this.approvTwo.id,
+          name_committee3: this.approvThree.id,
+          name_committee4: this.approvFour.id,
+          name_committee5: this.approvFive.id,
+          name_committee6: this.approvSix.id,
+          advisor: this.advisor.id,
+          head_department: this.head_department.id,
+          head_educational: this.head_educational.id,
+          deputy_dean_a_r: this.deputy_dean_a_r.id,
+          dean: this.dean.id,
+          head_academic_p_r: this.head_academic_p_r.id,
+          registrar_officer: this.registrar_officer.id,
+          created_user: 1,
+        };
 
-    //   this.$axios.post(`api/credit.transfer`, data).then((response) => {
-    //     console.log("post", response);
-    //     if (response.data.result) {
-    //       this.$router.push("/transfer/transferComparison/");
-    //     }
-    //   });
-    // },
+        this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
+          if (response.data) {
+            console.log("post", response.data);
+            this.$router.push("/transfer/");
+          }
+        });
+      });
+    },
   },
 };
 </script>

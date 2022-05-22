@@ -290,7 +290,7 @@ export default {
       approvFour: null,
       approvFive: null,
       approvSix: null,
-      registrar_officer:null,
+      registrar_officer: null,
       head_academic_p_r: null,
       dean: null,
       deputy_dean_a_r: null,
@@ -392,9 +392,10 @@ export default {
         created_user: 1,
       };
 
-      this.$fixedKeyApi.post(`/equivalent_course/`, data).then((response) => {
+      this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
         if (response.data) {
           console.log("post", response.data);
+          this.$router.push("/transfer/");
         }
       });
     },

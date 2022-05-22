@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       v-model="drawer"
       :clipped="clipped"
       fixed
@@ -11,11 +11,11 @@
       <v-col class="text-center">
           <img height="50%" width="100%" src="~/assets/logo.png" @click="to"/>
 
-        <!-- <v-img class="pa-3 VuetifyRotateY" height="150" width="75" :src="image"></v-img> -->
       </v-col>
 
       <NavigationSideBar />
     </v-navigation-drawer>
+
     <v-app-bar :clipped-left="clipped" fixed app elevation="0">
       <v-app-bar-nav-icon @click.stop="miniVariant = !miniVariant" />
       <v-spacer></v-spacer>
@@ -23,13 +23,33 @@
         <v-icon v-if="themes == true"> mdi-white-balance-sunny </v-icon>
         <v-icon v-if="themes != true"> mdi-moon-waning-crescent </v-icon>
       </v-btn>
+    </v-app-bar> -->
+
+    <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
+
+    <v-app-bar elevation="0" app>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+
+      <v-spacer></v-spacer>
+      <v-btn icon @click="toggleTheme">
+        <v-icon v-if="themes == true"> mdi-white-balance-sunny </v-icon>
+        <v-icon v-if="themes != true"> mdi-moon-waning-crescent </v-icon>
+      </v-btn>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-col class="text-center">
+        <img height="50%" width="100%" src="~/assets/logo.png" @click="to" />
+      </v-col>
+
+      <NavigationSideBar />
+    </v-navigation-drawer>
     <v-main class="">
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
+    <!-- <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
         <v-list-item @click.native="right = !right">
           <v-list-item-action>
@@ -38,7 +58,7 @@
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
     <!-- <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -77,10 +97,9 @@ export default {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem("useDarkTheme", this.$vuetify.theme.dark.toString());
     },
-    to(){
-            this.$router.push("/");
-
-    }
+    to() {
+      this.$router.push("/");
+    },
   },
 };
 </script>

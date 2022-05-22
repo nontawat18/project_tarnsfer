@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center">
-    <v-row>
-      <v-col cols="6" class="text-center">
+  <div >
+    <v-row justify="center" align="center">
+      <v-col cols="6" class="text-center" >
         <v-card class="" width="260" outlined height="120" to="/transfer/">
           <v-col>
             <strong>5</strong>

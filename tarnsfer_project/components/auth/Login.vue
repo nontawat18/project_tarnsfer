@@ -69,8 +69,8 @@ export default {
     return {
       valid: false,
       login: {
-        username: "admin",
-        password: "vrpadmin1234",
+        username: "cha",
+        password: "12345678",
       },
       loginFailed: false,
       accountId: 0,

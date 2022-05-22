@@ -1,88 +1,165 @@
 <template>
-  <v-list expand nav dense elevation="0">
-    <!-- <div v-for="(menu, i) in menus" :key="i">
-      <v-list-item v-if="!menu.sub_menus" :to="menu.route" avatar class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>{{ menu.icon }}</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="menu.name" />
-      </v-list-item>
-
-      <v-list-group v-else eager :key="menu.name" no-action :value="false">
-        <template v-slot:activator>
+  <div>
+    <v-list
+      expand
+      nav
+      dense
+      elevation="0"
+      v-if="userLogin.role.role == 'admin'"
+    >
+      <div>
+        <v-list-item :to="`/`" class="v-list-item">
           <v-list-item-icon>
-            <v-icon>{{ menu.icon }}</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>{{ menu.name }}</v-list-item-title>
-        </template>
-
-        <v-list-item
-          v-for="sub_menus in menu.sub_menus"
-          :to="sub_menus.route"
-          :key="sub_menus.name"
-        >
-          <v-list-item-title>{{ sub_menus.name }}</v-list-item-title>
+          <v-list-item-title v-text="`หน้าแรก`" />
         </v-list-item>
-      </v-list-group>
-    </div> -->
-    <div>
-      <v-list-item :to="`/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-home</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`หน้าแรก`" />
-      </v-list-item>
-    </div>
-    <div>
-      <v-list-item :to="`/subject/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-book</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`คลังวิชา`" />
-      </v-list-item>
-    </div>
-    <div>
-      <v-list-item :to="`/basesubject/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-book-plus</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`เพิ่มรายวิชามหาวิทยาลัย`" />
-      </v-list-item>
-    </div>
+      </div>
+      <div>
+        <v-list-item :to="`/subject/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-book</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`คลังวิชา`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item :to="`/basesubject/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-book-plus</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`เพิ่มรายวิชามหาวิทยาลัย`" />
+        </v-list-item>
+      </div>
 
-    <!-- <div>
-      <v-list-item :to="`/course/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-database</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`หลักสูตร`" />
-      </v-list-item>
-    </div> -->
-    <div>
-      <v-list-item :to="`/transfer/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-file-export</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`การเทียบโอน`" />
-      </v-list-item>
-    </div>
-    <div>
-      <v-list-item :to="`/profile/`" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-account</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`โปรไฟล์`" />
-      </v-list-item>
-    </div>
-    <div>
-      <v-list-item @click="userLogout()" class="v-list-item">
-        <v-list-item-icon>
-          <v-icon>mdi-logout</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title v-text="`ออกจากระบบ`" />
-      </v-list-item>
-    </div>
-  </v-list>
+      <div>
+        <v-list-item :to="`/transfer/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-file-export</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`การเทียบโอน`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item :to="`/profile/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`โปรไฟล์`" />
+        </v-list-item>
+      </div>
+
+      <div>
+        <v-list-item :to="`/user/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account-plus</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`สร้างบัญชีผู้ใช้`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item @click="userLogout()" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`ออกจากระบบ`" />
+        </v-list-item>
+      </div>
+    </v-list>
+
+    <v-list
+      expand
+      nav
+      dense
+      elevation="0"
+      v-if="userLogin.role.role == 'student'"
+    >
+      <div>
+        <v-list-item :to="`/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`หน้าแรก`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item :to="`/subject/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-book</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`คลังวิชา`" />
+        </v-list-item>
+      </div>
+
+      <div>
+        <v-list-item :to="`/transfer/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-file-export</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`การเทียบโอน`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item :to="`/profile/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`โปรไฟล์`" />
+        </v-list-item>
+      </div>
+
+      <div>
+        <v-list-item @click="userLogout()" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`ออกจากระบบ`" />
+        </v-list-item>
+      </div>
+    </v-list>
+    <v-list
+      expand
+      nav
+      dense
+      elevation="0"
+      v-if="userLogin.role.role == 'teacher'"
+    >
+      <div>
+        <v-list-item :to="`/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`หน้าแรก`" />
+        </v-list-item>
+      </div>
+
+      <div>
+        <v-list-item :to="`/transfer/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-file-export</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`การเทียบโอน`" />
+        </v-list-item>
+      </div>
+      <div>
+        <v-list-item :to="`/profile/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`โปรไฟล์`" />
+        </v-list-item>
+      </div>
+
+      <div>
+        <v-list-item @click="userLogout()" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`ออกจากระบบ`" />
+        </v-list-item>
+      </div>
+    </v-list>
+  </div>
 </template>
 
 <script>
@@ -101,6 +178,16 @@ export default {
     //   },
     //   set() {},
     // },
+    userLogin: {
+      get() {
+        if (this.$store.state.users.userLogin) {
+          return this.$store.state.users.userLogin.user;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   methods: {
     userLogout() {

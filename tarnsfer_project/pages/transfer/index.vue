@@ -10,7 +10,7 @@
       ></v-text-field>
     </v-col>
     <!-- {{ equivalentCourse }} -->
-    <v-col class="text-right">
+    <v-col class="text-right" v-if="userLogin.role.role != 'teacher'">
       <!-- <v-btn color="" elevation="0" fab small class="mb-2">
         <v-icon> mdi-plus</v-icon>
       </v-btn> -->
@@ -177,6 +177,16 @@ export default {
       get() {
         if (this.$store.state.subject.schoolCourse) {
           return this.$store.state.subject.schoolCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    userLogin: {
+      get() {
+        if (this.$store.state.users.userLogin) {
+          return this.$store.state.users.userLogin.user;
         } else {
           return null;
         }

@@ -125,10 +125,21 @@ export default {
       },
       set() {},
     },
+    equivalentCourse: {
+      get() {
+        if (this.$store.state.transfer.equivalentCourse) {
+          return this.$store.state.transfer.equivalentCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   mounted() {
     this.getSchoolCourse();
-          this.getMyCourse();
+    this.getMyCourse();
+    this.getEquivalentCourse();
 
     // this.getSubject(
     //    this.$store.dispatch(`subjects/getSubject`, {
@@ -150,8 +161,8 @@ export default {
     // },
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
-            getMyCourse: "subject/getMyCourse",
-
+      getMyCourse: "subject/getMyCourse",
+      getEquivalentCourse: "transfer/getEquivalentCourse",
     }),
     removeFormElement() {
       console.log("delete", this.lengths, this.index);

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-col class="text-right pa-0">
+    <!-- <v-col class="text-right pa-0">
       <v-btn color="red" elevation="0" small icon class="mb-2" outlined>
         <v-icon> mdi-pencil</v-icon>
       </v-btn>
-    </v-col>
-    <v-col class="text-center pa-0 pt-4">
+    </v-col> -->
+    <!-- <v-col class="text-center pa-0 pt-4">
       <v-avatar size="100">
         <img
           alt="user"
@@ -15,7 +15,7 @@
       <v-col>
         <h3 class="">{{userLogin.first_name}} {{userLogin.last_name}}</h3>
       </v-col>
-    </v-col>
+    </v-col> -->
     <v-card elevation="0" outlined>
       <v-card-text>
         <v-row>
@@ -26,7 +26,7 @@
             <span>{{userLogin.first_name}} {{userLogin.last_name}}</span>
           </v-col>
         </v-row>
-        <v-row>
+        <!-- <v-row>
           <v-col cols="3">
             <strong>เบอร์โทรศัพท์</strong>
           </v-col>
@@ -41,16 +41,16 @@
           <v-col cols="9">
             <span>60332110079-5</span>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-row>
           <v-col cols="3">
-            <strong>คณะ</strong>
+            <strong>Role</strong>
           </v-col>
           <v-col cols="9">
-            <span>วิศวกรรมศาสตร์</span>
+            <span>{{userLogin.role.role}}</span>
           </v-col>
         </v-row>
-        <v-row>
+        <!-- <v-row>
           <v-col cols="3">
             <strong>สาขา</strong>
           </v-col>
@@ -65,7 +65,7 @@
           <v-col cols="9">
             <span>มหาวิทยาลัยเทคโลโนยีราชมงคลอีสาน วิทยาเขตขอนแก่น</span>
           </v-col>
-        </v-row>
+        </v-row> -->
       </v-card-text>
 
       <!-- <v-card-actions>
