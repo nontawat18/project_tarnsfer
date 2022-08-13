@@ -39,7 +39,7 @@ export const actions = {
         let userID = rootState.users.userId
 
         await this.$fixedKeyApi
-            .get(`/equivalent-course/?created_user=${userID}`)
+            .get(`/equivalent-course/?search=${userID}&created_user=${userID}`)
             .then(response => {
                 self.search = response.data;
                 console.log("getEquivalentCourse", response.data);
