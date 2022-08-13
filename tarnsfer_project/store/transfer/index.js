@@ -33,12 +33,13 @@ export const mutations = {
 /* actions */
 
 export const actions = {
-    async getEquivalentCourse({ commit }) {
+    async getEquivalentCourse({ commit, rootState }) {
         var self = this;
         // console.log("getProduct", productSearch);
+        let userID = rootState.users.userId
 
         await this.$fixedKeyApi
-            .get(`/equivalent-course/`)
+            .get(`/equivalent-course/?created_user=${userID}`)
             .then(response => {
                 self.search = response.data;
                 console.log("getEquivalentCourse", response.data);

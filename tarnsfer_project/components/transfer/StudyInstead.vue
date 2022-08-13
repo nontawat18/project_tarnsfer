@@ -344,6 +344,16 @@ export default {
       },
       set() {},
     },
+        userId: {
+      get() {
+        if (this.$store.state.users.userId) {
+          return this.$store.state.users.userId;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     equivalentCourse: {
       get() {
         if (this.$store.state.transfer.equivalentCourse) {
@@ -423,7 +433,7 @@ export default {
         dean: this.dean.id,
         head_academic_p_r: this.head_academic_p_r.id,
         registrar_officer: this.registrar_officer.id,
-        created_user: 1,
+        created_user: this.userId,
       };
 
       this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {

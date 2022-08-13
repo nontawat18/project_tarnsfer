@@ -100,8 +100,8 @@
                         v-model="image"
                         @change="uploadImage(image)"
                       ></v-file-input> -->
-                       <v-textarea
-                       outlined
+                      <v-textarea
+                        outlined
                         dense
                         label="คำอธิบายรายวิชา"
                         v-model="editedItem.description_file"
@@ -319,6 +319,16 @@ export default {
       },
       set() {},
     },
+    userId: {
+      get() {
+        if (this.$store.state.users.userId) {
+          return this.$store.state.users.userId;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
 
   watch: {
@@ -529,7 +539,7 @@ export default {
           subject: null,
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
-          created_user: 1,
+          created_user: this.userId,
         };
         this.$fixedKeyApi.patch(`/my-course/${id}/`, data).then((response) => {
           if (response.status == 200) {
@@ -550,7 +560,7 @@ export default {
           subject: null,
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
-          created_user: 1,
+          created_user: this.userId,
         };
         this.$fixedKeyApi.post(`/my-course/`, data).then((response) => {
           if (response.data) {

@@ -84,7 +84,6 @@
 
             <v-col>
               {{ menu.equivalent_type }}
-              {{ menu.id }}
             </v-col>
           </v-card>
         </v-col>
