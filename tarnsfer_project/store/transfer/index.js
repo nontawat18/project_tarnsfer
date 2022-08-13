@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const state = () => ({
     equivalentCourse: [],
+    equivalentCourseByID: []
 });
 
 /* getters */
@@ -18,6 +19,12 @@ export const mutations = {
     getEquivalentCourse(state, data) {
         state.equivalentCourse = {
             ...state.equivalentCourse,
+            ...data,
+        };
+    },
+    getEquivalentCourseByID(state, data) {
+        state.equivalentCourseByID = {
+            ...state.equivalentCourseByID,
             ...data,
         };
     },
@@ -40,6 +47,19 @@ export const actions = {
             });
     },
 
+    async getEquivalentCourseByID({ commit }, { id }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+
+        await this.$fixedKeyApi
+            .get(`/equivalent-course/${id}/`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getEquivalentCourseByID", response.data);
+
+                commit("getEquivalentCourseByID", response.data);
+            });
+    },
 
 };
 

@@ -93,13 +93,19 @@
                         outlined
                         dense
                       ></v-text-field> -->
-                      <v-file-input
+                      <!-- <v-file-input
                         outlined
                         dense
                         label="คำอธิบายรายวิชา"
                         v-model="image"
                         @change="uploadImage(image)"
-                      ></v-file-input>
+                      ></v-file-input> -->
+                       <v-textarea
+                       outlined
+                        dense
+                        label="คำอธิบายรายวิชา"
+                        v-model="editedItem.description_file"
+                      ></v-textarea>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
@@ -153,7 +159,7 @@
           mdi-delete
         </v-icon>
       </template>
-      <template v-slot:[`item.description_file`]="{ item }">
+      <!-- <template v-slot:[`item.description_file`]="{ item }">
         <div>
           <v-btn
             class=""
@@ -166,7 +172,7 @@
             <v-icon left> mdi-download</v-icon> Download
           </v-btn>
         </div>
-      </template>
+      </template> -->
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
       </template>
@@ -522,7 +528,7 @@ export default {
           course: null,
           subject: null,
           course_year: this.editedItem.course_year,
-          description_file: this.base64.result,
+          description_file: this.editedItem.description_file,
           created_user: 1,
         };
         this.$fixedKeyApi.patch(`/my-course/${id}/`, data).then((response) => {
@@ -543,7 +549,7 @@ export default {
           course: null,
           subject: null,
           course_year: this.editedItem.course_year,
-          description_file: this.base64.result,
+          description_file: this.editedItem.description_file,
           created_user: 1,
         };
         this.$fixedKeyApi.post(`/my-course/`, data).then((response) => {

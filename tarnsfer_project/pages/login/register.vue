@@ -1,10 +1,5 @@
 <template>
   <v-container>
-    <v-col class="pl-10">
-      <v-btn elevation="0" drak icon to="/login" color="primary">
-        <v-icon large> mdi-chevron-left </v-icon> ย้อนกลับหน้า login
-      </v-btn>
-    </v-col>
     <v-row class="mt-16" align="center" justify="center">
       <v-card width="90%" elevation="0">
         <v-card-title>
@@ -20,23 +15,10 @@
           <v-col>
             <v-row>
               <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-combobox
-                  v-model="title"
-                  :rules="[rules.required]"
-                  label="คำนำหน้า"
-                  :items="titleUsers"
-                  item-text="name"
-                  item-value="id"
-                  required
-                  outlined
-                  dense
-                ></v-combobox>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
                 <v-text-field
-                  v-model="name"
+                  v-model="firstName"
                   :rules="[rules.required]"
-                  label="ชื่อ-สกุล"
+                  label="ชื่อ"
                   required
                   outlined
                   dense
@@ -44,12 +26,50 @@
               </v-col>
               <v-col sm="6" cols="12" class="pt-0 pb-0">
                 <v-text-field
-                  v-model="tel"
+                  v-model="lastName"
                   :rules="[rules.required]"
-                  label="เบอร์โทรศัพท์"
+                  label="สกุล"
                   required
                   outlined
                   dense
+                ></v-text-field>
+              </v-col>
+              <v-col sm="6" cols="12" class="pt-0 pb-0">
+                <v-text-field
+                  v-model="username"
+                  :rules="[rules.required]"
+                  label="Username"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col sm="6" cols="12" class="pt-0 pb-0">
+                <v-text-field
+                  v-model="login.password"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required]"
+                  :type="show1 ? 'text' : 'password'"
+                  name="input-10-1"
+                  label="รหัสผ่าน"
+                  counter
+                  outlined
+                  dense
+                  @click:append="show1 = !show1"
+                ></v-text-field>
+              </v-col>
+              <v-col sm="6" cols="12" class="pt-0 pb-0">
+                <v-text-field
+                  v-model="login.confPassword"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required]"
+                  :type="show2 ? 'text' : 'password'"
+                  name="input-10-1"
+                  label="ยืนยันรหัสผ่าน"
+                  counter
+                  outlined
+                  dense
+                  @click:append="show2 = !show2"
                 ></v-text-field>
               </v-col>
               <v-col sm="6" cols="12" class="pt-0 pb-0">
@@ -62,123 +82,17 @@
                   dense
                 ></v-text-field>
               </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-file-input
-                  :rules="[rules.required]"
-                  outlined
-                  dense
-                  accept="image/png, image/jpeg, image/bmp"
-                  prepend-icon="mdi-camera"
-                  label="อัปโหลดรูปภาพ"
-                  @change="uploadImage(image)"
-                  v-model="image"
-                ></v-file-input>
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col>
-            <v-col>
-              <strong>ข้อมูลการศึกษา</strong>
-            </v-col>
-            <v-row>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="serailNumber"
-                  :rules="[rules.required]"
-                  label="รหัสนักศึกษา"
-                  required
-                  placeholder="60332110079-5"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-combobox
-                  v-model="userStudy"
-                  :rules="[rules.required]"
-                  :items="typeUserStudy"
-                  item-text="name"
-                  item-value="id"
-                  label="ประเภทนักศึกษา"
-                  required
-                  outlined
-                  dense
-                ></v-combobox>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-combobox
-                  v-model="education"
-                  :rules="[rules.required]"
-                  :items="typeEducation"
-                  item-text="name"
-                  item-value="id"
-                  label="ระดับการศึกษา"
-                  required
-                  outlined
-                  dense
-                ></v-combobox>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="yearOfStudy"
-                  :rules="[rules.required]"
-                  label="ปีที่เข้าศึกษา"
-                  required
-                  placeholder="เช่น 2565"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="univercity"
-                  :rules="[rules.required]"
-                  label="กำลังศึกษาที่"
-                  required
-                  placeholder="เช่น มหาวิทยาลัยราชภัฏมหาสารคาม"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="faculty"
-                  :rules="[rules.required]"
-                  label="คณะ"
-                  required
-                  placeholder="เช่น วิศวกรรมศาสตร์ "
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="branch"
-                  :rules="[rules.required]"
-                  label="สาขา"
-                  required
-                  placeholder="เช่น วิศวกรรมคอมพิวเตอร์"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
-                <v-text-field
-                  v-model="year"
-                  :rules="[rules.required]"
-                  label="ชั้นปี"
-                  required
-                  placeholder="เช่น ชั้นปี 3"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
             </v-row>
           </v-col>
         </v-form>
         <v-col class="pt-2">
           <v-btn block rounded elevation="0" color="primary" @click="create">
             ลงทะเบียนเข้าใช้
+          </v-btn>
+        </v-col>
+        <v-col class="pt-2">
+          <v-btn block rounded elevation="0" color="gray" to="/login">
+            ย้อนกลับหน้า login
           </v-btn>
         </v-col>
       </v-card>
@@ -247,10 +161,17 @@ export default {
 
   data() {
     return {
+      login: {
+        password: "",
+        confPassword: "",
+      },
       valid2: false,
       title: "",
       name: "",
       tel: "",
+      firstName:"",
+      lastName:"",
+      userName:'',
       userStudy: "",
       serailNumber: "",
       education: "",
@@ -312,55 +233,27 @@ export default {
     },
   },
   mounted() {
-    this.getTitleUsers();
   },
   methods: {
-    ...mapActions({
-      getTitleUsers: "users/getTitleUsers",
-    }),
+
     create() {
-      this.$refs.form1.validate();
-      try {
-        if (this.valid2) {
-          let pictureNew = "";
-          if (this.base64.result) {
-            pictureNew = this.base64.result.split(",");
-          }
+     let data = {
 
-          let data = {
-            params: {
-              data: {
-                name: this.name,
-                title: this.title.id,
-                mobile: this.tel,
-                email: this.email,
-                image_1920: pictureNew[1],
-                year_of_study: this.yearOfStudy,
-                univercity: this.univercity,
-                faculty: this.faculty,
-                branch: this.branch,
-                year: this.year,
-                type_users_study: this.userStudy.id,
-                type_education: this.education.id,
-                serail_number: this.serailNumber,
-              },
-            },
-          };
-          this.$axios.post(`api/res.partner`, data).then((response) => {
-            console.log("ability.transfer", response.data);
+        first_name: this.firstName,
+        last_name: this.lastName,
+        username: this.username,
+        password: this.login.password,
+        confirm_password: this.login.confPassword,
+        email: this.email,
+        role: "student",
+      };
 
-            if (response.data.result) {
-              this.$router.push("/login");
-            } else {
-              this.$toast.error("ลงทะเบียนไม่สำเร็จ").goAway(2000);
-            }
-          });
+      this.$fixedKeyApi.post(`/user/`, data).then((response) => {
+        if (response.data) {
+          console.log("post", response.data);
+          this.$router.push("/login");
         }
-      } catch (err) {
-        console.log(err);
-        this.error = true;
-        // this.$refs.loading.finish();
-      }
+      });
     },
     async uploadImage(image) {
       console.log(image);

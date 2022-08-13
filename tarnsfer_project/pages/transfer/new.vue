@@ -5,9 +5,9 @@
         <v-icon> mdi-plus</v-icon>
       </v-btn> -->
 
-      <v-card>
+      <!-- <v-card> -->
         <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider> -->
 
         <v-col>
           <v-row>
@@ -33,7 +33,7 @@
         <v-col v-else>
           <TransferStudyInstead />
         </v-col>
-      </v-card>
+      <!-- </v-card> -->
     </v-col>
   </div>
 </template>

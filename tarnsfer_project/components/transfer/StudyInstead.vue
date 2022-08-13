@@ -1,264 +1,297 @@
 <template>
   <div>
-    <v-col>
-      <v-col>
-        <v-row>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="อาจารย์ที่ปรึกษา"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="advisor"
-            ></v-combobox>
+    <v-stepper v-model="e1">
+      <v-stepper-header elevation="0">
+        <v-stepper-step :complete="e1 > 1" step="1">
+          เพิ่มรายวิชาที่จะเทียบ
+        </v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step :complete="e1 > 2" step="2">
+          เลือกผู้เห็นชอบ
+        </v-stepper-step>
+        <v-divider></v-divider>
+
+        <v-stepper-step step="3"> คณะกรรมการเทียบโอน </v-stepper-step>
+      </v-stepper-header>
+
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-col class="pb-0 pt-0">
+            <v-col class="pb-8">
+              <strong>รายวิชาที่ขอเทียบ</strong>
+            </v-col>
+            <v-row>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="วิชาเดิมที่ขอเทียบ"
+                  outlined
+                  :items="schoolCourse"
+                  item-text="course_title"
+                  dense
+                  item-value="id"
+                  v-model="subjectOld"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="หลักสูตร"
+                  outlined
+                  dense
+                  :items="subject"
+                  item-text="name"
+                  item-value="id"
+                  v-model="couseOld"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="สาขาวิชา"
+                  outlined
+                  dense
+                  :items="subject"
+                  item-text="name"
+                  item-value="id"
+                  v-model="branceOld"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-text-field
+                  label="ปี พ.ศ"
+                  dense
+                  outlined
+                  v-model="yearOld"
+                ></v-text-field>
+              </v-col>
+            </v-row>
           </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="หัวหน้าสาขาวิชา"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="head_department"
-            ></v-combobox>
+          <v-col class="pt-0">
+            <v-col class="pb-8">
+              <strong>รายวิชาที่ขอเรียนแทน</strong>
+            </v-col>
+            <v-row>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="รายวิชาที่ขอเรียนแทน"
+                  outlined
+                  dense
+                  :items="schoolCourse"
+                  item-text="course_title"
+                  item-value="id"
+                  v-model="subjectNew"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="หลักสูตร"
+                  outlined
+                  dense
+                  :items="subject"
+                  item-text="name"
+                  item-value="id"
+                  v-model="couseNew"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-combobox
+                  label="สาขาวิชา"
+                  outlined
+                  dense
+                  :items="subject"
+                  item-text="name"
+                  item-value="id"
+                  v-model="branceNew"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-text-field
+                  label="ปี พ.ศ"
+                  dense
+                  outlined
+                  v-model="yearNew"
+                ></v-text-field>
+              </v-col>
+            </v-row>
           </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="หัวหน้าสำนักงานคณบดี"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="head_educational"
-            ></v-combobox>
+          <v-btn color="grey" dark @click="e1 = 2"> Next </v-btn>
+
+          <!-- <v-btn text> Cancel </v-btn> -->
+        </v-stepper-content>
+
+        <v-stepper-content step="2">
+          <v-col>
+            <v-col>
+              <v-row>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="อาจารย์ที่ปรึกษา"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="advisor"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าสาขาวิชา"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="head_department"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าสำนักงานคณบดี"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="head_educational"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="รองคณบดีฝ่ายวิชาการและวิจัย"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="deputy_dean_a_r"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณบดี"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="dean"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="หัวหน้าแผนกงานส่งเสริมวิาการและงานทะเบียน"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="head_academic_p_r"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label=" เจ้าหน้าที่ทะเบียน"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="registrar_officer"
+                  ></v-combobox>
+                </v-col>
+              </v-row>
+            </v-col>
           </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="รองคณบดีฝ่ายวิชาการและวิจัย"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="deputy_dean_a_r"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณบดี"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="dean"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="หัวหน้าแผนกงานส่งเสริมวิาการและงานทะเบียน"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="head_academic_p_r"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label=" เจ้าหน้าที่ทะเบียน"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="registrar_officer"
-            ></v-combobox>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-col>
-    <v-col class="pb-0 pt-0">
-      <v-col class="pb-8">
-        <strong>รายวิชาที่ขอเทียบ</strong>
-      </v-col>
-      <v-row>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="วิชาเดิมที่ขอเทียบ"
-            outlined
-            :items="schoolCourse"
-            item-text="course_title"
-            dense
-            item-value="id"
-            v-model="subjectOld"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="หลักสูตร"
-            outlined
-            dense
-            :items="subject"
-            item-text="name"
-            item-value="id"
-            v-model="couseOld"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="สาขาวิชา"
-            outlined
-            dense
-            :items="subject"
-            item-text="name"
-            item-value="id"
-            v-model="branceOld"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-text-field
-            label="ปี พ.ศ"
-            dense
-            outlined
-            v-model="yearOld"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-col>
-    <v-col class="pt-0">
-      <v-col class="pb-8">
-        <strong>รายวิชาที่ขอเรียนแทน</strong>
-      </v-col>
-      <v-row>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="รายวิชาที่ขอเรียนแทน"
-            outlined
-            dense
-            :items="schoolCourse"
-            item-text="course_title"
-            item-value="id"
-            v-model="subjectNew"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="หลักสูตร"
-            outlined
-            dense
-            :items="subject"
-            item-text="name"
-            item-value="id"
-            v-model="couseNew"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-combobox
-            label="สาขาวิชา"
-            outlined
-            dense
-            :items="subject"
-            item-text="name"
-            item-value="id"
-            v-model="branceNew"
-          ></v-combobox>
-        </v-col>
-        <v-col cols="12" sm="6" class="pt-0 pb-0">
-          <v-text-field
-            label="ปี พ.ศ"
-            dense
-            outlined
-            v-model="yearNew"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-col>
-    <v-col>
-      <v-col class="pb-8">
+          <v-btn color="grey" dark @click="e1 = 3"> Next </v-btn>
+
+          <v-btn text @click="e1 = 1"> Back </v-btn>
+        </v-stepper-content>
+        <v-stepper-content step="3">
+          <v-col>
+            <!-- <v-col class="pb-8">
         <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
-      </v-col>
-      <v-col>
-        <v-row>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 1"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvOne"
-            ></v-combobox>
+      </v-col> -->
+            <v-col>
+              <v-row>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 1"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvOne"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 2"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvTwo"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 3"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvThree"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 4"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvFour"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 5"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvFive"
+                  ></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                  <v-combobox
+                    label="คณะกรรมการที่ 6"
+                    outlined
+                    dense
+                    :items="teacher"
+                    item-text="full_name"
+                    item-value="id"
+                    v-model="approvSix"
+                  ></v-combobox>
+                </v-col>
+              </v-row>
+            </v-col>
           </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 2"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvTwo"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 3"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvThree"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 4"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvFour"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 5"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvFive"
-            ></v-combobox>
-          </v-col>
-          <v-col cols="12" sm="6" class="pt-0 pb-0">
-            <v-combobox
-              label="คณะกรรมการที่ 6"
-              outlined
-              dense
-              :items="teacher"
-              item-text="full_name"
-              item-value="id"
-              v-model="approvSix"
-            ></v-combobox>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-col>
-    <v-col class="text-center">
-      <v-btn @click="save()" elevation="0" color="grey" dark>
-        บันทึกการเทียบโอน
-      </v-btn>
-    </v-col>
+          <v-btn @click="save()" elevation="0" color="grey" dark>
+            บันทึกการเทียบโอน
+          </v-btn>
+          <v-btn text @click="e1 = 2"> Back </v-btn>
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
+
+
   </div>
 </template>
 <script>
@@ -267,6 +300,7 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
+      e1: 1,
       subjectOld: null,
       subjectNew: null,
       couseOld: null,

@@ -72,8 +72,8 @@
     </v-col>
     <div>
       <v-row>
-        <v-col v-for="(menu, i) in equivalentCourse" :key="i" cols="12" sm="3">
-          <v-card outlined width="100%">
+        <v-col v-for="(menu) in equivalentCourse" :key="menu.id" cols="12" sm="3">
+          <v-card outlined width="100%" @click="toDetail(menu.id)">
             <v-col>
               <v-chip class="" small>
                 {{ menu.registrar_officer_approve }}
@@ -84,6 +84,7 @@
 
             <v-col>
               {{ menu.equivalent_type }}
+              {{ menu.id }}
             </v-col>
           </v-card>
         </v-col>
@@ -204,7 +205,17 @@ export default {
       getEquivalentCourse: "transfer/getEquivalentCourse",
       getTeacher: "users/getTeacher",
       getSchoolCourse: "subject/getSchoolCourse",
+
+
     }),
+      toDetail(id) {
+        console.log("getEquivalentCourse show id", id);
+
+        this.$store.dispatch(`transfer/getEquivalentCourseByID`, {
+          id: id,
+        });
+        this.$router.push("/transfer/detail/");
+      },
   },
 };
 </script>
