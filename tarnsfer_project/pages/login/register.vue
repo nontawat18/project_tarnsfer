@@ -248,7 +248,7 @@ export default {
         role: "student",
       };
 
-      this.$fixedKeyApi.post(`/user/`, data).then((response) => {
+      this.$fixedKeyApi.post(`/users/`, data).then((response) => {
         if (response.data) {
           console.log("post", response.data);
           this.$router.push("/login");

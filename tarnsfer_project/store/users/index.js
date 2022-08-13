@@ -6,7 +6,8 @@ export const state = () => ({
     userLogin: null,
     userId: 0,
     key: '',
-    teacher: []
+    teacher: [],
+    profile: []
 });
 
 /* getters */
@@ -31,6 +32,9 @@ export const mutations = {
     },
     getTeacher(state, data) {
         state.teacher = data;
+    },
+    getProfile(state, data) {
+        state.profile = data;
     },
 
 };
@@ -60,6 +64,21 @@ export const actions = {
                 console.log("getTeacher", response.data);
 
                 commit("getTeacher", response.data);
+            });
+    },
+
+    getProfile({ commit, rootState }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+        let userID = rootState.users.userId
+
+        this.$fixedKeyApi
+            .get(`/profile/${userID}/`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getProfile", response.data);
+
+                commit("getProfile", response.data);
             });
     },
 
