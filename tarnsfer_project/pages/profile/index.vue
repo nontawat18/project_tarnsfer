@@ -83,7 +83,7 @@
           <v-icon>mdi-share-variant</v-icon>
         </v-btn>
       </v-card-actions> -->
-      <v-col v-if="profile.file_transcrip == null">
+      <!-- <v-col v-if="profile.file_transcrip == null">
         <v-file-input
           outlined
           dense
@@ -106,7 +106,34 @@
         >
           <v-icon left> mdi-download</v-icon> Download Transcript
         </v-btn>
-      </v-col>
+      </v-col> -->
+      <v-row>
+        <v-col cols="6" sm="6" class="">
+          <v-file-input
+            outlined
+            dense
+            label="Uplaod Transcript"
+            v-model="image"
+            @change="uploadImage(image)"
+          ></v-file-input>
+        </v-col>
+        <v-col cols="2" sm="2" class="text-center">
+          <v-btn color="gray" @click="save"> บันทึก </v-btn>
+        </v-col>
+        <v-col cols="4" sm="4" class="">
+          <v-btn
+            class=""
+            small
+            elevation="0"
+            @click="download(profile.file_transcrip)"
+            dark
+            color="grey"
+          >
+            <v-icon left> mdi-download</v-icon> Download Transcript
+          </v-btn>
+        </v-col>
+
+      </v-row>
     </v-card>
   </div>
 </template>
@@ -266,7 +293,7 @@ export default {
     ...mapActions({
       getProfile: "users/getProfile",
     }),
-    download(item) {
+    async download(item) {
       // const url = "/users/download";
       console.log("item", item);
       // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
@@ -279,7 +306,7 @@ export default {
 
       downloadLink.href = linkSource;
       downloadLink.download = fileName;
-      downloadLink.click();
+      await downloadLink.click();
     },
     save() {
       // Object.assign(this.desserts[this.editedIndex], this.editedItem);

@@ -57,6 +57,14 @@
           <v-list-item-title v-text="`สร้างบัญชีผู้ใช้`" />
         </v-list-item>
       </div>
+            <div>
+        <v-list-item :to="`/listUser/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account-multiple</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`รายชื่อผู้ใช้`" />
+        </v-list-item>
+      </div>
       <div>
         <v-list-item @click="userLogout()" class="v-list-item">
           <v-list-item-icon>
@@ -90,7 +98,14 @@
           <v-list-item-title v-text="`คลังวิชา`" />
         </v-list-item>
       </div>
-
+      <div>
+        <v-list-item :to="`/basesubject/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-book-plus</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`รายวิชามหาวิทยาลัย`" />
+        </v-list-item>
+      </div>
       <div>
         <v-list-item :to="`/transfer/`" class="v-list-item">
           <v-list-item-icon>

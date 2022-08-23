@@ -239,6 +239,7 @@
                     v-model="approvSix"
                   ></v-combobox>
                 </v-col>
+                {{ approvSix }}
               </v-row>
             </v-col>
           </v-col>
@@ -392,7 +393,7 @@ export default {
       },
       set() {},
     },
-        userId: {
+    userId: {
       get() {
         if (this.$store.state.users.userId) {
           return this.$store.state.users.userId;
@@ -454,6 +455,8 @@ export default {
         id: index,
         component: Transfer,
         nameSubjectTransfer: null,
+        nameSubjectTransfer2: null,
+        nameSubjectTransfer3: null,
         nameSubject: null,
         // nameCourse: null,
       });
@@ -466,6 +469,9 @@ export default {
         id: index,
         component: Ability,
         nameSubjectTransfer: null,
+        nameSubjectTransfer2: null,
+        nameSubjectTransfer3: null,
+
         nameSubject: null,
         // nameCourse: null,
       });
@@ -475,9 +481,35 @@ export default {
     },
     async updateLength(data) {
       if (this.lengths[data.index]) {
-        this.lengths[data.index].nameSubjectTransfer =
-          data.nameSubjectTransfer.id.toFixed(0);
-        this.lengths[data.index].nameSubject = data.nameSubject.id.toFixed(0);
+        if (
+          data.nameSubjectTransfer == "" ||
+          data.nameSubjectTransfer == undefined
+        ) {
+          this.lengths[data.index].nameSubjectTransfer = "";
+        } else {
+          this.lengths[data.index].nameSubjectTransfer =
+            data.nameSubjectTransfer.id;
+        }
+        if (
+          data.nameSubjectTransfer2 == "" ||
+          data.nameSubjectTransfer2 == undefined
+        ) {
+          this.lengths[data.index].nameSubjectTransfer2 = "";
+        } else {
+          this.lengths[data.index].nameSubjectTransfer2 =
+            data.nameSubjectTransfer2.id;
+        }
+        if (
+          data.nameSubjectTransfer3 == "" ||
+          data.nameSubjectTransfer3 == undefined
+        ) {
+          this.lengths[data.index].nameSubjectTransfer3 = "";
+        } else {
+          this.lengths[data.index].nameSubjectTransfer3 =
+            data.nameSubjectTransfer3.id;
+        }
+
+        this.lengths[data.index].nameSubject = data.nameSubject.id;
         console.log(this.lengths);
         // this.lengths[data.index].nameCourse = data.nameCourse.id.toFixed(0);
         // console.log(this.lengths);
@@ -488,9 +520,12 @@ export default {
       if (this.lengthsAbility[data.index]) {
         this.lengthsAbility[data.index].nameSubjectTransfer =
           data.nameSubjectTransfer.id.toFixed(0);
-        this.lengthsAbility[data.index].nameSubject =
-          data.nameSubject.id.toFixed(0);
-        console.log(this.lengthsAbility);
+        this.lengths[data.index].nameSubjectTransfer2 =
+          data.nameSubjectTransfer2.id.toFixed(0);
+        this.lengths[data.index].nameSubjectTransfer3 =
+          data.nameSubjectTransfer3.id.toFixed(0);
+        this.lengths[data.index].nameSubject = data.nameSubject.id.toFixed(0);
+        console.log(this.lengths);
         // this.lengthsAbility[data.index].nameCourse =
         //   data.nameCourse.id.toFixed(0);
         // console.log(this.lengthsAbility);
@@ -559,7 +594,11 @@ export default {
             {
               status: "รอตรวจสอบ",
               semester: 1,
-              student_course: element.nameSubjectTransfer,
+              student_course: [
+                element.nameSubjectTransfer,
+                element.nameSubjectTransfer2,
+                element.nameSubjectTransfer3,
+              ],
               course_enroll: element.nameSubject,
             },
           ],
@@ -581,6 +620,7 @@ export default {
           registrar_officer: this.registrar_officer.id,
           created_user: this.userId,
         };
+        console.log(data);
 
         this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
           if (response.data) {

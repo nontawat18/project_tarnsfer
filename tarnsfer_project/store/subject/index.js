@@ -39,20 +39,22 @@ export const actions = {
         let userID = rootState.users.userId
 
         await this.$fixedKeyApi
-            .get(`/my-course/?created_user=${userID}`)
-            .then(response => {
-                self.search = response.data;
-                console.log("getMyCourse", response.data);
+            // .get(`/my-course/?created_user=${userID}`)
+            .get(`/my-course/`)
 
-                commit("getMyCourse", response.data);
-            });
+        .then(response => {
+            self.search = response.data;
+            console.log("getMyCourse", response.data);
+
+            commit("getMyCourse", response.data);
+        });
     },
     async getSchoolCourse({ commit }) {
         var self = this;
         // console.log("getProduct", productSearch);
 
         await this.$fixedKeyApi
-            .get(`/school-course`)
+            .get(`/school-course/`)
             .then(response => {
                 self.search = response.data;
                 console.log("getSchoolCourse", response.data);

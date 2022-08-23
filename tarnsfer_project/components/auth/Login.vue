@@ -69,8 +69,10 @@ export default {
     return {
       valid: false,
       login: {
-        username: "cha",
-        password: "12345678",
+        // username: "cha",
+        // password: "12345678",
+        username: "admin",
+        password: "vrpadmin1234",
       },
       loginFailed: false,
       accountId: 0,
@@ -126,19 +128,16 @@ export default {
         //   });
 
         let data = {
-            username: this.login.username,
-            password: this.login.password,
-            // db: "admin",
+          username: this.login.username,
+          password: this.login.password,
+          // db: "admin",
         };
 
         this.$fixedKeyApi.post(`/rest-auth/login/`, data).then((response) => {
           console.log("auth", response);
           if (response.status == 200) {
             this.$store.dispatch("users/saveUser", response.data);
-            this.$store.dispatch(
-              "users/setUserKey",
-              response.data.key
-            );
+            this.$store.dispatch("users/setUserKey", response.data.key);
             this.$store.dispatch("users/setUserId", response.data.user.id);
             this.$toast.success("เข้าสู่ระบบแล้ว").goAway(2000);
 

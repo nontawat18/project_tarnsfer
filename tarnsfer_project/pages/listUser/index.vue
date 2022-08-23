@@ -2,13 +2,13 @@
   <div class="pt-4">
     <v-data-table
       :headers="headers"
-      :items="schoolCourse"
+      :items="profileAll"
       :search="search"
       class="elevation-1"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>รายวิชาในมหาวิทยาลัย</v-toolbar-title>
+          <v-toolbar-title>รายชื่อผู้ใช้</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
@@ -29,7 +29,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">รายวิชาในมหาวิทยาลัย</span>
+                  <span class="text-h5">{{ formTitle }}</span>
                 </v-card-title>
 
                 <v-card-text>
@@ -71,22 +71,22 @@
                           dense
                         ></v-text-field>
                       </v-col>
-                      <!-- <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.course"
-                        label="หลักสูตร"
-                        outlined
-                        dense
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.subject"
-                        label="สาขาวิชา"
-                        outlined
-                        dense
-                      ></v-text-field>
-                    </v-col> -->
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.grade"
+                          label="เกรด"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.school"
+                          label="วิทยาลัย/มหาวิทยาลัย"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <!-- <v-text-field
                         v-model="editedItem.description_file"
@@ -98,10 +98,9 @@
                         outlined
                         dense
                         label="คำอธิบายรายวิชา"
-                        v-model="editedItem.description_file"
+                        v-model="image"
                         @change="uploadImage(image)"
                       ></v-file-input> -->
-
                         <v-textarea
                           outlined
                           dense
@@ -120,7 +119,6 @@
                     </v-row>
                   </v-container>
                 </v-card-text>
-
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
@@ -158,7 +156,7 @@
         </v-col>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-         <div v-if="userRole == 'admin'">
+        <div v-if="userRole == 'admin'">
           <v-icon small color="primary" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -167,7 +165,13 @@
           </v-icon>
         </div>
         <div v-else>
-          <v-icon small color="primary" disabled class="mr-2" @click="editItem(item)">
+          <v-icon
+            small
+            color="primary"
+            disabled
+            class="mr-2"
+            @click="editItem(item)"
+          >
             mdi-pencil
           </v-icon>
           <v-icon small color="red" disabled @click="deleteItem(item)">
@@ -271,15 +275,16 @@ export default {
     ],
     headers: [
       {
-        text: "รหัสวิชา",
+        text: "ชื่อ",
         align: "start",
         sortable: false,
-        value: "course_code",
+        value: "first_name",
       },
-      { text: "ชื่อวิชา", value: "course_title", sortable: false },
-      { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
-      { text: "หน่วยกิจ", value: "credit", sortable: false },
-      { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
+      { text: "นามสกุล", value: "last_name", sortable: false },
+      { text: "username", value: "username", sortable: false },
+      { text: "role", value: "role.role", sortable: false },
+      { text: "email", value: "email", sortable: false },
+
       // { text: "หลักสูตร", value: "course", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
@@ -293,6 +298,8 @@ export default {
       credit_type: 0,
       credit: 0,
       description_file: "",
+      grade: "",
+      school: "",
     },
     defaultItem: {
       id: 0,
@@ -302,6 +309,8 @@ export default {
       credit_type: 0,
       credit: 0,
       description_file: "",
+      grade: "",
+      school: "",
     },
   }),
 
@@ -319,10 +328,40 @@ export default {
       },
       set() {},
     },
+    myCourse: {
+      get() {
+        if (this.$store.state.subject.myCourse) {
+          return this.$store.state.subject.myCourse.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    userId: {
+      get() {
+        if (this.$store.state.users.userId) {
+          return this.$store.state.users.userId;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     userRole: {
       get() {
         if (this.$store.state.users.userLogin.user) {
           return this.$store.state.users.userLogin.user.role.role;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    profileAll: {
+      get() {
+        if (this.$store.state.users.profileAll) {
+          return this.$store.state.users.profileAll.results;
         } else {
           return null;
         }
@@ -345,10 +384,14 @@ export default {
   },
   mounted() {
     this.getSchoolCourse();
+    this.getMyCourse();
+    this.getProfileAll();
   },
   methods: {
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
+      getMyCourse: "subject/getMyCourse",
+      getProfileAll: "users/getProfileAll",
     }),
     download(item) {
       // const url = "/users/download";
@@ -474,7 +517,7 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.schoolCourse.indexOf(item);
+      this.editedIndex = this.myCourse.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       this.idSubject = item.id;
@@ -482,7 +525,7 @@ export default {
     },
 
     deleteItem(item) {
-      this.editedIndex = this.schoolCourse.indexOf(item);
+      this.editedIndex = this.myCourse.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
       this.idSubject = item.id;
@@ -514,56 +557,57 @@ export default {
       let id = this.idSubject;
       // Object.assign(this.desserts[this.editedIndex], this.editedItem);
 
-      this.$fixedKeyApi.delete(`/school-course/${id}`).then((response) => {
+      this.$fixedKeyApi.delete(`/my-course/${id}`).then((response) => {
         console.log("delete", response);
         if (response.status == 204) {
           this.closeDelete();
-          this.getSchoolCourse();
+          this.getMyCourse();
         }
       });
     },
     save() {
       if (this.editedIndex > -1) {
-        let id = this.idSubject;
-
         // Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        let id = this.idSubject;
         let data = {
           course_code: this.editedItem.course_code,
           course_title: this.editedItem.course_title,
           credit_type: this.editedItem.credit_type,
           credit: this.editedItem.credit,
+          grade: this.editedItem.grade,
+          school: this.editedItem.school,
           course: null,
           subject: null,
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
-          created_user: 1,
+          created_user: this.userId,
         };
-        this.$fixedKeyApi
-          .patch(`/school-course/${id}/`, data)
-          .then((response) => {
-            if (response.data) {
-              console.log("patch", response.data);
-              this.close();
-              this.getSchoolCourse();
-            }
-          });
+        this.$fixedKeyApi.patch(`/my-course/${id}/`, data).then((response) => {
+          if (response.status == 200) {
+            console.log("patch", response.data);
+            this.close();
+            this.getMyCourse();
+          }
+        });
       } else {
         let data = {
           course_code: this.editedItem.course_code,
           course_title: this.editedItem.course_title,
           credit_type: this.editedItem.credit_type,
           credit: this.editedItem.credit,
+          grade: this.editedItem.grade,
+          school: this.editedItem.school,
           course: null,
           subject: null,
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
-          created_user: 1,
+          created_user: this.userId,
         };
-        this.$fixedKeyApi.post(`/school-course/`, data).then((response) => {
+        this.$fixedKeyApi.post(`/my-course/`, data).then((response) => {
           if (response.data) {
             console.log("post", response.data);
             this.close();
-            this.getSchoolCourse();
+            this.getMyCourse();
           }
         });
       }

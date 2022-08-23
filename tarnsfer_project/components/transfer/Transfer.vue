@@ -17,7 +17,7 @@
         </v-col> -->
         <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
-            label="วิชาที่จะเทียบ"
+            label="วิชาที่จะเทียบที่ 1"
             :items="myCourse"
             item-text="course_title"
             item-value="id"
@@ -25,6 +25,30 @@
             dense
             @v-on:change="onChange()"
             v-model="nameSubjectTransfer"
+          ></v-combobox>
+        </v-col>
+        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+          <v-combobox
+            label="วิชาที่จะเทียบที่ 2"
+            :items="myCourse"
+            item-text="course_title"
+            item-value="id"
+            outlined
+            dense
+            @v-on:change="onChange()"
+            v-model="nameSubjectTransfer2"
+          ></v-combobox>
+        </v-col>
+        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+          <v-combobox
+            label="วิชาที่จะเทียบที 3"
+            :items="myCourse"
+            item-text="course_title"
+            item-value="id"
+            outlined
+            dense
+            @v-on:change="onChange()"
+            v-model="nameSubjectTransfer3"
           ></v-combobox>
         </v-col>
         <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
@@ -39,7 +63,6 @@
             v-model="nameSubject"
           ></v-combobox>
         </v-col>
-
         <v-col cols="12" class="pl-1 pt-0">
           <v-btn
             color="red"
@@ -66,6 +89,9 @@ export default {
       creditTransfer: null,
       subjectDetailTransfer: null,
       nameSubjectTransfer: null,
+      nameSubjectTransfer2: null,
+      nameSubjectTransfer3: null,
+
       subjectSerailTransfer: null,
       credit: null,
       subjectDetail: null,
@@ -176,6 +202,10 @@ export default {
       await this.$emit("update", {
         index: this.index,
         nameSubjectTransfer: this.nameSubjectTransfer,
+        nameSubjectTransfer2: this.nameSubjectTransfer2,
+
+        nameSubjectTransfer3: this.nameSubjectTransfer3,
+
         nameSubject: this.nameSubject,
         nameCourse: this.nameCourse,
       });
