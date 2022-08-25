@@ -37,84 +37,78 @@
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.course_code"
-                          label="รหัสวิชา"
+                          v-model="editedItem.first_name"
+                          label="ชื่อ"
                           outlined
                           dense
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.course_title"
-                          label="ชื่อวิชา"
+                          v-model="editedItem.last_name"
+                          label="นามสกุล"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.username"
+                          label="Username"
                           outlined
                           dense
                         ></v-text-field>
                       </v-col>
 
+                      <v-col sm="6" cols="12" class="pt-0 pb-0" v-if="formTitle == 'New Item'">
+                        <v-text-field
+                          v-model="editedItem.password"
+                          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                          :rules="[rules.required]"
+                          :type="show1 ? 'text' : 'password'"
+                          name="input-10-1"
+                          label="รหัสผ่าน"
+                          counter
+                          outlined
+                          dense
+                          @click:append="show1 = !show1"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col sm="6" cols="12" class="pt-0 pb-0" v-if="formTitle == 'New Item'">
+                        <v-text-field
+                          v-model="editedItem.confirm_password"
+                          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                          :rules="[rules.required]"
+                          :type="show1 ? 'text' : 'password'"
+                          name="input-10-1"
+                          label="ยืนยันรหัสผ่าน"
+                          counter
+                          outlined
+                          dense
+                          @click:append="show1 = !show1"
+                        ></v-text-field>
+                      </v-col>
+
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.email"
+                          :rules="[rules.required, rules.email]"
+                          label="E-mail"
+                          required
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-select
-                          v-model="editedItem.credit_type"
-                          label="ประเภทรายวิชา"
-                          :items="type"
+                          v-model="editedItem.role"
+                          label="Role"
+                          :items="role"
                           item-text="name"
                           item-value="id"
                           outlined
                           dense
                         ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.credit"
-                          label="หน่วยกิจ"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.grade"
-                          label="เกรด"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.school"
-                          label="วิทยาลัย/มหาวิทยาลัย"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <!-- <v-text-field
-                        v-model="editedItem.description_file"
-                        label="คำอธิบายรายวิชา"
-                        outlined
-                        dense
-                      ></v-text-field> -->
-                        <!-- <v-file-input
-                        outlined
-                        dense
-                        label="คำอธิบายรายวิชา"
-                        v-model="image"
-                        @change="uploadImage(image)"
-                      ></v-file-input> -->
-                        <v-textarea
-                          outlined
-                          dense
-                          label="คำอธิบายรายวิชา"
-                          v-model="editedItem.description_file"
-                        ></v-textarea>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.course_year"
-                          label="ปี พ.ศ"
-                          outlined
-                          dense
-                        ></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -193,9 +187,6 @@
           </v-btn>
         </div>
       </template> -->
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
     </v-data-table>
   </div>
 </template>
@@ -261,16 +252,33 @@ export default {
     dialogDelete: false,
     image: null,
     base64: "",
+    show1: false,
     idSubject: "",
-
-    type: [
+    rules: {
+      required: (value) => !!value || "จำเป็นต้องระบุ",
+      counter: (value) => value.length <= 20 || "Max 20 characters",
+      email: (value) => {
+        const pattern =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Invalid e-mail.";
+      },
+    },
+    role: [
       {
-        id: "ท",
-        name: "ทฤษฎี",
+        id: "admin",
+        name: "admin",
       },
       {
-        id: "ป",
-        name: "ปฏิบัติ",
+        id: "judge",
+        name: "judge",
+      },
+      {
+        id: "teacher",
+        name: "teacher",
+      },
+      {
+        id: "student",
+        name: "student",
       },
     ],
     headers: [
@@ -291,26 +299,22 @@ export default {
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      id: 0,
-      course_code: "",
-      course_title: "",
-      course: 0,
-      credit_type: 0,
-      credit: 0,
-      description_file: "",
-      grade: "",
-      school: "",
+      first_name: "",
+      last_name: "",
+      username: "",
+      password: "",
+      confirm_password: "",
+      role: "",
+      email: "",
     },
     defaultItem: {
-      id: 0,
-      course_code: "",
-      course_title: "",
-      course: 0,
-      credit_type: 0,
-      credit: 0,
-      description_file: "",
-      grade: "",
-      school: "",
+      first_name: "",
+      last_name: "",
+      username: "",
+      password: "",
+      confirm_password: "",
+      role: "",
+      email: "",
     },
   }),
 
@@ -379,9 +383,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
+  created() {},
   mounted() {
     this.getSchoolCourse();
     this.getMyCourse();
@@ -431,93 +433,9 @@ export default {
         console.log("base64", this.base64);
       }
     },
-    initialize() {
-      this.desserts = [
-        {
-          course_code: "Frozen Yogurt",
-          course_title: 159,
-          course: 6.0,
-          credit_type: 24,
-          credit: 4.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Ice cream sandwich",
-          course_title: 237,
-          course: 9.0,
-          credit_type: 37,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Eclair",
-          course_title: 262,
-          course: 16.0,
-          credit_type: 23,
-          credit: 6.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Cupcake",
-          course_title: 305,
-          course: 3.7,
-          credit_type: 67,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Gingerbread",
-          course_title: 356,
-          course: 16.0,
-          credit_type: 49,
-          credit: 3.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Jelly bean",
-          course_title: 375,
-          course: 0.0,
-          credit_type: 94,
-          credit: 0.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Lollipop",
-          course_title: 392,
-          course: 0.2,
-          credit_type: 98,
-          credit: 0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Honeycomb",
-          course_title: 408,
-          course: 3.2,
-          credit_type: 87,
-          credit: 6.5,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Donut",
-          course_title: 452,
-          course: 25.0,
-          credit_type: 51,
-          credit: 4.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "KitKat",
-          course_title: 518,
-          course: 26.0,
-          credit_type: 65,
-          credit: 7,
-          description_file: "RMUTI KKC",
-        },
-      ];
-    },
 
     editItem(item) {
-      this.editedIndex = this.myCourse.indexOf(item);
+      this.editedIndex = this.profileAll.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       this.idSubject = item.id;
@@ -525,7 +443,7 @@ export default {
     },
 
     deleteItem(item) {
-      this.editedIndex = this.myCourse.indexOf(item);
+      this.editedIndex = this.profileAll.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
       this.idSubject = item.id;
@@ -557,11 +475,11 @@ export default {
       let id = this.idSubject;
       // Object.assign(this.desserts[this.editedIndex], this.editedItem);
 
-      this.$fixedKeyApi.delete(`/my-course/${id}`).then((response) => {
+      this.$fixedKeyApi.delete(`/users/${id}`).then((response) => {
         console.log("delete", response);
         if (response.status == 204) {
           this.closeDelete();
-          this.getMyCourse();
+          this.getProfileAll();
         }
       });
     },
@@ -570,44 +488,36 @@ export default {
         // Object.assign(this.desserts[this.editedIndex], this.editedItem);
         let id = this.idSubject;
         let data = {
-          course_code: this.editedItem.course_code,
-          course_title: this.editedItem.course_title,
-          credit_type: this.editedItem.credit_type,
-          credit: this.editedItem.credit,
-          grade: this.editedItem.grade,
-          school: this.editedItem.school,
-          course: null,
-          subject: null,
-          course_year: this.editedItem.course_year,
-          description_file: this.editedItem.description_file,
-          created_user: this.userId,
+          first_name: this.editedItem.first_name,
+          last_name: this.editedItem.last_name,
+          username: this.editedItem.username,
+          password: this.editedItem.password,
+          confirm_password: this.editedItem.confirm_password,
+          email: this.editedItem.email,
+          role: this.editedItem.role,
         };
-        this.$fixedKeyApi.patch(`/my-course/${id}/`, data).then((response) => {
+        this.$fixedKeyApi.patch(`/users/${id}/`, data).then((response) => {
           if (response.status == 200) {
             console.log("patch", response.data);
             this.close();
-            this.getMyCourse();
+            this.getProfileAll();
           }
         });
       } else {
         let data = {
-          course_code: this.editedItem.course_code,
-          course_title: this.editedItem.course_title,
-          credit_type: this.editedItem.credit_type,
-          credit: this.editedItem.credit,
-          grade: this.editedItem.grade,
-          school: this.editedItem.school,
-          course: null,
-          subject: null,
-          course_year: this.editedItem.course_year,
-          description_file: this.editedItem.description_file,
-          created_user: this.userId,
+          first_name: this.editedItem.first_name,
+          last_name: this.editedItem.last_name,
+          username: this.editedItem.username,
+          password: this.editedItem.password,
+          confirm_password: this.editedItem.confirm_password,
+          email: this.editedItem.email,
+          role: this.editedItem.role,
         };
-        this.$fixedKeyApi.post(`/my-course/`, data).then((response) => {
+        this.$fixedKeyApi.post(`/users/`, data).then((response) => {
           if (response.data) {
             console.log("post", response.data);
             this.close();
-            this.getMyCourse();
+            this.getProfileAll();
           }
         });
       }
