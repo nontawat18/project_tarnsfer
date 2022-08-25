@@ -239,7 +239,6 @@
                     v-model="approvSix"
                   ></v-combobox>
                 </v-col>
-                {{ approvSix }}
               </v-row>
             </v-col>
           </v-col>
@@ -345,6 +344,7 @@ export default {
       valid3: false,
       idAbility: [],
       e1: 1,
+      subjectList: null,
       image: null,
       base64: "",
       id: [],
@@ -594,11 +594,9 @@ export default {
             {
               status: "รอตรวจสอบ",
               semester: 1,
-              student_course: [
-                element.nameSubjectTransfer,
-                element.nameSubjectTransfer2,
-                element.nameSubjectTransfer3,
-              ],
+              student_course1: element.nameSubjectTransfer,
+              student_course2: element.nameSubjectTransfer2,
+              student_course3: element.nameSubjectTransfer3,
               course_enroll: element.nameSubject,
             },
           ],

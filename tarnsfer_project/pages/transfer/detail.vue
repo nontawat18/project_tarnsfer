@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-col>
+    <!-- <v-col>
       <v-row>
         <v-card outlined width="100%">
           <v-col>
@@ -90,11 +90,248 @@
               {{ equivalentCourseByID.name_committee6.last_name }}
             </h3>
 
-            <!-- {{ equivalentCourseByID }} -->
           </v-col>
         </v-card>
       </v-row>
-    </v-col>
+    </v-col> -->
+
+    <v-row class="mt-5" justify="center">
+      <v-card width="1250" class="pa-16 pt-14">
+        <div class="text-center">
+          <u><h3>คำร้องขอเทียบโอนรายวิชา / ขอเทียบเพื่อเรียนแทน</h3></u>
+        </div>
+        <div class="mt-15">
+          <v-row>
+            <v-col></v-col>
+            <v-col>
+              <p>
+                วันที่ ................. เดือน
+                ............................................. พ.ศ.
+                .....................................
+              </p></v-col
+            >
+          </v-row>
+        </div>
+        <div class="mt-5">
+          เรื่อง {{ equivalentCourseByID.equivalent_type }}
+        </div>
+
+        <div class="mt-10">
+          เรียน คณบดี {{ equivalentCourseByID.dean.first_name }}
+          {{ equivalentCourseByID.dean.last_name }}
+        </div>
+        <div class="pl-16 ml-10 mt-10">
+          ข้าพเจ้า {{ userLogin.first_name }} {{ userLogin.last_name }}
+          <!-- {{ equivalentCourseByID }} -->
+
+          รหัสนักศึกษา
+          ..........................................................
+        </div>
+        <div class="mt-4">
+          นักศึกษาระดับ .................................... คณะ
+          ............................................. สาขาวิชา
+          ...............................................
+        </div>
+        <div class="mt-4">
+          เบอร์โทรศัพท์..................................................
+          มีความประสงค์จะขอเทียบโอนรายวิชาที่ได้ศึกษามาแล้ว
+          <b>เนื่องจาก (ระบุเหตุผลประกอบ):</b>
+          <v-row class="mt-1">
+            <v-col cols="2"></v-col
+            ><v-col>
+              <v-row>
+                <p
+                  style="
+                    padding: 8px;
+                    border: 2px solid black;
+                    width: 8px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                  "
+                ></p>
+                พ้นสถานภาพการเป็นนักศึกษาแล้วสอบกลับเข้ามาใหม่ ภายใน 6
+                ภาคการศึกษา
+              </v-row>
+              <v-row>
+                <p
+                  style="
+                    padding: 8px;
+                    border: 2px solid black;
+                    width: 8px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                  "
+                ></p>
+                โอนย้ายสาขาวิชา/ย้ายเวลาเรียน
+                <p
+                  style="
+                    padding: 8px;
+                    border: 2px solid black;
+                    width: 8px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                  "
+                ></p>
+                โอนย้ายสถานศึกษา
+              </v-row>
+              <v-row>
+                <p
+                  style="
+                    padding: 8px;
+                    border: 2px solid black;
+                    width: 8px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                  "
+                ></p>
+                เรียนแทนรายวิชาที่เคยเรียนมาแล้ว
+                (เฉพาะนักศึกษาที่เคยศึกษาจากมหาวิทยาลัย / สถาบันอื่น)
+              </v-row>
+              <v-row>
+                <p
+                  style="
+                    padding: 8px;
+                    border: 2px solid black;
+                    width: 8px;
+                    margin-left: 8px;
+                    margin-right: 8px;
+                  "
+                ></p>
+                อื่นๆ
+                ................................................................................................................................................................................
+              </v-row>
+            </v-col>
+          </v-row>
+        </div>
+        <div class="mt-2">
+          <v-row>
+            <v-col cols="2"
+              ><b><u>หลักฐานที่ต้องแนบ</u></b></v-col
+            >
+            <v-col>
+              1. ใบแสดงผลการเรียน แสดงรายวิชาที่ประสงค์จะขอเรียน <br />2.
+              คำอธิบายรายวิชาที่ประสงค์จะขอเทียบโอน
+              (เฉพาะนักศึกษาที่เคยศึกษาจากมหาวิทยาลัย / สถาบันอื่น) <br />3.
+              คำอธิบายราชวิชาที่ประสงค์จะขอเทียบเพื่อเรียน
+              (กรณีเป็นการขอเทียบรายวิชาต่างคณะ)</v-col
+            >
+          </v-row>
+        </div>
+        <div class="pl-16 ml-10 mt-10">จึงเรียนมาเพื่อโปรดพิจารณา</div>
+        <div class="mt-10">
+          <v-row>
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16">1. ความเห็นของอาจารย์ที่ปรึกษา</b
+                ><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col class="text-center">
+                      (ลงชื่อ) {{ equivalentCourseByID.advisor.first_name }} {{ equivalentCourseByID.advisor.last_name }} อาจารย์ที่ปรึกษา<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16">5. ผลการพิจารณาของคณบดี</b><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <v-col>
+                      (ลงชื่อ) {{ equivalentCourseByID.dean.first_name }} {{ equivalentCourseByID.dean.last_name }} คณบดี<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16">2. ความเห็นของหัวหน้าสาขา</b><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col >
+                      (ลงชื่อ) {{ equivalentCourseByID.head_department.first_name }} {{ equivalentCourseByID.head_department.last_name }} หัวหน้าสาขา<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16"
+                  >6. ความเห็นของหัวหน้างานส่งเสริมวิชาการและงานทะเบียน</b
+                ><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col>
+                      (ลงชื่อ) {{ equivalentCourseByID.head_academic_p_r.first_name }} {{ equivalentCourseByID.head_academic_p_r.last_name }} หัวหน้างานส่งเสริมฯ<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16">3. ความเห็นของหัวหน้าสำนักงานคณบดี</b
+                ><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col>
+                      (ลงชื่อ) {{ equivalentCourseByID.head_academic_p_r.first_name }} {{ equivalentCourseByID.head_academic_p_r.last_name }} หัวหน้าสำนักงานคณบดี<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card>
+              <v-card class="pa-3" outlined>
+                <b class="pb-16">4. ความเห็นของรองคณบดีฝ่ายวิชาการและวิจัย</b
+                ><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col>
+                      (ลงชื่อ) {{ equivalentCourseByID.deputy_dean_a_r.first_name }} {{ equivalentCourseByID.deputy_dean_a_r.last_name }} รองคณบดีฝ่ายวิชาการฯ<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+            <v-col cols="6" sm="6" class="pa-0"
+              ><v-card class="pa-3" outlined>
+                <b class="pb-16">7. สำหรับเจ้าหน้าที่แผนกงานทะเบียนและวัดผล</b
+                ><br /><br /><br />
+                ........................................................................................................................................................
+                <div class="mt-10 text-center">
+                  <v-row>
+                    <!-- <v-col cols="2"></v-col> -->
+                    <v-col>
+                      (ลงชื่อ) {{ equivalentCourseByID.registrar_officer.first_name }} {{ equivalentCourseByID.registrar_officer.last_name }} เจ้าหน้าที่งานทะเบียน<br />
+                      วันที่............................................................................................
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card></v-col
+            >
+          </v-row>
+        </div>
+      </v-card>
+    </v-row>
   </div>
 </template>
 <script>
