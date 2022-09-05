@@ -30,6 +30,9 @@ export default {
     plugins: [
         { src: "~/plugins/axios.js", ssr: false },
         { src: "~/plugins/persistedState.client.js" },
+        { src: "~/plugins/Roboto-Bold-normal.js" },
+        { src: "~/plugins/Sarabun-Bold-normal.js" },
+
     ],
     ssr: false,
 
