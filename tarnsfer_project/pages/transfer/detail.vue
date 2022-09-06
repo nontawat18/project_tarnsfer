@@ -1523,7 +1523,7 @@ export default {
           doc.internal.pageSize.getHeight()
         );
 
-        doc.save("ใบคำขอเทียบโอน 1" + Date.now() + ".pdf");
+        doc.save("ใบคำขอเทียบโอน_1_" + Date.now() + ".pdf");
       });
 
       html2canvas(this.$refs.contentTwo, {
@@ -1541,7 +1541,7 @@ export default {
           doc.internal.pageSize.getHeight()
         );
 
-        doc.save("ใบคำขอเทียบโอน 2" + Date.now() + ".pdf");
+        doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
     },
     makePDF2() {
