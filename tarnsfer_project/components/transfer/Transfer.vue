@@ -15,7 +15,7 @@
             v-model="nameCourse"
           ></v-combobox>
         </v-col> -->
-        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+        <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที่ 1"
             :items="myCourse"
@@ -27,7 +27,16 @@
             v-model="nameSubjectTransfer"
           ></v-combobox>
         </v-col>
-        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+        <v-col cols="2" class="pl-2 pr-2 pt-2 pb-0">
+          <v-text-field
+            label="เกรดวิชาที่ 1"
+            outlined
+            dense
+            @v-on:change="onChange()"
+            v-model="gradeOne"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที่ 2"
             :items="myCourse"
@@ -39,7 +48,16 @@
             v-model="nameSubjectTransfer2"
           ></v-combobox>
         </v-col>
-        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+        <v-col cols="2" class="pl-2 pr-2 pt-2 pb-0">
+          <v-text-field
+            label="เกรดวิชาที่ 1"
+            outlined
+            dense
+            @v-on:change="onChange()"
+            v-model="gradeTwo"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที 3"
             :items="myCourse"
@@ -50,6 +68,15 @@
             @v-on:change="onChange()"
             v-model="nameSubjectTransfer3"
           ></v-combobox>
+        </v-col>
+        <v-col cols="2" class="pl-2 pr-2 pt-2 pb-0">
+          <v-text-field
+            label="เกรดวิชาที่ 1"
+            outlined
+            dense
+            @v-on:change="onChange()"
+            v-model="gradeThere"
+          ></v-text-field>
         </v-col>
         <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
@@ -91,7 +118,9 @@ export default {
       nameSubjectTransfer: null,
       nameSubjectTransfer2: null,
       nameSubjectTransfer3: null,
-
+      gradeOne: 0,
+      gradeTwo: 0,
+      gradeThere: 0,
       subjectSerailTransfer: null,
       credit: null,
       subjectDetail: null,
@@ -205,6 +234,9 @@ export default {
         nameSubjectTransfer2: this.nameSubjectTransfer2,
 
         nameSubjectTransfer3: this.nameSubjectTransfer3,
+        gradeOne: this.gradeOne,
+        gradeTwo: this.gradeTwo,
+        gradeThere: this.gradeThere,
 
         nameSubject: this.nameSubject,
         nameCourse: this.nameCourse,

@@ -393,6 +393,9 @@ export default {
           student_course2: listAll.nameSubjectTransfer2,
           student_course3: listAll.nameSubjectTransfer3,
           course_enroll: listAll.nameSubject,
+          credit1: listAll.gradeOne,
+          credit2: listAll.gradeTwo,
+          credit3: listAll.gradeThere,
         });
       });
       return find;
@@ -472,6 +475,9 @@ export default {
         nameSubjectTransfer2: null,
         nameSubjectTransfer3: null,
         nameSubject: null,
+        gradeOne: 0,
+        gradeTwo: 0,
+        gradeThere: 0,
         // nameCourse: null,
       });
     },
@@ -485,7 +491,9 @@ export default {
         nameSubjectTransfer: null,
         nameSubjectTransfer2: null,
         nameSubjectTransfer3: null,
-
+        gradeOne: 0,
+        gradeTwo: 0,
+        gradeThere: 0,
         nameSubject: null,
         // nameCourse: null,
       });
@@ -524,6 +532,10 @@ export default {
         }
 
         this.lengths[data.index].nameSubject = data.nameSubject.id;
+
+        this.lengths[data.index].gradeOne = data.gradeOne;
+        this.lengths[data.index].gradeTwo = data.gradeTwo;
+        this.lengths[data.index].gradeThere = data.gradeThere;
         console.log(this.lengths);
         // this.lengths[data.index].nameCourse = data.nameCourse.id.toFixed(0);
         // console.log(this.lengths);

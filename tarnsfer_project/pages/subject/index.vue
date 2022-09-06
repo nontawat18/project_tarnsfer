@@ -71,18 +71,26 @@
                           dense
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <!-- <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.grade"
                           label="เกรด"
                           outlined
                           dense
                         ></v-text-field>
-                      </v-col>
+                      </v-col> -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.school"
                           label="วิทยาลัย/มหาวิทยาลัย"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
+                       <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.course_year"
+                          label="ปี พ.ศ"
                           outlined
                           dense
                         ></v-text-field>
@@ -108,14 +116,7 @@
                           v-model="editedItem.description_file"
                         ></v-textarea>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.course_year"
-                          label="ปี พ.ศ"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
+
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -277,7 +278,7 @@ export default {
       { text: "ชื่อวิชา", value: "course_title", sortable: false },
       { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
-      { text: "เกรด", value: "grade", sortable: false },
+      // { text: "เกรด", value: "grade", sortable: false },
 
       { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
       // { text: "หลักสูตร", value: "course", sortable: false },

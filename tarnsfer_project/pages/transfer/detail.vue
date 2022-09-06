@@ -26,10 +26,12 @@
             {{ equivalentCourseByID.dean.last_name }}
           </div>
           <div class="mt-10" v-else>
-            เรียน คณบดี .......................................................................
+            เรียน คณบดี
+            .......................................................................
           </div>
           <div class="pl-16 ml-10 mt-10">
-            ข้าพเจ้า {{ equivalentCourseByID.created_user.first_name }} {{ equivalentCourseByID.created_user.last_name }}
+            ข้าพเจ้า {{ equivalentCourseByID.created_user.first_name }}
+            {{ equivalentCourseByID.created_user.last_name }}
             <!-- {{ equivalentCourseByID }} -->
 
             รหัสนักศึกษา
@@ -290,7 +292,8 @@
                   </div>
                   <div v-else style="text-align: center">
                     <p>
-                      (ลงชื่อ) ............................................................
+                      (ลงชื่อ)
+                      ............................................................
                       อาจารย์ที่ปรึกษา
                     </p>
                     <p>วันที่.........................................</p>
@@ -334,7 +337,9 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      (ลงชื่อ) ............................................................ คณบดี
+                      (ลงชื่อ)
+                      ............................................................
+                      คณบดี
                     </p>
                     <p>วันที่.........................................</p>
                   </div>
@@ -366,7 +371,8 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      (ลงชื่อ) ............................................................
+                      (ลงชื่อ)
+                      ............................................................
                       หัวหน้าสาขาวิชา
                     </p>
                     <p>วันที่.........................................</p>
@@ -397,7 +403,8 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      ลงชื่อ ............................................................
+                      ลงชื่อ
+                      ............................................................
                       หัวหน้างานส่งเสริม
                     </p>
                     <p>วันที่.........................................</p>
@@ -430,7 +437,8 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      ลงชื่อ ............................................................
+                      ลงชื่อ
+                      ............................................................
                       หัวหน้าสำนักงานคณบดี
                     </p>
                     <p>วันที่.........................................</p>
@@ -481,7 +489,8 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      ลงชื่อ ............................................................
+                      ลงชื่อ
+                      ............................................................
                       เจ้าหน้าที่งานทะเบียน
                     </p>
                     <p>วันที่.........................................</p>
@@ -514,7 +523,8 @@
                   </div>
                   <div style="text-align: center" v-else>
                     <p>
-                      ลงชื่อ ............................................................
+                      ลงชื่อ
+                      ............................................................
                       รองคณบดีฝ่ายวิชาการฯ
                     </p>
                     <p>วันที่.........................................</p>
@@ -587,8 +597,8 @@
                 <th class="pa-0">
                   รายวิชาที่ต้องการเทียบ/โอน (ใหม่)
                   <tr>
-                    <th width="40%">รหัสวิชา</th>
-                    <th width="40%">ชื่อวิชา</th>
+                    <th width="35%">รหัสวิชา</th>
+                    <th width="35%">ชื่อวิชา</th>
                     <th class="pa-0" width="20%">
                       หน่วนกิต
                       <tr>
@@ -597,7 +607,7 @@
                         <th>ร</th>
                       </tr>
                     </th>
-                    <th width="40%">เกรด</th>
+                    <th width="10%">เกรด</th>
                   </tr>
                 </th>
                 <th class="pa-0">
@@ -620,14 +630,14 @@
                 <td>{{ i + 1 }}</td>
                 <td class="pa-0">
                   <tr class="pa-0">
-                    <td width="50%">
+                    <td width="40%">
                       {{ equivalent_item.course_enroll.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="40%">
                       {{ equivalent_item.course_enroll.course_title }}
                     </td>
-                    <td class="pa-0">
-                      <tr>
+                    <td class="pa-0" width="20%">
+                      <tr >
                         <td>
                           <span
                             v-if="
@@ -661,13 +671,14 @@
                 </td>
                 <td class="pa-0">
                   <tr>
-                    <td width="40%">
+                    <td width="35%">
                       {{ equivalent_item.student_course1.course_code }}
+
                     </td>
-                    <td width="40%">
+                    <td width="35%">
                       {{ equivalent_item.student_course1.course_title }}
                     </td>
-                    <td class="pa-0">
+                    <td class="pa-0" width="20%">
                       <tr>
                         <td>
                           <span
@@ -698,20 +709,22 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit1
+                        }}
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course2">
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course2.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course2.course_title }}
                     </td>
-                    <td class="pa-0">
+                    <td class="pa-0" width="20%">
                       <tr>
                         <td>
                           <span
@@ -742,20 +755,22 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit2
+                        }}
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course3">
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course3.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course3.course_title }}
                     </td>
-                    <td class="pa-0">
+                    <td class="pa-0" width="20%">
                       <tr>
                         <td>
                           <span
@@ -786,17 +801,19 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit3
+                        }}
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course4">
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course4.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="20%">
                       {{ equivalent_item.student_course4.course_title }}
                     </td>
                     <td class="pa-0">
@@ -830,20 +847,22 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit4
+                        }}
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course5">
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course5.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course5.course_title }}
                     </td>
-                    <td class="pa-0">
+                    <td class="pa-0" width="20%">
                       <tr>
                         <td>
                           <span
@@ -874,20 +893,22 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit5
+                        }}
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course6">
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course6.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="35%">
                       {{ equivalent_item.student_course6.course_title }}
                     </td>
-                    <td class="pa-0">
+                    <td class="pa-0" width="20%">
                       <tr>
                         <td>
                           <span
@@ -918,9 +939,11 @@
                         </td>
                       </tr>
                     </td>
-                    <td>
+                    <td width="10%">
                       <tr>
-                        3
+                        {{
+                          equivalent_item.credit6
+                        }}
                       </tr>
                     </td>
                   </tr>
