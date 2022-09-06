@@ -637,7 +637,7 @@
                       {{ equivalent_item.course_enroll.course_title }}
                     </td>
                     <td class="pa-0" width="20%">
-                      <tr >
+                      <tr>
                         <td>
                           <span
                             v-if="
@@ -672,143 +672,417 @@
                 <td class="pa-0">
                   <tr>
                     <td width="35%">
-                      {{ equivalent_item.student_course1.course_code }}
-
+                      <div v-if="equivalent_item.credit1 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course1.course_code }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p style=" margin: 0px">
+                          {{ equivalent_item.student_course1.course_code }}
+                        </p>
+                      </div>
                     </td>
                     <td width="35%">
-                      {{ equivalent_item.student_course1.course_title }}
+                      <div v-if="equivalent_item.credit1 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course1.course_title }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p style=" margin: 0px">
+                          {{ equivalent_item.student_course1.course_title }}
+                        </p>
+                      </div>
                     </td>
                     <td class="pa-0" width="20%">
                       <tr>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course1.credit_type == 'ท'
-                            "
-                            >{{ equivalent_item.student_course1.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit1 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ท'
+                              "
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ท'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course1.credit_type == 'ป'
-                            "
-                            >{{ equivalent_item.student_course1.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit1 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ป'
+                              "
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ป'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course1.credit_type == 'ร'
-                            "
-                            >{{ equivalent_item.student_course1.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit1 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ร'
+                              "
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course1.credit_type ==
+                                'ร'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course1.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                       </tr>
                     </td>
                     <td width="10%">
                       <tr>
-                        {{
-                          equivalent_item.credit1
-                        }}
+                        <div v-if="equivalent_item.credit1 < 2.5">
+                          <p style="color: red; margin: 0px">
+                            {{ equivalent_item.credit1 }}
+                          </p>
+                        </div>
+                        <div v-else>
+                          <p style=" margin: 0px">
+                            {{ equivalent_item.credit1 }}
+                          </p>
+                        </div>
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course2">
                     <td width="35%">
-                      {{ equivalent_item.student_course2.course_code }}
+                      <div v-if="equivalent_item.credit2 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course2.course_code }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p style=" margin: 0px">
+                          {{ equivalent_item.student_course2.course_code }}
+                        </p>
+                      </div>
                     </td>
                     <td width="35%">
-                      {{ equivalent_item.student_course2.course_title }}
+                      <div v-if="equivalent_item.credit2 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course2.course_title }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p style=" margin: 0px">
+                          {{ equivalent_item.student_course2.course_title }}
+                        </p>
+                      </div>
                     </td>
                     <td class="pa-0" width="20%">
                       <tr>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course2.credit_type == 'ท'
-                            "
-                            >{{ equivalent_item.student_course2.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit2 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ท'
+                              "
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ท'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course2.credit_type == 'ป'
-                            "
-                            >{{ equivalent_item.student_course2.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit2 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ป'
+                              "
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ป'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course2.credit_type == 'ร'
-                            "
-                            >{{ equivalent_item.student_course2.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit2 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ร'
+                              "
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course2.credit_type ==
+                                'ร'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course2.credit
+                              }}</span
+                            >
+                            <span style=" margin: 0px" v-else>0</span>
+                          </div>
                         </td>
                       </tr>
                     </td>
                     <td width="10%">
                       <tr>
-                        {{
-                          equivalent_item.credit2
-                        }}
+                        <div v-if="equivalent_item.credit2 < 2.5">
+                          <p style="color: red; margin: 0px">
+                            {{ equivalent_item.credit2 }}
+                          </p>
+                        </div>
+                        <div v-else>
+                          <p style=" margin: 0px">
+                            {{ equivalent_item.credit2 }}
+                          </p>
+                        </div>
                       </tr>
                     </td>
                   </tr>
                   <tr v-if="equivalent_item.student_course3">
                     <td width="35%">
-                      {{ equivalent_item.student_course3.course_code }}
+                      <div v-if="equivalent_item.credit3 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course3.course_code }}
+                        </p>
+                      </div>
+                      <div v-else style=" margin: 0px">
+                        <p>
+                          {{ equivalent_item.student_course3.course_code }}
+                        </p>
+                      </div>
                     </td>
                     <td width="35%">
-                      {{ equivalent_item.student_course3.course_title }}
+                      <div v-if="equivalent_item.credit3 < 2.5">
+                        <p style="color: red; margin: 0px">
+                          {{ equivalent_item.student_course3.course_title }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p style=" margin: 0px">
+                          {{ equivalent_item.student_course3.course_title }}
+                        </p>
+                      </div>
                     </td>
                     <td class="pa-0" width="20%">
                       <tr>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course3.credit_type == 'ท'
-                            "
-                            >{{ equivalent_item.student_course3.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit3 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ท'
+                              "
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ท'
+                              "
+                              style=" margin: 0px"
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span v-else style=" margin: 0px">0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course3.credit_type == 'ป'
-                            "
-                            >{{ equivalent_item.student_course3.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit3 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ป'
+                              "
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                            style=" margin: 0px"
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ป'
+                              "
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span style=" margin: 0px" v-else>0</span>
+                          </div>
                         </td>
                         <td>
-                          <span
-                            v-if="
-                              equivalent_item.student_course3.credit_type == 'ร'
-                            "
-                            >{{ equivalent_item.student_course3.credit }}</span
-                          >
-                          <span v-else>0</span>
+                          <div v-if="equivalent_item.credit3 < 2.5">
+                            <span
+                              style="color: red; margin: 0px"
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ร'
+                              "
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span v-else style="color: red; margin: 0px"
+                              >0</span
+                            >
+                          </div>
+                          <div v-else>
+                            <span
+                            style=" margin: 0px"
+                              v-if="
+                                equivalent_item.student_course3.credit_type ==
+                                'ร'
+                              "
+                              >{{
+                                equivalent_item.student_course3.credit
+                              }}</span
+                            >
+                            <span style=" margin: 0px" v-else>0</span>
+                          </div>
                         </td>
                       </tr>
                     </td>
                     <td width="10%">
                       <tr>
-                        {{
-                          equivalent_item.credit3
-                        }}
+                        <div v-if="equivalent_item.credit3 < 2.5">
+                          <p style="color: red; margin: 0px">
+                            {{ equivalent_item.credit3 }}
+                          </p>
+                        </div>
+                        <div v-else>
+                          <p style=" margin: 0px">
+                            {{ equivalent_item.credit3 }}
+                          </p>
+                        </div>
                       </tr>
                     </td>
                   </tr>
+
+
+
+
+
+
+
+
+
+
+
                   <tr v-if="equivalent_item.student_course4">
                     <td width="35%">
                       {{ equivalent_item.student_course4.course_code }}
