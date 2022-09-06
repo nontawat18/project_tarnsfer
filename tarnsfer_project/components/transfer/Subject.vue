@@ -357,19 +357,19 @@ export default {
         "การศึกษาตามอัธยาศัย",
         "ประสบการณ์บุคคล",
       ],
-      approvOne: "",
-      approvTwo: "",
-      approvThree: "",
-      approvFour: "",
-      approvFive: "",
-      approvSix: "",
-      registrar_officer: "",
-      head_academic_p_r: "",
-      dean: "",
-      deputy_dean_a_r: "",
-      head_educational: "",
-      head_department: "",
-      advisor: "",
+      approvOne: null,
+      approvTwo: null,
+      approvThree: null,
+      approvFour: null,
+      approvFive: null,
+      approvSix: null,
+      registrar_officer: null,
+      head_academic_p_r: null,
+      dean: null,
+      deputy_dean_a_r: null,
+      head_educational: null,
+      head_department: null,
+      advisor: null,
     };
   },
   computed: {
@@ -382,6 +382,20 @@ export default {
         }
       },
       set() {},
+    },
+    subjectAllList() {
+      let find = [];
+      this.lengths.forEach((listAll) => {
+        find.push({
+          status: "รอตรวจสอบ",
+          semester: 1,
+          student_course1: listAll.nameSubjectTransfer,
+          student_course2: listAll.nameSubjectTransfer2,
+          student_course3: listAll.nameSubjectTransfer3,
+          course_enroll: listAll.nameSubject,
+        });
+      });
+      return find;
     },
     equivalentCourse: {
       get() {
@@ -585,47 +599,124 @@ export default {
 
     //   console.log("this.id", this.id, this.idAbility);
     // },
-
+    next() {
+      console.log(this.subjectAllList);
+    },
     save() {
-      this.lengths.forEach((element) => {
-        let data = {
-          equivalent_type: "ขอเทียบโอนรายวิชา",
-          equivalent_item: [
-            {
-              status: "รอตรวจสอบ",
-              semester: 1,
-              student_course1: element.nameSubjectTransfer,
-              student_course2: element.nameSubjectTransfer2,
-              student_course3: element.nameSubjectTransfer3,
-              course_enroll: element.nameSubject,
-            },
-          ],
-          studied_from: null,
-          number_of_equivalent: null,
-          number_of_credit: 3,
-          name_committee1: this.approvOne.id,
-          name_committee2: this.approvTwo.id,
-          name_committee3: this.approvThree.id,
-          name_committee4: this.approvFour.id,
-          name_committee5: this.approvFive.id,
-          name_committee6: this.approvSix.id,
-          advisor: this.advisor.id,
-          head_department: this.head_department.id,
-          head_educational: this.head_educational.id,
-          deputy_dean_a_r: this.deputy_dean_a_r.id,
-          dean: this.dean.id,
-          head_academic_p_r: this.head_academic_p_r.id,
-          registrar_officer: this.registrar_officer.id,
-          created_user: this.userId,
-        };
-        console.log(data);
+      let appOne = null;
+      let appTwo = null;
+      let appThree = null;
+      let appFour = null;
+      let appFive = null;
+      let appSix = null;
+      let advisorNew = null;
+      let head_department_new = null;
+      let head_educational_new = null;
+      let deputy_dean_a_r_new = null;
+      let dean_new = null;
+      let head_academic_p_r_new = null;
+      let registrar_officer_new = null;
 
-        this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
-          if (response.data) {
-            console.log("post", response.data);
-            this.$router.push("/transfer/");
-          }
-        });
+      if (this.advisor == null) {
+        advisorNew = null;
+      } else {
+        advisorNew = this.advisor.id;
+      }
+      if (this.head_department == null) {
+        head_department_new = null;
+      } else {
+        head_department_new = this.head_department.id;
+      }
+      if (this.head_educational == null) {
+        head_educational_new = null;
+      } else {
+        head_educational_new = this.head_educational.id;
+      }
+      if (this.deputy_dean_a_r == null) {
+        deputy_dean_a_r_new = null;
+      } else {
+        deputy_dean_a_r_new = this.deputy_dean_a_r.id;
+      }
+      if (this.dean == null) {
+        dean_new = null;
+      } else {
+        dean_new = this.dean.id;
+      }
+      if (this.head_academic_p_r == null) {
+        head_academic_p_r_new = null;
+      } else {
+        head_academic_p_r_new = this.head_academic_p_r.id;
+      }
+      if (this.registrar_officer == null) {
+        registrar_officer_new = null;
+      } else {
+        registrar_officer_new = this.registrar_officer.id;
+      }
+
+      if (this.approvOne == null) {
+        appOne = null;
+      } else {
+        appOne = this.approvOne.id;
+      }
+
+      if (this.approvTwo == null) {
+        appTwo = null;
+      } else {
+        appTwo = this.approvTwo.id;
+      }
+
+      if (this.approvThree == null) {
+        appThree = null;
+      } else {
+        appThree = this.approvThree.id;
+      }
+
+      if (this.approvFour == null) {
+        appFour = null;
+      } else {
+        appFour = this.approvFour.id;
+      }
+
+      if (this.approvFive == null) {
+        appFive = null;
+      } else {
+        appFive = this.approvFive.id;
+      }
+
+      if (this.approvSix == null) {
+        appSix = null;
+      } else {
+        appSix = this.approvSix.id;
+      }
+
+      let data = {
+        equivalent_type: "ขอเทียบโอนรายวิชา",
+        equivalent_item: this.subjectAllList,
+        studied_from: null,
+        number_of_equivalent: null,
+        number_of_credit: 3,
+        name_committee1: appOne,
+        name_committee2: appTwo,
+        name_committee3: appThree,
+        name_committee4: appFour,
+        name_committee5: appFive,
+        name_committee6: appSix,
+        advisor: advisorNew,
+        head_department: head_department_new,
+        head_educational: head_educational_new,
+        deputy_dean_a_r: deputy_dean_a_r_new,
+        dean: dean_new,
+        head_academic_p_r: head_academic_p_r_new,
+        registrar_officer: registrar_officer_new,
+        created_user: this.userId,
+      };
+      console.log(data);
+
+      this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
+        if (response.data) {
+          console.log("post", response.data);
+          this.$router.push("/transfer/");
+        }
       });
     },
   },

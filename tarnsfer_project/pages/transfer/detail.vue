@@ -21,12 +21,15 @@
             เรื่อง {{ equivalentCourseByID.equivalent_type }}
           </div>
 
-          <div class="mt-10">
+          <div class="mt-10" v-if="equivalentCourseByID.dean != null">
             เรียน คณบดี {{ equivalentCourseByID.dean.first_name }}
             {{ equivalentCourseByID.dean.last_name }}
           </div>
+          <div class="mt-10" v-else>
+            เรียน คณบดี .......................................................................
+          </div>
           <div class="pl-16 ml-10 mt-10">
-            ข้าพเจ้า {{ userLogin.first_name }} {{ userLogin.last_name }}
+            ข้าพเจ้า {{ equivalentCourseByID.created_user.first_name }} {{ equivalentCourseByID.created_user.last_name }}
             <!-- {{ equivalentCourseByID }} -->
 
             รหัสนักศึกษา
@@ -274,10 +277,20 @@
                   <p style="padding: 5px">
                     ........................................................................................................................
                   </p>
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.advisor != null"
+                  >
                     <p>
                       (ลงชื่อ) {{ equivalentCourseByID.advisor.first_name }}
                       {{ equivalentCourseByID.advisor.last_name }}
+                      อาจารย์ที่ปรึกษา
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div v-else style="text-align: center">
+                    <p>
+                      (ลงชื่อ) ............................................................
                       อาจารย์ที่ปรึกษา
                     </p>
                     <p>วันที่.........................................</p>
@@ -309,10 +322,19 @@
                   />
                   <label for="vehicle1"> อนุญาติ</label>
 
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.dean != null"
+                  >
                     <p>
                       (ลงชื่อ) {{ equivalentCourseByID.dean.first_name }}
                       {{ equivalentCourseByID.dean.last_name }} คณบดี
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      (ลงชื่อ) ............................................................ คณบดี
                     </p>
                     <p>วันที่.........................................</p>
                   </div>
@@ -330,11 +352,21 @@
                   <p style="padding: 5px">
                     ........................................................................................................................
                   </p>
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.head_department != null"
+                  >
                     <p>
                       (ลงชื่อ)
                       {{ equivalentCourseByID.head_department.first_name }}
                       {{ equivalentCourseByID.head_department.last_name }}
+                      หัวหน้าสาขาวิชา
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      (ลงชื่อ) ............................................................
                       หัวหน้าสาขาวิชา
                     </p>
                     <p>วันที่.........................................</p>
@@ -351,11 +383,21 @@
                   <p style="padding: 5px">
                     ........................................................................................................................
                   </p>
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.head_academic_p_r != null"
+                  >
                     <p>
                       ลงชื่อ
                       {{ equivalentCourseByID.head_academic_p_r.first_name }}
                       {{ equivalentCourseByID.head_academic_p_r.last_name }}
+                      หัวหน้างานส่งเสริม
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      ลงชื่อ ............................................................
                       หัวหน้างานส่งเสริม
                     </p>
                     <p>วันที่.........................................</p>
@@ -374,11 +416,21 @@
                   <p style="padding: 5px">
                     -เพื่อโปรดพิจารณา.............................................................................................
                   </p>
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.head_academic_p_r != null"
+                  >
                     <p>
                       ลงชื่อ
                       {{ equivalentCourseByID.head_academic_p_r.first_name }}
                       {{ equivalentCourseByID.head_academic_p_r.last_name }}
+                      หัวหน้าสำนักงานคณบดี
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      ลงชื่อ ............................................................
                       หัวหน้าสำนักงานคณบดี
                     </p>
                     <p>วันที่.........................................</p>
@@ -415,11 +467,21 @@
                   <label for="vehicle1">
                     อื่นๆ...............................................................................................................</label
                   >
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.registrar_officer != null"
+                  >
                     <p>
                       ลงชื่อ
                       {{ equivalentCourseByID.registrar_officer.first_name }}
                       {{ equivalentCourseByID.registrar_officer.last_name }}
+                      เจ้าหน้าที่งานทะเบียน
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      ลงชื่อ ............................................................
                       เจ้าหน้าที่งานทะเบียน
                     </p>
                     <p>วันที่.........................................</p>
@@ -438,11 +500,21 @@
                   <p style="padding: 5px">
                     -เห็นควร............................................................................................................
                   </p>
-                  <div style="text-align: center">
+                  <div
+                    style="text-align: center"
+                    v-if="equivalentCourseByID.deputy_dean_a_r != null"
+                  >
                     <p>
                       ลงชื่อ
                       {{ equivalentCourseByID.deputy_dean_a_r.first_name }}
                       {{ equivalentCourseByID.deputy_dean_a_r.last_name }}
+                      รองคณบดีฝ่ายวิชาการฯ
+                    </p>
+                    <p>วันที่.........................................</p>
+                  </div>
+                  <div style="text-align: center" v-else>
+                    <p>
+                      ลงชื่อ ............................................................
                       รองคณบดีฝ่ายวิชาการฯ
                     </p>
                     <p>วันที่.........................................</p>
@@ -872,9 +944,15 @@
                 .................................................................
                 คณะกรรมการฯ 1
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee1 != null"
+                >
                   ({{ equivalentCourseByID.name_committee1.first_name }}
                   {{ equivalentCourseByID.name_committee1.last_name }})
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
               <v-col cols="6" sm="6">
@@ -882,9 +960,15 @@
                 .................................................................
                 คณะกรรมการฯ 2
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee2 != null"
+                >
                   ({{ equivalentCourseByID.name_committee2.first_name }}
                   {{ equivalentCourseByID.name_committee2.last_name }})
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
               <v-col cols="6" sm="6">
@@ -892,9 +976,15 @@
                 .................................................................
                 คณะกรรมการฯ 3
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee3 != null"
+                >
                   ({{ equivalentCourseByID.name_committee3.first_name }}
                   {{ equivalentCourseByID.name_committee3.last_name }} )
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
               <v-col cols="6" sm="6">
@@ -902,9 +992,15 @@
                 .................................................................
                 คณะกรรมการฯ 4
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee4 != null"
+                >
                   ({{ equivalentCourseByID.name_committee4.first_name }}
                   {{ equivalentCourseByID.name_committee4.last_name }})
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
               <v-col cols="6" sm="6">
@@ -912,9 +1008,15 @@
                 .................................................................
                 คณะกรรมการฯ 5
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee5 != null"
+                >
                   ({{ equivalentCourseByID.name_committee5.first_name }}
                   {{ equivalentCourseByID.name_committee5.last_name }})
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
               <v-col cols="6" sm="6">
@@ -922,9 +1024,15 @@
                 .................................................................
                 คณะกรรมการฯ 6
                 <br /><br />
-                <v-col class="pa-0 text-center">
+                <v-col
+                  class="pa-0 text-center"
+                  v-if="equivalentCourseByID.name_committee6 != null"
+                >
                   ({{ equivalentCourseByID.name_committee6.first_name }}
                   {{ equivalentCourseByID.name_committee6.last_name }} )
+                </v-col>
+                <v-col class="pa-0 text-center" v-else>
+                  (.........................................................................................)
                 </v-col>
               </v-col>
             </v-row>
@@ -932,7 +1040,9 @@
         </v-card>
       </div>
     </v-row>
-    <v-btn @click="makePDF">Download</v-btn>
+    <v-col class="text-center">
+      <v-btn @click="makePDF">Download Transfer</v-btn>
+    </v-col>
   </div>
 </template>
 <script>
