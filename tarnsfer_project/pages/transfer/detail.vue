@@ -3,8 +3,24 @@
     <v-row class="mt-5 mb-10" justify="center" id="app">
       <div ref="content">
         <v-card width="1250" class="pa-16 pt-14">
+          <v-row>
+            <v-col cols="1" class="">
+              <img
+                height="100%"
+                width="100%"
+                src="~/assets/rmuti-removebg-preview2.png"
+              />
+            </v-col>
+            <v-col cols="4" class="pt-16">
+              <p>มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตขอนแก่น</p>
+            </v-col>
+            <v-col cols="4"> </v-col>
+            <v-col cols="3" class="pt-16 pr-8 text-right">
+              <strong>คคว./ฝวว./01-1/2</strong>
+            </v-col>
+          </v-row>
           <div class="text-center">
-            <u><h3>คำร้องขอเทียบโอนรายวิชา / ขอเทียบเพื่อเรียนแทน</h3></u>
+            <h2>คำร้องขอเทียบโอนรายวิชา</h2>
           </div>
           <div class="mt-15">
             <v-row>
@@ -21,32 +37,99 @@
             เรื่อง {{ equivalentCourseByID.equivalent_type }}
           </div>
 
-          <div class="mt-10" v-if="equivalentCourseByID.dean != null">
+          <!-- <div class="mt-10" v-if="equivalentCourseByID.dean != null">
             เรียน คณบดี {{ equivalentCourseByID.dean.first_name }}
             {{ equivalentCourseByID.dean.last_name }}
-          </div>
-          <div class="mt-10" v-else>
-            เรียน คณบดี
-            .......................................................................
-          </div>
+          </div> -->
+          <div class="mt-10">เรียน คณบดีคณะวิศวกรรมศาสตร์</div>
           <div class="pl-16 ml-10 mt-10">
-            ข้าพเจ้า {{ equivalentCourseByID.created_user.first_name }}
-            {{ equivalentCourseByID.created_user.last_name }}
+            ข้าพเจ้า .........................{{
+              equivalentCourseByID.created_user.first_name
+            }}
+            {{
+              equivalentCourseByID.created_user.last_name
+            }}...........................
             <!-- {{ equivalentCourseByID }} -->
 
             รหัสนักศึกษา
-            ..........................................................
+            ....................................................................................
+          </div>
+          <div class="mt-4 pl-3">
+            <v-row>
+              สาขาวิชา ...................................................
+              ชั้นปี ................... รอบ
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              เช้า
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              บ่าย
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              สมทบ หมายเลขโทรศัพท์........................................
+            </v-row>
           </div>
           <div class="mt-4">
-            นักศึกษาระดับ .............................................. คณะ
-            ........................................................ สาขาวิชา
-            ..............................................................
-          </div>
-          <div class="mt-4">
-            เบอร์โทรศัพท์..................................................
-            มีความประสงค์จะขอเทียบโอนรายวิชาที่ได้ศึกษามาแล้ว
-            <b>เนื่องจาก (ระบุเหตุผลประกอบ):</b>
-            <v-row class="mt-1">
+            คณะ...................................................................................
+            มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
+            <v-row class="pl-3 pt-8">
+              <p>
+                ..................................................................
+                ในระดับ
+              </p>
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              อนุปริญญา/ปวส.
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              ปริญญาตรี
+              <p
+                style="
+                  padding: 8px;
+                  border: 2px solid black;
+                  width: 8px;
+                  margin-left: 8px;
+                  margin-right: 8px;
+                "
+              ></p>
+              อื่นๆ................................โดยมีรายละเอียดดังนี้
+            </v-row>
+            <!-- <v-row class="mt-1">
               <v-col cols="2"></v-col
               ><v-col>
                 <v-row>
@@ -112,23 +195,73 @@
                   ..........................................................................................................................................
                 </v-row>
               </v-col>
-            </v-row>
+            </v-row> -->
           </div>
-          <div class="mt-2">
-            <v-row>
-              <v-col cols="2"
-                ><b><u>หลักฐานที่ต้องแนบ</u></b></v-col
-              >
-              <v-col>
-                1. ใบแสดงผลการเรียน แสดงรายวิชาที่ประสงค์จะขอเรียน <br />2.
-                คำอธิบายรายวิชาที่ประสงค์จะขอเทียบโอน
-                (เฉพาะนักศึกษาที่เคยศึกษาจากมหาวิทยาลัย / สถาบันอื่น) <br />3.
-                คำอธิบายราชวิชาที่ประสงค์จะขอเทียบเพื่อเรียน
-                (กรณีเป็นการขอเทียบรายวิชาต่างคณะ)</v-col
-              >
-            </v-row>
+          <div class="mt-6 mb-12">
+            <b>หมายเหตุ : แนบเอกสาร</b>
+            <v-col class="pl-16">
+              - ใบระเบียบแสดงผลทางการศึกษา (รบ.)
+              และเนื้อหารายวิชา/ลักษณะรายวิชาที่ต้องการขอเทียบ/และรายวิชาที่ต้องการเทียบ<br />
+              - เอกสารอื่นๆ ตามที่คณะกรรมการร้องขอ
+              <br />
+            </v-col>
           </div>
-          <div class="pl-16 ml-10 mt-10">จึงเรียนมาเพื่อโปรดพิจารณา</div>
+          <v-row class="pb-8">
+            <v-col cols="3"> </v-col>
+            <v-col cols="6" class="text-right">ขอแสดงความนับถือ</v-col>
+            <v-col cols="3"> </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="3"> </v-col>
+            <v-col cols="7" class="text-right"
+              >ลงชื่อ.........................................................</v-col
+            >
+            <v-col cols="2"> </v-col>
+          </v-row>
+          <v-row class="mb-8">
+            <v-col cols="3"> </v-col>
+            <v-col cols="7" class="text-right"
+              >(...................{{
+                equivalentCourseByID.created_user.first_name
+              }}
+              {{
+                equivalentCourseByID.created_user.last_name
+              }}....................)</v-col
+            >
+            <v-col cols="2"> </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6" class="pr-16">
+              ➊.............................................................................................................................................................................................................................................................................อาจารย์ที่ปรึกษา
+            </v-col>
+            <v-col cols="6" class="pr-16">
+              ➋.........................................................................................................................................................................................................................................................หัวหน้าสาขาวิชา/โปรแกรมวิชา
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6" class="pr-16">
+              ➌ความเห็นคณะกรรมการเทียบโอนฯ อนุญาต
+              เห็นควรให้สามารถเทียบโอนผลการเรียนได้
+              จำนวน............................รายวิชา....................................หน่วยกิต
+              และต้องการศึกษาเพิ่มเติม จำนวน............................หน่วยกิต
+              ............................ประธานกรรมการเทียบโอน
+            </v-col>
+            <v-col cols="6" class="pr-16">
+              ➍ความเห็น
+              .......................................................................................................................................................................................................................................................................หัวหน้าสำนักงานคณบดี
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6" class="pr-16">
+              ➎ความเห็น
+              ............................................................................................................................................................................................................................................................รองคณบดีฝ่ายวิชาการและวิจัย
+            </v-col>
+            <v-col cols="6" class="pr-16">
+              ➏ความเห็นคณบดี
+              ...............................................................................................................................................................................................................................................................................................คณบดี
+            </v-col>
+          </v-row>
           <!-- <div class="mt-10">
           <v-row>
             <v-col cols="6" sm="6" class="pa-0"
@@ -265,7 +398,7 @@
             >
           </v-row>
         </div> -->
-          <div class="mt-10">
+          <!-- <div class="mt-10">
             <table style="width: 100%">
               <tr>
                 <td
@@ -532,16 +665,32 @@
                 </td>
               </tr>
             </table>
-          </div>
+          </div> -->
         </v-card>
       </div>
       <div class="ma-4"></div>
       <div ref="contentTwo">
         <v-card width="1250" class="pa-16 pt-14">
-          <div class="text-center mt-16">
-            <u><h3>ราชวิชาที่เทียบโอน/ขอเทียบเพื่อเรียนแทน</h3></u>
+          <v-row>
+            <v-col cols="1" class="">
+              <img
+                height="100%"
+                width="100%"
+                src="~/assets/rmuti-removebg-preview2.png"
+              />
+            </v-col>
+            <v-col cols="4" class="pt-16">
+              <p>มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตขอนแก่น</p>
+            </v-col>
+            <v-col cols="4"> </v-col>
+            <v-col cols="3" class="pt-16 pr-8 text-right">
+              <strong>คคว./ฝวว./01-2/2</strong>
+            </v-col>
+          </v-row>
+          <div class="text-center mb-16 mt-6">
+            <u><h2>ราชวิชาที่ขอเทียบโอน</h2></u>
           </div>
-          <div class="pl-16 ml-10 mt-10">
+          <!-- <div class="pl-16 ml-10 mt-10">
             <b>ขอเทียบโอนรายวิชา</b> ทีเคยเรียนมาแล้วจากสถานศึกษา
             ......................................................................................................
           </div>
@@ -573,51 +722,48 @@
             สาขาวิชา ........................................................ ปี
             พ.ศ............................
           </div>
-          <div class="mt-5">ดังรายละเอียดด้านล่าง</div>
+          <div class="mt-5">ดังรายละเอียดด้านล่าง</div> -->
           <table width="100%">
             <thead class="pa-0">
               <tr>
                 <th class="pa-0">ที่</th>
 
                 <th class="pa-0">
-                  รายวิชาที่ขอเทียบ/โอน (วิชาเก่า)
+                  <strong style="">รายวิชาที่ต้องการเทียบ</strong><br />
+                  (ในหลักสูตร)
                   <tr class="pa-0">
-                    <th class="pa-0" width="40%">รหัสวิชา</th>
-                    <th class="pa-0" width="40%">ชื่อวิชา</th>
-                    <th class="pa-0" width="20%">
-                      หน่วนกิต
-                      <tr class="pa-0">
-                        <th>ท</th>
-                        <th>ป</th>
-                        <th>ร</th>
-                      </tr>
-                    </th>
+                    <th width="30%">รหัสวิชา</th>
+                    <th width="40%">ชื่อวิชา</th>
+                    <th width="15%">หน่วยกิต</th>
+                    <th width="15%">สภาพวิชา</th>
                   </tr>
                 </th>
-                <th class="pa-0">
-                  รายวิชาที่ต้องการเทียบ/โอน (ใหม่)
-                  <tr>
-                    <th width="35%">รหัสวิชา</th>
-                    <th width="35%">ชื่อวิชา</th>
-                    <th class="pa-0" width="20%">
-                      หน่วนกิต
-                      <tr>
+                <th class="pb-6 pl-0 pr-0">
+                  <strong> รายวิชาที่ขอเทียบ</strong><br />
+                  (สถานศึกษาเดิม)
+
+                  <tr class="pa-0">
+                    <th width="30%">รหัสวิชา</th>
+                    <th width="40%">ชื่อวิชา</th>
+                    <th width="15%">
+                      หน่วยกิต
+                      <!--  <tr>
                         <th>ท</th>
                         <th>ป</th>
                         <th>ร</th>
-                      </tr>
+                      </tr> -->
                     </th>
-                    <th width="10%">เกรด</th>
+                    <th width="15%">เกรด</th>
                   </tr>
                 </th>
                 <th class="pa-0">
                   ผลการพิจารณา
                   <tr>
-                    <th class="pa-0" width="50%">เทียบได้</th>
-                    <th width="50%">เทียบไม่ได้</th>
+                    <th class="pa-0" width="58%">เทียบได้</th>
+                    <th width="55%">เทียบไม่ได้</th>
                   </tr>
                 </th>
-                <th>ภาคเรียน</th>
+                <!-- <th>ภาคเรียน</th> -->
               </tr>
             </thead>
             <tbody>
@@ -633,11 +779,12 @@
                     <td width="40%">
                       {{ equivalent_item.course_enroll.course_code }}
                     </td>
-                    <td width="40%">
+                    <td width="50%">
                       {{ equivalent_item.course_enroll.course_title }}
                     </td>
-                    <td class="pa-0" width="20%">
-                      <tr>
+                    <td class="pa-0 text-center" width="10%">
+                      {{ equivalent_item.course_enroll.credit }}
+                      <!-- <tr>
                         <td>
                           <span
                             v-if="
@@ -665,69 +812,56 @@
                           >
                           <span v-else>0</span>
                         </td>
-                      </tr>
+                      </tr> -->
                     </td>
+                    <td class="pa-0 text-center" width="15%">1.3</td>
                   </tr>
                 </td>
                 <td class="pa-0">
-                  <tr>
-                    <td width="35%">
+                  <tr class="pa-0" width="100%">
+                    <td width="30%">
                       <div v-if="equivalent_item.credit1 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course1.course_code }}
                         </p>
                       </div>
                       <div v-else>
-                        <p style=" margin: 0px">
+                        <p style="margin: 0px">
                           {{ equivalent_item.student_course1.course_code }}
                         </p>
                       </div>
                     </td>
-                    <td width="35%">
+                    <td width="45%">
                       <div v-if="equivalent_item.credit1 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
                       </div>
                       <div v-else>
-                        <p style=" margin: 0px">
+                        <p style="margin: 0px">
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
                       </div>
                     </td>
-                    <td class="pa-0" width="20%">
-                      <tr>
-                        <td>
-                          <div v-if="equivalent_item.credit1 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course1.credit_type ==
-                                'ท'
-                              "
-                              >{{
-                                equivalent_item.student_course1.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
+                    <td class="pa-0" width="25%">
+                      <div
+                        v-if="equivalent_item.credit1 < 2.5"
+                        class="text-center"
+                      >
+                        <span style="color: red; margin: 0px">{{
+                          equivalent_item.student_course1.credit
+                        }}</span>
+                        <!-- <span v-else style="color: red; margin: 0px"
                               >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                              v-if="
-                                equivalent_item.student_course1.credit_type ==
-                                'ท'
-                              "
-                              style=" margin: 0px"
-                              >{{
-                                equivalent_item.student_course1.credit
-                              }}</span
-                            >
-                            <span v-else style=" margin: 0px">0</span>
-                          </div>
-                        </td>
-                        <td>
+                            > -->
+                      </div>
+                      <div v-else>
+                        <span style="margin: 0px">{{
+                          equivalent_item.student_course1.credit
+                        }}</span>
+                        <!-- <span v-else style="margin: 0px">0</span> -->
+                      </div>
+                      <!-- <td>
                           <div v-if="equivalent_item.credit1 < 2.5">
                             <span
                               style="color: red; margin: 0px"
@@ -749,12 +883,12 @@
                                 equivalent_item.student_course1.credit_type ==
                                 'ป'
                               "
-                              style=" margin: 0px"
+                              style="margin: 0px"
                               >{{
                                 equivalent_item.student_course1.credit
                               }}</span
                             >
-                            <span v-else style=" margin: 0px">0</span>
+                            <span v-else style="margin: 0px">0</span>
                           </div>
                         </td>
                         <td>
@@ -779,309 +913,165 @@
                                 equivalent_item.student_course1.credit_type ==
                                 'ร'
                               "
-                              style=" margin: 0px"
+                              style="margin: 0px"
                               >{{
                                 equivalent_item.student_course1.credit
                               }}</span
                             >
-                            <span v-else style=" margin: 0px">0</span>
+                            <span v-else style="margin: 0px">0</span>
                           </div>
-                        </td>
-                      </tr>
+                        </td> -->
                     </td>
-                    <td width="10%">
+                    <td width="15%">
                       <tr>
-                        <div v-if="equivalent_item.credit1 < 2.5">
+                        <div
+                          v-if="equivalent_item.credit1 < 2.5"
+                          class="text-center"
+                        >
                           <p style="color: red; margin: 0px">
                             {{ equivalent_item.credit1 }}
                           </p>
                         </div>
-                        <div v-else>
-                          <p style=" margin: 0px">
+                        <div v-else class="text-center">
+                          <p style="margin: 0px">
                             {{ equivalent_item.credit1 }}
                           </p>
                         </div>
                       </tr>
                     </td>
                   </tr>
-                  <tr v-if="equivalent_item.student_course2">
-                    <td width="35%">
+                  <tr
+                    v-if="equivalent_item.student_course2"
+                    class="pa-0"
+                    width="100%"
+                  >
+                    <td width="30%">
                       <div v-if="equivalent_item.credit2 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course2.course_code }}
                         </p>
                       </div>
                       <div v-else>
-                        <p style=" margin: 0px">
+                        <p style="margin: 0px">
                           {{ equivalent_item.student_course2.course_code }}
                         </p>
                       </div>
                     </td>
-                    <td width="35%">
+                    <td width="40%">
                       <div v-if="equivalent_item.credit2 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course2.course_title }}
                         </p>
                       </div>
                       <div v-else>
-                        <p style=" margin: 0px">
+                        <p style="margin: 0px">
                           {{ equivalent_item.student_course2.course_title }}
                         </p>
                       </div>
                     </td>
-                    <td class="pa-0" width="20%">
-                      <tr>
-                        <td>
-                          <div v-if="equivalent_item.credit2 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ท'
-                              "
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
+                    <td class="pa-0" width="15%">
+                      <div
+                        v-if="equivalent_item.credit2 < 2.5"
+                        class="text-center"
+                      >
+                        <span style="color: red; margin: 0px">{{
+                          equivalent_item.student_course2.credit
+                        }}</span>
+                        <!-- <span v-else style="color: red; margin: 0px"
                               >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ท'
-                              "
-                              style=" margin: 0px"
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span v-else style=" margin: 0px">0</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div v-if="equivalent_item.credit2 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ป'
-                              "
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
-                              >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ป'
-                              "
-                              style=" margin: 0px"
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span v-else style=" margin: 0px">0</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div v-if="equivalent_item.credit2 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ร'
-                              "
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
-                              >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                              v-if="
-                                equivalent_item.student_course2.credit_type ==
-                                'ร'
-                              "
-                              style=" margin: 0px"
-                              >{{
-                                equivalent_item.student_course2.credit
-                              }}</span
-                            >
-                            <span style=" margin: 0px" v-else>0</span>
-                          </div>
-                        </td>
-                      </tr>
+                            > -->
+                      </div>
+                      <div v-else class="text-center">
+                        <span style="margin: 0px">{{
+                          equivalent_item.student_course2.credit
+                        }}</span>
+                        <!-- <span v-else style="margin: 0px">0</span> -->
+                      </div>
                     </td>
-                    <td width="10%">
+                    <td width="15%">
                       <tr>
-                        <div v-if="equivalent_item.credit2 < 2.5">
+                        <div
+                          v-if="equivalent_item.credit2 < 2.5"
+                          class="text-center"
+                        >
                           <p style="color: red; margin: 0px">
                             {{ equivalent_item.credit2 }}
                           </p>
                         </div>
-                        <div v-else>
-                          <p style=" margin: 0px">
+                        <div v-else class="text-center">
+                          <p style="margin: 0px">
                             {{ equivalent_item.credit2 }}
                           </p>
                         </div>
                       </tr>
                     </td>
                   </tr>
-                  <tr v-if="equivalent_item.student_course3">
-                    <td width="35%">
+                  <tr
+                    v-if="equivalent_item.student_course3"
+                    class="pa-0"
+                    width="100%"
+                  >
+                    <td width="30%">
                       <div v-if="equivalent_item.credit3 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course3.course_code }}
                         </p>
                       </div>
-                      <div v-else style=" margin: 0px">
+                      <div v-else style="margin: 0px">
                         <p>
                           {{ equivalent_item.student_course3.course_code }}
                         </p>
                       </div>
                     </td>
-                    <td width="35%">
+                    <td width="40%">
                       <div v-if="equivalent_item.credit3 < 2.5">
                         <p style="color: red; margin: 0px">
                           {{ equivalent_item.student_course3.course_title }}
                         </p>
                       </div>
                       <div v-else>
-                        <p style=" margin: 0px">
+                        <p style="margin: 0px">
                           {{ equivalent_item.student_course3.course_title }}
                         </p>
                       </div>
                     </td>
-                    <td class="pa-0" width="20%">
-                      <tr>
-                        <td>
-                          <div v-if="equivalent_item.credit3 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ท'
-                              "
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
+                    <td class="pa-0" width="25%">
+                      <div
+                        v-if="equivalent_item.credit3 < 2.5"
+                        class="text-center"
+                      >
+                        <span style="color: red; margin: 0px">{{
+                          equivalent_item.student_course3.credit
+                        }}</span>
+                        <!-- <span v-else style="color: red; margin: 0px"
                               >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ท'
-                              "
-                              style=" margin: 0px"
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span v-else style=" margin: 0px">0</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div v-if="equivalent_item.credit3 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ป'
-                              "
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
-                              >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                            style=" margin: 0px"
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ป'
-                              "
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span style=" margin: 0px" v-else>0</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div v-if="equivalent_item.credit3 < 2.5">
-                            <span
-                              style="color: red; margin: 0px"
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ร'
-                              "
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span v-else style="color: red; margin: 0px"
-                              >0</span
-                            >
-                          </div>
-                          <div v-else>
-                            <span
-                            style=" margin: 0px"
-                              v-if="
-                                equivalent_item.student_course3.credit_type ==
-                                'ร'
-                              "
-                              >{{
-                                equivalent_item.student_course3.credit
-                              }}</span
-                            >
-                            <span style=" margin: 0px" v-else>0</span>
-                          </div>
-                        </td>
-                      </tr>
+                            > -->
+                      </div>
+                      <div v-else class="text-center">
+                        <span style="margin: 0px">{{
+                          equivalent_item.student_course3.credit
+                        }}</span>
+                        <!-- <span v-else style="margin: 0px">0</span> -->
+                      </div>
                     </td>
-                    <td width="10%">
+                    <td width="15%">
                       <tr>
-                        <div v-if="equivalent_item.credit3 < 2.5">
+                        <div
+                          v-if="equivalent_item.credit3 < 2.5"
+                          class="text-center"
+                        >
                           <p style="color: red; margin: 0px">
                             {{ equivalent_item.credit3 }}
                           </p>
                         </div>
                         <div v-else>
-                          <p style=" margin: 0px">
+                          <p style="margin: 0px">
                             {{ equivalent_item.credit3 }}
                           </p>
                         </div>
                       </tr>
                     </td>
                   </tr>
-
-
-
-
-
-
-
-
-
-
 
                   <tr v-if="equivalent_item.student_course4">
                     <td width="35%">
@@ -1225,112 +1215,148 @@
                 <td>
                   <tr></tr>
                 </td>
-                <td>
+                <!-- <td>
                   <tr></tr>
+                </td> -->
+              </tr>
+              <tr>
+                <td></td>
+                <td class="pa-0">
+                  <tr class="pa-0" width="100%">
+                    <td width="91%" class="text-center">
+                      <strong>รวม</strong>
+                    </td>
+
+                    <td width="15%" class="text-center">{{ plus }}</td>
+
+                    <td width="15%">-</td>
+                  </tr>
                 </td>
+                <td class="pa-0">
+                  <tr class="pa-0" width="100%">
+                    <td width="75%" class="text-center">
+                      <strong>รวม</strong>
+                    </td>
+
+                    <td width="28%" class="text-center">-</td>
+
+                    <td width="15%">-</td>
+                  </tr>
+                </td>
+                <td></td>
               </tr>
             </tbody>
           </table>
           <div class="text-center mt-16">
-            <u><h3>ผลการพิจารณาของกรรมการเทียบโอน</h3></u>
+            <u><h3>คณะกรรมการพิจารณา</h3></u>
           </div>
           <div class="mt-10">
-            <v-row>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 1
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee1 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee1.first_name }}
-                  {{ equivalentCourseByID.name_committee1.last_name }})
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+            <v-row class="pr-16 pl-16">
+              <v-col cols="6" sm="6" class="pr-0 pb-0">
+                <v-sheet class="pa-6" outlined>
+                  1.
+                  ....................................................................................
+
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee1 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee1.first_name }}
+                    {{ equivalentCourseByID.name_committee1.last_name }}......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                    (......................................................................................)
+                  </v-col>
+                </v-sheet>
               </v-col>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 2
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee2 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee2.first_name }}
-                  {{ equivalentCourseByID.name_committee2.last_name }})
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+              <v-col cols="6" sm="6" class="pl-0 pb-0">
+                <v-sheet class="pa-6" outlined>
+                  2.
+                  ....................................................................................
+
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee2 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee2.first_name }}
+                    {{ equivalentCourseByID.name_committee2.last_name }}......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                    (......................................................................................)
+                  </v-col>
+                </v-sheet>
               </v-col>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 3
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee3 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee3.first_name }}
-                  {{ equivalentCourseByID.name_committee3.last_name }} )
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+              <v-col cols="6" sm="6" class="pr-0 pt-0 pb-0">
+                <v-sheet class="pa-6" outlined>
+                  3.
+                  ....................................................................................
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee3 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee3.first_name }}
+                    {{ equivalentCourseByID.name_committee3.last_name }} ......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                                        (......................................................................................)
+
+                  </v-col>
+                </v-sheet>
               </v-col>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 4
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee4 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee4.first_name }}
-                  {{ equivalentCourseByID.name_committee4.last_name }})
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+              <v-col cols="6" sm="6" class="pl-0 pt-0 pb-0">
+                <v-sheet class="pa-6" outlined>
+                  4.
+                  ....................................................................................
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee4 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee4.first_name }}
+                    {{ equivalentCourseByID.name_committee4.last_name }}......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                    (......................................................................................)
+                  </v-col>
+                </v-sheet>
               </v-col>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 5
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee5 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee5.first_name }}
-                  {{ equivalentCourseByID.name_committee5.last_name }})
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+              <v-col cols="6" sm="6" class="pr-0 pt-0">
+                <v-sheet class="pa-6" outlined>
+                  5.
+                  ....................................................................................
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee5 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee5.first_name }}
+                    {{ equivalentCourseByID.name_committee5.last_name }}......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                                        (......................................................................................)
+
+                  </v-col>
+                </v-sheet>
               </v-col>
-              <v-col cols="6" sm="6">
-                (ลงชื่อ)
-                .................................................................
-                คณะกรรมการฯ 6
-                <br /><br />
-                <v-col
-                  class="pa-0 text-center"
-                  v-if="equivalentCourseByID.name_committee6 != null"
-                >
-                  ({{ equivalentCourseByID.name_committee6.first_name }}
-                  {{ equivalentCourseByID.name_committee6.last_name }} )
-                </v-col>
-                <v-col class="pa-0 text-center" v-else>
-                  (.........................................................................................)
-                </v-col>
+              <v-col cols="6" sm="6" class="pl-0 pt-0 pb-0">
+                <v-sheet class="pa-6" outlined>
+                  6.
+                  ....................................................................................
+                  <br /><br />
+                  <v-col
+                    class="pa-0 text-center"
+                    v-if="equivalentCourseByID.name_committee6 != null"
+                  >
+                    (......{{ equivalentCourseByID.name_committee6.first_name }}
+                    {{ equivalentCourseByID.name_committee6.last_name }} ......)
+                  </v-col>
+                  <v-col class="pa-0 text-center" v-else>
+                    (......................................................................................)
+                  </v-col>
+                </v-sheet>
               </v-col>
             </v-row>
           </div>
@@ -1430,6 +1456,25 @@ export default {
       },
       set() {},
     },
+    plus() {
+      let find = 0;
+      this.equivalentCourseByID.equivalent_item.forEach((listAll) => {
+        // find.push({
+        //   status: "รอตรวจสอบ",
+        //   semester: 1,
+        //   student_course1: listAll.nameSubjectTransfer,
+        //   student_course2: listAll.nameSubjectTransfer2,
+        //   student_course3: listAll.nameSubjectTransfer3,
+        //   course_enroll: listAll.nameSubject,
+        //   credit1: listAll.gradeOne,
+        //   credit2: listAll.gradeTwo,
+        //   credit3: listAll.gradeThere,
+        // });
+        find += listAll.course_enroll.credit;
+      });
+      return find;
+    },
+
     count: {
       get() {
         if (this.$store.state.transfer.equivalentCourse) {
