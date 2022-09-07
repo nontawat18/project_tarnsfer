@@ -93,7 +93,7 @@
           <div class="mt-4">
             คณะ...................................................................................
             มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
-            <v-row class="pl-3 pt-8">
+            <v-row class="pl-3 pt-7">
               <p>
                 ..................................................................
                 ในระดับ
@@ -1553,9 +1553,10 @@ export default {
       //   width: margins.width,
       // });
       //doc.save(Date.now() + ".pdf");
+
       html2canvas(this.$refs.content, {
         width: 1270,
-        height: 1550,
+        height: 1500,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
@@ -1567,6 +1568,7 @@ export default {
           doc.internal.pageSize.getWidth(),
           doc.internal.pageSize.getHeight()
         );
+
 
         doc.save("ใบคำขอเทียบโอน_1_" + Date.now() + ".pdf");
       });
