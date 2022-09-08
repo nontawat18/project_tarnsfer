@@ -2,7 +2,8 @@
   <div>
     <v-row class="mt-5 mb-10" justify="center" id="app">
       <div ref="content">
-        <v-card width="1250" class="pa-16 pt-14">
+       
+        <v-card width="1270" class="pa-16 pt-14">
           <v-row>
             <v-col cols="1" class="">
               <img
@@ -1262,7 +1263,9 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee1 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee1.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee1.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee1.last_name }}......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
@@ -1280,7 +1283,9 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee2 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee2.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee2.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee2.last_name }}......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
@@ -1297,12 +1302,13 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee3 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee3.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee3.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee3.last_name }} ......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
-                                        (......................................................................................)
-
+                    (......................................................................................)
                   </v-col>
                 </v-sheet>
               </v-col>
@@ -1315,7 +1321,9 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee4 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee4.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee4.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee4.last_name }}......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
@@ -1332,12 +1340,13 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee5 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee5.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee5.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee5.last_name }}......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
-                                        (......................................................................................)
-
+                    (......................................................................................)
                   </v-col>
                 </v-sheet>
               </v-col>
@@ -1350,7 +1359,9 @@
                     class="pa-0 text-center"
                     v-if="equivalentCourseByID.name_committee6 != null"
                   >
-                    (......{{ equivalentCourseByID.name_committee6.first_name }}
+                    (......{{
+                      equivalentCourseByID.name_committee6.first_name
+                    }}
                     {{ equivalentCourseByID.name_committee6.last_name }} ......)
                   </v-col>
                   <v-col class="pa-0 text-center" v-else>
@@ -1555,38 +1566,23 @@ export default {
       //doc.save(Date.now() + ".pdf");
 
       html2canvas(this.$refs.content, {
-        width: 1270,
-        height: 1500,
+        width: 1570,
+        height: 1800,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
-        doc.addImage(
-          img,
-          "PNG",
-          20,
-          2,
-          doc.internal.pageSize.getWidth(),
-          doc.internal.pageSize.getHeight()
-        );
-
+        doc.addImage(img, "png", 20, 2, 940, 1300);
 
         doc.save("ใบคำขอเทียบโอน_1_" + Date.now() + ".pdf");
       });
 
       html2canvas(this.$refs.contentTwo, {
-        width: 1270,
-        height: 1550,
+        width: 1590,
+        height: 2800,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
-        doc.addImage(
-          img,
-          "PNG",
-          20,
-          2,
-          doc.internal.pageSize.getWidth(),
-          doc.internal.pageSize.getHeight()
-        );
+        doc.addImage(img, "png", 20, 2, 960, 1800);
 
         doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
