@@ -85,6 +85,10 @@
             <v-col>
               {{ menu.equivalent_type }}
             </v-col>
+             <v-col class="pt-0 ">
+              {{ menu.created_user.first_name }}
+              {{ menu.created_user.last_name }}
+            </v-col>
           </v-card>
         </v-col>
       </v-row>
@@ -193,12 +197,25 @@ export default {
       },
       set() {},
     },
+    userLogincheck: {
+      get() {
+        if (this.$store.state.users.userLogin) {
+          return this.$store.state.users.userLogin;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   mounted() {
     this.getEquivalentCourse();
     this.getTeacher();
     this.getSchoolCourse();
     this.getProfile();
+    if (this.userLogincheck == null) {
+      this.$router.push("/login/");
+    }
   },
   methods: {
     ...mapActions({

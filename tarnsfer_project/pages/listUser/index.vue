@@ -35,6 +35,14 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
+                      <!-- <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.title"
+                          label="คำนำหน้า"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col> -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.first_name"
@@ -60,7 +68,12 @@
                         ></v-text-field>
                       </v-col>
 
-                      <v-col sm="6" cols="12" class="pt-0 pb-0" v-if="formTitle == 'New Item'">
+                      <v-col
+                        sm="6"
+                        cols="12"
+                         md="4"
+                        v-if="formTitle == 'New Item'"
+                      >
                         <v-text-field
                           v-model="editedItem.password"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -74,7 +87,12 @@
                           @click:append="show1 = !show1"
                         ></v-text-field>
                       </v-col>
-                      <v-col sm="6" cols="12" class="pt-0 pb-0" v-if="formTitle == 'New Item'">
+                      <v-col
+                        sm="6"
+                        cols="12"
+                         md="4"
+                        v-if="formTitle == 'New Item'"
+                      >
                         <v-text-field
                           v-model="editedItem.confirm_password"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -282,6 +300,8 @@ export default {
       },
     ],
     headers: [
+      // { text: "คำนำห้า", value: "title.title", sortable: false },
+
       {
         text: "ชื่อ",
         align: "start",
@@ -306,6 +326,7 @@ export default {
       confirm_password: "",
       role: "",
       email: "",
+
     },
     defaultItem: {
       first_name: "",

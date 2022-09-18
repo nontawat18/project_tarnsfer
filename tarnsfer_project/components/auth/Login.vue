@@ -8,7 +8,7 @@
             <v-text-field
               v-model="login.username"
               :rules="[rules.required]"
-              label="ชื่อผู้ใช้งาน"
+              label="ชื่อผู้ใช้งาน/รหัสนักศึกษา"
               required
               outlined
               dense

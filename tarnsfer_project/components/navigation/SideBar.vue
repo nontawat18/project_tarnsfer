@@ -210,7 +210,7 @@ export default {
       this.$store.dispatch("users/setUserId", 0);
 
       this.$store.dispatch("users/saveUser", null);
-      this.$router.push("/");
+      this.$router.push("/login");
     },
   },
 };

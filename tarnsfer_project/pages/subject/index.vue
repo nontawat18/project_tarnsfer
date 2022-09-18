@@ -95,7 +95,7 @@
                           dense
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="12" md="12">
                         <!-- <v-text-field
                         v-model="editedItem.description_file"
                         label="คำอธิบายรายวิชา"
@@ -276,7 +276,7 @@ export default {
         value: "course_code",
       },
       { text: "ชื่อวิชา", value: "course_title", sortable: false },
-      { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
+      // { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
       // { text: "เกรด", value: "grade", sortable: false },
 

@@ -17,13 +17,185 @@
       </v-col>
     </v-col> -->
     <v-card elevation="0" outlined>
+      <v-col class="text-right">
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="grey" dark v-bind="attrs" v-on="on">
+              เปลี่ยนรหัสผ่าน
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="text-h5"> เปลี่ยนรหัสผ่าน </span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Old Password*"
+                      type="password"
+                      required
+                      outlined
+                      dense
+                      v-model="oldpassword"
+                    ></v-text-field>
+                    <v-text-field
+                      label="New Password*"
+                      type="password"
+                      required
+                      outlined
+                      dense
+                      v-model="newpassword"
+                    ></v-text-field>
+                    <v-text-field
+                      label="Confirm New Password*"
+                      type="password"
+                      required
+                      outlined
+                      dense
+                      v-model="connewpassword"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Close
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="change()"> Save </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialog2" persistent max-width="600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="grey" dark v-bind="attrs" v-on="on">
+              แก้ไขข้อมูลส่วนตัว
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="คำนำหน้า"
+                      required
+                      outlined
+                      dense
+                      v-model="title"
+                    ></v-text-field>
+                    <v-text-field
+                      label="รหัสนักศึกษา"
+                      required
+                      outlined
+                      dense
+                      v-model="student_id"
+                    ></v-text-field>
+                    <v-text-field
+                      label="ชั้นปี"
+                      required
+                      outlined
+                      dense
+                      v-model="class_level"
+                    ></v-text-field>
+                    <v-text-field
+                      label="คณะ"
+                      required
+                      outlined
+                      dense
+                      v-model="faculty"
+                    ></v-text-field>
+                    <v-text-field
+                      label="สาขา"
+                      required
+                      outlined
+                      dense
+                      v-model="field_of_study"
+                    ></v-text-field>
+                    <v-text-field
+                      label="ระดับการศึกษา"
+                      required
+                      outlined
+                      dense
+                      v-model="level_of_study"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog2 = false">
+                Close
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="changeProfile()">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-col>
       <v-card-text>
+        <v-row>
+          <v-col cols="3">
+            <strong>คำนำหน้า</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.title }} </span>
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="3">
             <strong>ชื่อ - สกุล</strong>
           </v-col>
           <v-col cols="9">
             <span>{{ profile.full_name }} </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>รหัสนักศึกษา</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.student_id }} </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>ชั้นปี</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.class_level }} </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>คณะ</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.faculty }} </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>สาขาวิชา</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.field_of_study }} </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>ระดับการศึกษา</strong>
+          </v-col>
+          <v-col cols="9">
+            <span>{{ profile.level_of_study }} </span>
           </v-col>
         </v-row>
         <!-- <v-row>
@@ -50,6 +222,7 @@
             <span>{{ profile.role }}</span>
           </v-col>
         </v-row>
+        <!-- {{ profile }} -->
         <!-- <v-row>
           <v-col cols="3">
             <strong>สาขา</strong>
@@ -123,7 +296,6 @@
         <v-col cols="4" sm="4" class="">
           <v-btn
             class=""
-            small
             elevation="0"
             @click="download(profile.file_transcrip)"
             dark
@@ -132,7 +304,6 @@
             <v-icon left> mdi-download</v-icon> Download Transcript
           </v-btn>
         </v-col>
-
       </v-row>
     </v-card>
   </div>
@@ -196,12 +367,23 @@ const resizeImage = ({ file, maxSize }) => {
 export default {
   data: () => ({
     dialog: false,
+    dialog2: false,
+
+    title: "",
+    student_id: "",
+    level_of_study: "",
+    faculty: "",
+    field_of_study: "",
+    class_level: "",
+
     search: "",
     dialogDelete: false,
     image: null,
     base64: "",
     idSubject: "",
-
+    oldpassword: "",
+    newpassword: "",
+    connewpassword: "",
     type: [
       {
         id: "ท",
@@ -265,6 +447,16 @@ export default {
       },
       set() {},
     },
+    userToken: {
+      get() {
+        if (this.$store.state.users.userLogin) {
+          return this.$store.state.users.userLogin.key;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     userId: {
       get() {
         if (this.$store.state.users.userId) {
@@ -293,6 +485,111 @@ export default {
     ...mapActions({
       getProfile: "users/getProfile",
     }),
+    change() {
+      let data = {
+        old_password: this.oldpassword,
+        new_password1: this.newpassword,
+        new_password2: this.connewpassword,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      this.$changePassword.defaults.headers.common["Authorization"] =
+        "Token " + this.userToken;
+      this.$changePassword
+        .post(`/rest-auth/password/change/`, data)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log("userToken", response.data);
+            // this.getMyCourse();
+            this.dialog = false;
+            this.$toast.success("แก้ไขรหัสผ่านเรียบร้อย").goAway(2000);
+          } else {
+            this.$toast
+              .success("แก้ไขรหัสผ่านไม่สำเร็จ กรุณาลองใหม่")
+              .goAway(2000);
+          }
+        });
+    },
+    changeProfile() {
+      let title = "";
+      let stdentID = "";
+      let level = "";
+      let faculty = "";
+      let field = "";
+      let classLe = "";
+
+      if (this.profile.title == null && this.title == "") {
+        title = this.title;
+      } else if (this.profile.title != null && this.title != "") {
+        title = this.title;
+      } else {
+        title = this.profile.title;
+      }
+
+      if (this.profile.student_id == null && this.student_id == "") {
+        stdentID = this.student_id;
+      } else if (this.profile.title != null && this.title != "") {
+        stdentID = this.student_id;
+      } else {
+        stdentID = this.profile.student_id;
+      }
+
+      if (this.profile.level_of_study == null && this.level_of_study == "") {
+        level = this.level_of_study;
+      } else if (this.profile.level_of_study != null && this.level_of_study != "") {
+        level = this.level_of_study;
+      } else {
+        level = this.profile.level_of_study;
+      }
+
+      if (this.profile.faculty == null && this.faculty == "") {
+        faculty = this.faculty;
+      } else if (this.profile.faculty != null && this.faculty != "") {
+        faculty = this.faculty;
+      } else {
+        faculty = this.profile.faculty;
+      }
+
+      if (this.profile.field_of_study == null && this.field_of_study == "") {
+        field = this.field_of_study;
+      } else if (this.profile.field_of_study != null && this.field_of_study != "") {
+        field = this.field_of_study;
+      } else {
+        field = this.profile.field_of_study;
+      }
+
+      if (this.profile.class_level == null && this.class_level == "") {
+        classLe = this.class_level;
+      } else if (this.profile.class_level != null && this.class_level != "") {
+        classLe = this.class_level;
+      } else {
+        classLe = this.profile.class_level;
+      }
+
+      let data = {
+        role: this.profile.role,
+        title: title,
+        student_id: stdentID,
+        level_of_study: level,
+        faculty: faculty,
+        field_of_study: field,
+        class_level: classLe,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          // this.getMyCourse();
+          this.dialog2 = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+
     async download(item) {
       // const url = "/users/download";
       console.log("item", item);

@@ -38,7 +38,7 @@
                 <v-text-field
                   v-model="username"
                   :rules="[rules.required]"
-                  label="Username"
+                  label="Username/รหัสนักศึกษา"
                   required
                   outlined
                   dense
