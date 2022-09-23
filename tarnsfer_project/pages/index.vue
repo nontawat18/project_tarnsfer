@@ -213,9 +213,7 @@ export default {
     this.getTeacher();
     this.getSchoolCourse();
     this.getProfile();
-    if (this.userLogincheck == null) {
-      this.$router.push("/login/");
-    }
+
   },
   methods: {
     ...mapActions({

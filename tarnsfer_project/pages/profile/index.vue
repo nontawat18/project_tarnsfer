@@ -280,8 +280,8 @@
           <v-icon left> mdi-download</v-icon> Download Transcript
         </v-btn>
       </v-col> -->
-      <v-row>
-        <v-col cols="6" sm="6" class="">
+      <v-row class="pb-3">
+        <v-col cols="12" sm="6" class="">
           <v-file-input
             outlined
             dense
@@ -290,10 +290,10 @@
             @change="uploadImage(image)"
           ></v-file-input>
         </v-col>
-        <v-col cols="2" sm="2" class="text-center">
+        <v-col cols="12" sm="2" class="text-center">
           <v-btn color="gray" @click="save"> บันทึก </v-btn>
         </v-col>
-        <v-col cols="4" sm="4" class="">
+        <v-col cols="12" sm="4" class="text-center">
           <v-btn
             class=""
             elevation="0"
@@ -517,7 +517,7 @@ export default {
       let field = "";
       let classLe = "";
 
-      if (this.profile.title == null && this.title == "") {
+      if (this.profile.title == null && this.title == "" ) {
         title = this.title;
       } else if (this.profile.title != null && this.title != "") {
         title = this.title;

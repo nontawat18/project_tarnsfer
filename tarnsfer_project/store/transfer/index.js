@@ -35,17 +35,31 @@ export const mutations = {
 export const actions = {
     async getEquivalentCourse({ commit, rootState }) {
         var self = this;
-        // console.log("getProduct", productSearch);
         let userID = rootState.users.userId
+        let role = rootState.users.userLogin.user.role.role
+        console.log("rolerolerolerolerole ", role);
 
-        await this.$fixedKeyApi
-            .get(`/equivalent-course/?search=${userID}&created_user=${userID}`)
-            .then(response => {
-                self.search = response.data;
-                console.log("getEquivalentCourse", response.data);
+        if (role == "student") {
+            await this.$fixedKeyApi
+                .get(`/equivalent-course/?created_user=${userID}`)
+                .then(response => {
+                    self.search = response.data;
+                    console.log("getEquivalentCourse", response.data);
 
-                commit("getEquivalentCourse", response.data);
-            });
+                    commit("getEquivalentCourse", response.data);
+                });
+        } else {
+            await this.$fixedKeyApi
+                .get(`/equivalent-course/?search=${userID}`)
+                .then(response => {
+                    self.search = response.data;
+                    console.log("getEquivalentCourse", response.data);
+
+                    commit("getEquivalentCourse", response.data);
+                });
+        }
+
+
     },
 
     async getEquivalentCourseByID({ commit }, { id }) {

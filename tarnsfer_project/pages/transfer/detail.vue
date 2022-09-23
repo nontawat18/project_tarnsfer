@@ -2,7 +2,7 @@
   <div>
     <v-row class="mt-5 mb-10" justify="center" id="app">
       <div ref="content">
-       
+
         <v-card width="1270" class="pa-16 pt-14">
           <v-row>
             <v-col cols="1" class="">
@@ -671,7 +671,7 @@
       </div>
       <div class="ma-4"></div>
       <div ref="contentTwo">
-        <v-card width="1250" class="pa-16 pt-14">
+        <v-card width="1270" class="pa-16 pt-14">
           <v-row>
             <v-col cols="1" class="">
               <img
