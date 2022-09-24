@@ -41,7 +41,7 @@ export const actions = {
 
         if (role == "student") {
             await this.$fixedKeyApi
-                .get(`/equivalent-course/?created_user=${userID}`)
+                .get(`/equivalent-course-all/?created_user=${userID}`)
                 .then(response => {
                     self.search = response.data;
                     console.log("getEquivalentCourse", response.data);
@@ -50,7 +50,7 @@ export const actions = {
                 });
         } else {
             await this.$fixedKeyApi
-                .get(`/equivalent-course/?search=${userID}`)
+                .get(`/equivalent-course-all/?search=${userID}`)
                 .then(response => {
                     self.search = response.data;
                     console.log("getEquivalentCourse", response.data);
