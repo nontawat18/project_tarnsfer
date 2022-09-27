@@ -2,7 +2,6 @@
   <div>
     <v-row class="mt-5 mb-10" justify="center" id="app">
       <div ref="content">
-
         <v-card width="1270" class="pa-16 pt-14">
           <v-row>
             <v-col cols="1" class="">
@@ -53,12 +52,12 @@
             <!-- {{ equivalentCourseByID }} -->
 
             รหัสนักศึกษา
-            ....................................................................................
+            ........................{{ this.profile.student_id }}............................
           </div>
           <div class="mt-4 pl-3">
             <v-row>
-              สาขาวิชา ...................................................
-              ชั้นปี ................... รอบ
+              สาขาวิชา .........{{ this.profile.field_of_study }}.........
+              ชั้นปี ........{{ this.profile.class_level }}........... รอบ
               <p
                 style="
                   padding: 8px;
@@ -88,11 +87,11 @@
                   margin-right: 8px;
                 "
               ></p>
-              สมทบ หมายเลขโทรศัพท์........................................
+              สมทบ หมายเลขโทรศัพท์.....{{ this.profile.tel }}........
             </v-row>
           </div>
           <div class="mt-4">
-            คณะ...................................................................................
+            คณะ....................{{ this.profile.faculty }}.......................................
             มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
             <v-row class="pl-3 pt-7">
               <p>
@@ -670,6 +669,7 @@
         </v-card>
       </div>
       <div class="ma-4"></div>
+      <!-- {{ this.profile }} -->
       <div ref="contentTwo">
         <v-card width="1270" class="pa-16 pt-14">
           <v-row>
@@ -838,7 +838,7 @@
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
                       </div>
-                      <div v-else>
+                      <div v-else >
                         <p style="margin: 0px">
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
@@ -856,7 +856,7 @@
                               >0</span
                             > -->
                       </div>
-                      <div v-else>
+                      <div v-else class="text-center">
                         <span style="margin: 0px">{{
                           equivalent_item.student_course1.credit
                         }}</span>
@@ -1452,6 +1452,7 @@ export default {
     head_educational: "",
     head_department: "",
     advisor: "",
+    profile: [],
   }),
   computed: {
     formTitle() {
@@ -1461,6 +1462,16 @@ export default {
       get() {
         if (this.$store.state.transfer.equivalentCourse) {
           return this.$store.state.transfer.equivalentCourseByID;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
+    userId: {
+      get() {
+        if (this.$store.state.users.userId) {
+          return this.$store.state.users.userId;
         } else {
           return null;
         }
@@ -1531,6 +1542,13 @@ export default {
     this.getEquivalentCourseByID();
     this.getTeacher();
     this.getSchoolCourse();
+
+    this.$fixedKeyApi.get(`/profile/${this.equivalentCourseByID.created_user.id }/`).then((response) => {
+      self.search = response.data;
+      console.log("getProfile mounted", response.data);
+
+      this.profile = response.data;
+    });
   },
   methods: {
     ...mapActions({
@@ -1566,7 +1584,7 @@ export default {
       //doc.save(Date.now() + ".pdf");
 
       html2canvas(this.$refs.content, {
-        width: 1570,
+        width: 1590,
         height: 1800,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");

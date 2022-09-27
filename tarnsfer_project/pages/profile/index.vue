@@ -69,7 +69,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialog2" persistent max-width="600px">
+        <!-- <v-dialog v-model="dialog2" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="grey" dark v-bind="attrs" v-on="on">
               แก้ไขข้อมูลส่วนตัว
@@ -139,15 +139,65 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-dialog>
+        </v-dialog> -->
       </v-col>
       <v-card-text>
         <v-row>
           <v-col cols="3">
             <strong>คำนำหน้า</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.title }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogTitle" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="คำนำหน้า"
+                          required
+                          outlined
+                          dense
+                          v-model="title"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogTitle = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeTitle()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <v-row>
@@ -162,40 +212,344 @@
           <v-col cols="3">
             <strong>รหัสนักศึกษา</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.student_id }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogStudentID" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="รหัสนักศึกษา"
+                          required
+                          outlined
+                          dense
+                          v-model="student_id"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogStudentID = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeStudentID()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
             <strong>ชั้นปี</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.class_level }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogClassLevel" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="ชั้นปี"
+                          required
+                          outlined
+                          dense
+                          v-model="class_level"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogClassLevel = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeClassLevel()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
             <strong>คณะ</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.faculty }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogFaculty" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="คณะ"
+                          required
+                          outlined
+                          dense
+                          v-model="faculty"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogFaculty = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changefaculty()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
             <strong>สาขาวิชา</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.field_of_study }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogStudy" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="สาขา"
+                          required
+                          outlined
+                          dense
+                          v-model="field_of_study"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogStudy = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeStudy()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
             <strong>ระดับการศึกษา</strong>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="7">
             <span>{{ profile.level_of_study }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogLevelStudy" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="ระดับการศึกษา"
+                          required
+                          outlined
+                          dense
+                          v-model="level_of_study"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogLevelStudy = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeLevelStudy()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>เบอร์โทรศัพท์</strong>
+          </v-col>
+          <v-col cols="7">
+            <span>{{ profile.tel }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogTel" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="เบอร์โทรศัพท์"
+                          required
+                          outlined
+                          dense
+                          v-model="tel"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="dialogTel = false">
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeTel()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-col>
         </v-row>
         <!-- <v-row>
@@ -368,6 +722,12 @@ export default {
   data: () => ({
     dialog: false,
     dialog2: false,
+    dialogTitle: false,
+    dialogStudentID: false,
+    dialogClassLevel: false,
+    dialogFaculty: false,
+    dialogStudy: false,
+    dialogLevelStudy: false,
 
     title: "",
     student_id: "",
@@ -375,7 +735,7 @@ export default {
     faculty: "",
     field_of_study: "",
     class_level: "",
-
+    tel: "",
     search: "",
     dialogDelete: false,
     image: null,
@@ -509,64 +869,8 @@ export default {
           }
         });
     },
-    changeProfile() {
-      let title = "";
-      let stdentID = "";
-      let level = "";
-      let faculty = "";
-      let field = "";
-      let classLe = "";
-
-      if (this.profile.title == null && this.title == "" ) {
-        title = this.title;
-      } else if (this.profile.title != null && this.title != "") {
-        title = this.title;
-      } else {
-        title = this.profile.title;
-      }
-
-      if (this.profile.student_id == null && this.student_id == "") {
-        stdentID = this.student_id;
-      } else if (this.profile.title != null && this.title != "") {
-        stdentID = this.student_id;
-      } else {
-        stdentID = this.profile.student_id;
-      }
-
-      if (this.profile.level_of_study == null && this.level_of_study == "") {
-        level = this.level_of_study;
-      } else if (this.profile.level_of_study != null && this.level_of_study != "") {
-        level = this.level_of_study;
-      } else {
-        level = this.profile.level_of_study;
-      }
-
-      if (this.profile.faculty == null && this.faculty == "") {
-        faculty = this.faculty;
-      } else if (this.profile.faculty != null && this.faculty != "") {
-        faculty = this.faculty;
-      } else {
-        faculty = this.profile.faculty;
-      }
-
-      if (this.profile.field_of_study == null && this.field_of_study == "") {
-        field = this.field_of_study;
-      } else if (this.profile.field_of_study != null && this.field_of_study != "") {
-        field = this.field_of_study;
-      } else {
-        field = this.profile.field_of_study;
-      }
-
-      if (this.profile.class_level == null && this.class_level == "") {
-        classLe = this.class_level;
-      } else if (this.profile.class_level != null && this.class_level != "") {
-        classLe = this.class_level;
-      } else {
-        classLe = this.profile.class_level;
-      }
-
+    changeewew() {
       let data = {
-        role: this.profile.role,
         title: title,
         student_id: stdentID,
         level_of_study: level,
@@ -582,6 +886,150 @@ export default {
           console.log("changeProfile", response.data);
           // this.getMyCourse();
           this.dialog2 = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeTel() {
+      let data = {
+        tel: this.tel,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogTel = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeTitle() {
+      let data = {
+        title: this.title,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogTitle = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeStudentID() {
+      let data = {
+        student_id: this.student_id,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogStudentID = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeClassLevel() {
+      let data = {
+        class_level: this.class_level,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogClassLevel = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeClassLevel() {
+      let data = {
+        class_level: this.class_level,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogClassLevel = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeStudy() {
+      let data = {
+        field_of_study: this.field_of_study,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogStudy = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeLevelStudy() {
+      let data = {
+        level_of_study: this.level_of_study,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogLevelStudy = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changefaculty() {
+      let data = {
+        faculty: this.faculty,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogFaculty = false;
           this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
           this.getProfile();
         } else {
