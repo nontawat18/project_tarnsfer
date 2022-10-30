@@ -40,7 +40,12 @@
         </v-stepper-step>
         <v-divider></v-divider>
 
-        <v-stepper-step step="3"> คณะกรรมการเทียบโอน </v-stepper-step>
+        <v-stepper-step :complete="e1 > 3" step="3">
+          เลือกผู้เห็นชอบ
+        </v-stepper-step>
+        <v-divider></v-divider>
+
+        <v-stepper-step step="4"> สรุปรายวิชาเทียบโอน </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
@@ -168,9 +173,6 @@
         </v-stepper-content>
         <v-stepper-content step="3">
           <v-col>
-            <!-- <v-col class="pb-8">
-        <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
-      </v-col> -->
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
@@ -242,10 +244,161 @@
               </v-row>
             </v-col>
           </v-col>
+          <v-btn color="grey" dark @click="e1 = 4"> Next </v-btn>
+          <v-btn text @click="e1 = 2"> Back </v-btn>
+        </v-stepper-content>
+        <v-stepper-content step="4">
+
+          <v-col>
+            <div class="">
+              <v-data-table
+                :headers="headers"
+                :items="lengths"
+                :search="search"
+                class="elevation-1"
+              >
+                <template v-slot:top>
+                  <v-toolbar flat>
+                    <v-toolbar-title>สรุปการเทียบโอน</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+
+                    <v-spacer></v-spacer>
+
+                      <!-- <v-dialog v-model="dialog" max-width="90%">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            color=""
+                            elevation="0"
+                            fab
+                            small
+                            class="mb-2"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            <v-icon> mdi-plus</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title>
+                            <span class="text-h5">รายวิชา</span>
+                          </v-card-title>
+
+                          <v-card-text>
+                            <v-container>
+                              <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field
+                                    v-model="editedItem.course_code"
+                                    label="รหัสวิชา"
+                                    outlined
+                                    dense
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field
+                                    v-model="editedItem.course_title"
+                                    label="ชื่อวิชา"
+                                    outlined
+                                    dense
+                                  ></v-text-field>
+                                </v-col>
+
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-select
+                                    v-model="editedItem.credit_type"
+                                    label="ประเภทรายวิชา"
+                                    :items="type"
+                                    item-text="name"
+                                    item-value="id"
+                                    outlined
+                                    dense
+                                  ></v-select>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field
+                                    v-model="editedItem.credit"
+                                    label="หน่วยกิจ"
+                                    outlined
+                                    dense
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field
+                                    v-model="editedItem.school"
+                                    label="วิทยาลัย/มหาวิทยาลัย"
+                                    outlined
+                                    dense
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field
+                                    v-model="editedItem.course_year"
+                                    label="ปี พ.ศ"
+                                    outlined
+                                    dense
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12">
+                                  <v-textarea
+                                    outlined
+                                    dense
+                                    label="คำอธิบายรายวิชา"
+                                    v-model="editedItem.description_file"
+                                  ></v-textarea>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="error" text @click="close">
+                              ยกเลิก
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="save">
+                              บันทึก
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog> -->
+                    <!-- <v-dialog v-model="dialogDelete" max-width="500px">
+                      <v-card>
+                        <v-card-title class="text-h5"
+                          >ยืนยันต้องการลบรายวิชานี้ออกจากรายวิชาของมหาวิทยาลัย?</v-card-title
+                        >
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="error" text @click="closeDelete"
+                            >ยกเลิก</v-btn
+                          >
+                          <v-btn
+                            color="blue darken-1"
+                            text
+                            @click="deleteItemConfirm"
+                            >ตกลง</v-btn
+                          >
+                          <v-spacer></v-spacer>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog> -->
+                  </v-toolbar>
+                  <!-- <v-col class="pb-0">
+                    <v-text-field
+                      v-model="search"
+                      label="ค้นหา"
+                      outlined
+                      dense
+                      class=""
+                    ></v-text-field>
+                  </v-col> -->
+                </template>
+
+              </v-data-table>
+            </div>
+          </v-col>
           <v-btn @click="save()" elevation="0" color="grey" dark>
             บันทึกการเทียบโอน
           </v-btn>
-          <v-btn text @click="e1 = 2"> Back </v-btn>
+          <v-btn text @click="e1 = 3"> Back </v-btn>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -357,6 +510,49 @@ export default {
         "การศึกษาตามอัธยาศัย",
         "ประสบการณ์บุคคล",
       ],
+       headers: [
+      {
+        text: "รายวิชาที่จะเทียบ",
+        align: "start",
+        sortable: false,
+        value: "nameSubject",
+      },
+      { text: "รายวิชาที่เทียบที่ 1", value: "nameSubjectTransfer", sortable: false },
+      // { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
+      { text: "เกรด", value: "gradeOne", sortable: false },
+      // { text: "เกรด", value: "grade", sortable: false },
+
+      { text: "รายวิชาที่เทียบที่ 2", value: "nameSubjectTransfer2", sortable: false },
+      // { text: "หลักสูตร", value: "course", sortable: false },
+      { text: "เกรด", value: "gradeTwo", sortable: false },
+      { text: "รายวิชาที่เทียบที่ 3", value: "nameSubjectTransfer3", sortable: false },
+      // { text: "หลักสูตร", value: "course", sortable: false },
+      { text: "เกรด", value: "gradeThere", sortable: false },
+    ],
+     desserts: [],
+    editedIndex: -1,
+    editedItem: {
+      id: 0,
+      course_code: "",
+      course_title: "",
+      course: 0,
+      credit_type: 0,
+      credit: 0,
+      description_file: "",
+      grade: "",
+      school: "",
+    },
+    defaultItem: {
+      id: 0,
+      course_code: "",
+      course_title: "",
+      course: 0,
+      credit_type: 0,
+      credit: 0,
+      description_file: "",
+      grade: "",
+      school: "",
+    },
       approvOne: null,
       approvTwo: null,
       approvThree: null,

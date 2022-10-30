@@ -18,13 +18,13 @@
                 value="ขอเทียบโอนรายวิชา"
               ></v-checkbox>
             </v-col>
-            <v-col ols="6" class="pb-0">
+            <!-- <v-col ols="6" class="pb-0">
               <v-checkbox
                 v-model="selected"
                 label="ขอเทียบเพื่อเรียนแทน"
                 value="ขอเทียบเพื่อเรียนแทน"
               ></v-checkbox>
-            </v-col>
+            </v-col> -->
           </v-row>
         </v-col>
         <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">

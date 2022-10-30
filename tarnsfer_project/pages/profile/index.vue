@@ -635,19 +635,20 @@
         </v-btn>
       </v-col> -->
       <v-row class="pb-3">
-        <v-col cols="12" sm="6" class="">
+        <v-col cols="12" sm="8" class="">
           <v-file-input
             outlined
             dense
+            accept="image/*"
             label="Uplaod Transcript"
             v-model="image"
             @change="uploadImage(image)"
           ></v-file-input>
         </v-col>
-        <v-col cols="12" sm="2" class="text-center">
+        <v-col cols="12" sm="4" class="text-center">
           <v-btn color="gray" @click="save"> บันทึก </v-btn>
         </v-col>
-        <v-col cols="12" sm="4" class="text-center">
+        <!-- <v-col cols="12" sm="4" class="text-center">
           <v-btn
             class=""
             elevation="0"
@@ -657,8 +658,13 @@
           >
             <v-icon left> mdi-download</v-icon> Download Transcript
           </v-btn>
-        </v-col>
+        </v-col> -->
       </v-row>
+    </v-card>
+    <v-card elevation="1" outlined color="#ffffff" class="mt-4">
+      <v-col class="text-center">
+        <img height="50%" width="100%" :src="profile.file_transcrip" />
+      </v-col>
     </v-card>
   </div>
 </template>
@@ -728,7 +734,7 @@ export default {
     dialogFaculty: false,
     dialogStudy: false,
     dialogLevelStudy: false,
-
+    dialogTel: false,
     title: "",
     student_id: "",
     level_of_study: "",
@@ -1062,7 +1068,7 @@ export default {
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
         if (response.status == 200) {
           console.log("patch", response.data);
-          // this.getMyCourse();
+           this.getProfile();
         }
       });
     },

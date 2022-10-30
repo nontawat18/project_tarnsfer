@@ -51,8 +51,9 @@
             }}...........................
             <!-- {{ equivalentCourseByID }} -->
 
-            รหัสนักศึกษา
-            ........................{{ this.profile.student_id }}............................
+            รหัสนักศึกษา ........................{{
+              this.profile.student_id
+            }}............................
           </div>
           <div class="mt-4 pl-3">
             <v-row>
@@ -91,7 +92,9 @@
             </v-row>
           </div>
           <div class="mt-4">
-            คณะ....................{{ this.profile.faculty }}.......................................
+            คณะ....................{{
+              this.profile.faculty
+            }}.......................................
             มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
             <v-row class="pl-3 pt-7">
               <p>
@@ -838,7 +841,7 @@
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
                       </div>
-                      <div v-else >
+                      <div v-else>
                         <p style="margin: 0px">
                           {{ equivalent_item.student_course1.course_title }}
                         </p>
@@ -1374,9 +1377,53 @@
         </v-card>
       </div>
     </v-row>
-    <v-col class="text-center">
-      <v-btn @click="makePDF">Download Transfer</v-btn>
-    </v-col>
+    <v-row>
+      <v-col class="text-center" cols="6" >
+        <v-btn @click="makePDF">Download Transfer (ดาวน์โหลดใบเทียบโอน)</v-btn>
+      </v-col>
+      <v-col class="text-center" cols="6">
+         <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="#BDBDBD"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          ใบแสดงผลการศึกษา
+        </v-btn>
+      </template>
+      <v-card>
+        <v-toolbar
+          dark
+          color="#BDBDBD"
+        > <v-toolbar-title>ใบแสดงผลการศึกษา</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn
+            icon
+            dark
+            @click="dialog = false"
+          >
+            <v-icon color="red"> mdi-close</v-icon>
+          </v-btn>
+
+
+        </v-toolbar>
+        <v-col class="text-center">
+        <img height="50%" width="100%" :src="profile.file_transcrip" />
+      </v-col>
+
+      </v-card>
+    </v-dialog>
+  </v-row>
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
@@ -1543,12 +1590,14 @@ export default {
     this.getTeacher();
     this.getSchoolCourse();
 
-    this.$fixedKeyApi.get(`/profile/${this.equivalentCourseByID.created_user.id }/`).then((response) => {
-      self.search = response.data;
-      console.log("getProfile mounted", response.data);
+    this.$fixedKeyApi
+      .get(`/profile/${this.equivalentCourseByID.created_user.id}/`)
+      .then((response) => {
+        self.search = response.data;
+        console.log("getProfile mounted", response.data);
 
-      this.profile = response.data;
-    });
+        this.profile = response.data;
+      });
   },
   methods: {
     ...mapActions({
