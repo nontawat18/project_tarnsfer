@@ -661,7 +661,18 @@
         </v-col> -->
       </v-row>
     </v-card>
-    <v-card elevation="1" outlined color="#ffffff" class="mt-4">
+    <v-card
+      elevation="1"
+      outlined
+      color="#ffffff"
+      class="mt-4"
+      v-if="profile.file_transcrip == null"
+    >
+      <v-col class="text-center">
+        <h3>ไม่มีใบแสดงผลการเรียน</h3>
+      </v-col>
+    </v-card>
+    <v-card elevation="1" outlined color="#ffffff" class="mt-4" v-else>
       <v-col class="text-center">
         <img height="50%" width="100%" :src="profile.file_transcrip" />
       </v-col>
@@ -1068,7 +1079,7 @@ export default {
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
         if (response.status == 200) {
           console.log("patch", response.data);
-           this.getProfile();
+          this.getProfile();
         }
       });
     },

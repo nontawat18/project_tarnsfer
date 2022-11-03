@@ -43,9 +43,9 @@
         <v-stepper-step :complete="e1 > 3" step="3">
           เลือกผู้เห็นชอบ
         </v-stepper-step>
-        <!-- <v-divider></v-divider> -->
+        <v-divider></v-divider>
 
-        <!-- <v-stepper-step step="4"> สรุปรายวิชาเทียบโอน </v-stepper-step> -->
+        <v-stepper-step step="4"> สรุปรายวิชาเทียบโอน </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
@@ -63,7 +63,6 @@
                 ref="callAddServiceInsulationTocart"
                 :_uuid="_uuid"
               />
-              <!-- {{ lengths }} -->
               <v-col cols="12" class="text-center">
                 <v-btn
                   color="grey"
@@ -244,21 +243,19 @@
               </v-row>
             </v-col>
           </v-col>
-                    <v-btn @click="save()" elevation="0" color="grey" dark>
+          <!-- <v-btn @click="save()" elevation="0" color="grey" dark>
             บันทึกการเทียบโอน
-          </v-btn>
-          <!-- <v-btn color="grey" dark @click="e1 = 4"> Next </v-btn> -->
+          </v-btn> -->
+          <v-btn color="grey" dark @click="e1 = 4"> Next </v-btn>
           <v-btn text @click="e1 = 2"> Back </v-btn>
         </v-stepper-content>
-        <!-- <v-stepper-content step="4">
-
-          <v-col>
-            <div class="">
+        <v-stepper-content step="4" class=" pt-2">
+          <v-col class=" pt-0">
+            <div class=" pt-0">
               <v-data-table
                 :headers="headers"
                 :items="lengths"
-                :search="search"
-                class="elevation-1"
+                class="elevation-2"
               >
                 <template v-slot:top>
                   <v-toolbar flat>
@@ -266,11 +263,11 @@
                     <v-divider class="mx-4" inset vertical></v-divider>
 
                     <v-spacer></v-spacer>
-
                   </v-toolbar>
-
                 </template>
-
+                <template v-slot:[`item.nameSubject`]="{ item }">
+                  <p>{{ item }}</p>
+                </template>
               </v-data-table>
             </div>
           </v-col>
@@ -278,7 +275,7 @@
             บันทึกการเทียบโอน
           </v-btn>
           <v-btn text @click="e1 = 3"> Back </v-btn>
-        </v-stepper-content> -->
+        </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
 
@@ -300,7 +297,7 @@
       >
         บันทึกใบเทียบโอน
       </v-btn>
-    </v-col>-->
+    </v-col> -->
   </div>
 </template>
 <script>
@@ -389,49 +386,63 @@ export default {
         "การศึกษาตามอัธยาศัย",
         "ประสบการณ์บุคคล",
       ],
-       headers: [
-      {
-        text: "รายวิชาที่จะเทียบ",
-        align: "start",
-        sortable: false,
-        value: "nameSubject",
-      },
-      { text: "รายวิชาที่เทียบที่ 1", value: "nameSubjectTransfer", sortable: false },
-      // { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
-      { text: "เกรด", value: "gradeOne", sortable: false },
-      // { text: "เกรด", value: "grade", sortable: false },
+      headers: [
+        {
+          text: "รายวิชาที่จะเทียบ",
+          align: "start",
+          sortable: false,
+          value: "nameSubjecttext",
+        },
+        { text: "หน่วยกิจ", value: "nameSubjectcredit", sortable: false },
 
-      { text: "รายวิชาที่เทียบที่ 2", value: "nameSubjectTransfer2", sortable: false },
-      // { text: "หลักสูตร", value: "course", sortable: false },
-      { text: "เกรด", value: "gradeTwo", sortable: false },
-      { text: "รายวิชาที่เทียบที่ 3", value: "nameSubjectTransfer3", sortable: false },
-      // { text: "หลักสูตร", value: "course", sortable: false },
-      { text: "เกรด", value: "gradeThere", sortable: false },
-    ],
-     desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      id: 0,
-      course_code: "",
-      course_title: "",
-      course: 0,
-      credit_type: 0,
-      credit: 0,
-      description_file: "",
-      grade: "",
-      school: "",
-    },
-    defaultItem: {
-      id: 0,
-      course_code: "",
-      course_title: "",
-      course: 0,
-      credit_type: 0,
-      credit: 0,
-      description_file: "",
-      grade: "",
-      school: "",
-    },
+        {
+          text: "รายวิชาที่เทียบที่ 1",
+          value: "nameSubjectTransfertext",
+          sortable: false,
+        },
+        // { text: "หน่วยกิจ", value: "nameSubjectcredit", sortable: false },
+        { text: "เกรด", value: "gradeOne", sortable: false },
+        // { text: "เกรด", value: "grade", sortable: false },
+
+        {
+          text: "รายวิชาที่เทียบที่ 2",
+          value: "nameSubjectTransfertext2",
+          sortable: false,
+        },
+        // { text: "หลักสูตร", value: "course", sortable: false },
+        { text: "เกรด", value: "gradeTwo", sortable: false },
+        {
+          text: "รายวิชาที่เทียบที่ 3",
+          value: "nameSubjectTransfertext3",
+          sortable: false,
+        },
+        // { text: "หลักสูตร", value: "course", sortable: false },
+        { text: "เกรด", value: "gradeThere", sortable: false },
+      ],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        id: 0,
+        course_code: "",
+        course_title: "",
+        course: 0,
+        credit_type: 0,
+        credit: 0,
+        description_file: "",
+        grade: "",
+        school: "",
+      },
+      defaultItem: {
+        id: 0,
+        course_code: "",
+        course_title: "",
+        course: 0,
+        credit_type: 0,
+        credit: 0,
+        description_file: "",
+        grade: "",
+        school: "",
+      },
       approvOne: null,
       approvTwo: null,
       approvThree: null,
@@ -583,30 +594,42 @@ export default {
           data.nameSubjectTransfer == undefined
         ) {
           this.lengths[data.index].nameSubjectTransfer = "";
+          this.lengths[data.index].nameSubjectTransfertext = "";
         } else {
           this.lengths[data.index].nameSubjectTransfer =
             data.nameSubjectTransfer.id;
+          this.lengths[data.index].nameSubjectTransfertext =
+            data.nameSubjectTransfer.course_title;
         }
         if (
           data.nameSubjectTransfer2 == "" ||
           data.nameSubjectTransfer2 == undefined
         ) {
           this.lengths[data.index].nameSubjectTransfer2 = "";
+          this.lengths[data.index].nameSubjectTransfertext2 = "";
         } else {
           this.lengths[data.index].nameSubjectTransfer2 =
             data.nameSubjectTransfer2.id;
+          this.lengths[data.index].nameSubjectTransfertext2 =
+            data.nameSubjectTransfer2.course_title;
         }
         if (
           data.nameSubjectTransfer3 == "" ||
           data.nameSubjectTransfer3 == undefined
         ) {
           this.lengths[data.index].nameSubjectTransfer3 = "";
+          this.lengths[data.index].nameSubjectTransfertext3 = "";
         } else {
           this.lengths[data.index].nameSubjectTransfer3 =
             data.nameSubjectTransfer3.id;
+          this.lengths[data.index].nameSubjectTransfertext3 =
+            data.nameSubjectTransfer3.course_title;
         }
 
         this.lengths[data.index].nameSubject = data.nameSubject.id;
+        this.lengths[data.index].nameSubjecttext =
+          data.nameSubject.course_title;
+        this.lengths[data.index].nameSubjectcredit = data.nameSubject.credit;
 
         this.lengths[data.index].gradeOne = data.gradeOne;
         this.lengths[data.index].gradeTwo = data.gradeTwo;

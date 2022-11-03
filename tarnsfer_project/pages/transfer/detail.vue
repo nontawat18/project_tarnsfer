@@ -1378,50 +1378,39 @@
       </div>
     </v-row>
     <v-row>
-      <v-col class="text-center" cols="6" >
+      <v-col class="text-center" cols="6">
         <v-btn @click="makePDF">Download Transfer (ดาวน์โหลดใบเทียบโอน)</v-btn>
       </v-col>
       <v-col class="text-center" cols="6">
-         <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="#BDBDBD"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          ใบแสดงผลการศึกษา
-        </v-btn>
-      </template>
-      <v-card>
-        <v-toolbar
-          dark
-          color="#BDBDBD"
-        > <v-toolbar-title>ใบแสดงผลการศึกษา</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn
-            icon
-            dark
-            @click="dialog = false"
+        <v-row justify="center">
+          <v-dialog
+            v-model="dialog"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
           >
-            <v-icon color="red"> mdi-close</v-icon>
-          </v-btn>
-
-
-        </v-toolbar>
-        <v-col class="text-center">
-        <img height="50%" width="100%" :src="profile.file_transcrip" />
-      </v-col>
-
-      </v-card>
-    </v-dialog>
-  </v-row>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="#BDBDBD" dark v-bind="attrs" v-on="on">
+                ใบแสดงผลการศึกษา
+              </v-btn>
+            </template>
+            <v-card>
+              <v-toolbar dark color="#BDBDBD">
+                <v-toolbar-title>ใบแสดงผลการศึกษา</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon dark @click="dialog = false">
+                  <v-icon color="red"> mdi-close</v-icon>
+                </v-btn>
+              </v-toolbar>
+              <v-col class="text-center" v-if="profile.file_transcrip == null">
+                <h3>ไม่มีใบแสดงผลการเรียน</h3>
+              </v-col>
+              <v-col class="text-center" v-else>
+                <img height="50%" width="100%" :src="profile.file_transcrip" />
+              </v-col>
+            </v-card>
+          </v-dialog>
+        </v-row>
       </v-col>
     </v-row>
   </div>
