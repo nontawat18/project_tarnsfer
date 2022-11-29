@@ -737,9 +737,8 @@
                   (ในหลักสูตร)
                   <tr class="pa-0">
                     <th width="30%">รหัสวิชา</th>
-                    <th width="40%">ชื่อวิชา</th>
+                    <th width="55%">ชื่อวิชา</th>
                     <th width="15%">หน่วยกิต</th>
-                    <th width="15%">สภาพวิชา</th>
                   </tr>
                 </th>
                 <th class="pb-6 pl-0 pr-0">
@@ -779,11 +778,11 @@
               >
                 <td>{{ i + 1 }}</td>
                 <td class="pa-0">
-                  <tr class="pa-0">
-                    <td width="40%">
+                  <tr v-if="equivalent_item.course_enroll" class="pa-0">
+                    <td width="20%">
                       {{ equivalent_item.course_enroll.course_code }}
                     </td>
-                    <td width="50%">
+                    <td width="40%">
                       {{ equivalent_item.course_enroll.course_title }}
                     </td>
                     <td class="pa-0 text-center" width="10%">
@@ -818,11 +817,14 @@
                         </td>
                       </tr> -->
                     </td>
-                    <td class="pa-0 text-center" width="15%">1.3</td>
                   </tr>
                 </td>
                 <td class="pa-0">
-                  <tr class="pa-0" width="100%">
+                  <tr
+                    v-if="equivalent_item.student_course1"
+                    class="pa-0"
+                    width="100%"
+                  >
                     <td width="30%">
                       <div v-if="equivalent_item.credit1 < 2.5">
                         <p style="color: red; margin: 0px">
@@ -1227,13 +1229,11 @@
                 <td></td>
                 <td class="pa-0">
                   <tr class="pa-0" width="100%">
-                    <td width="91%" class="text-center">
+                    <td width="37%" class="text-center">
                       <strong>รวม</strong>
                     </td>
 
-                    <td width="15%" class="text-center">{{ plus }}</td>
-
-                    <td width="15%">-</td>
+                    <td width="5%" class="text-center">{{ plus }}</td>
                   </tr>
                 </td>
                 <td class="pa-0">
@@ -1528,7 +1528,9 @@ export default {
         //   credit2: listAll.gradeTwo,
         //   credit3: listAll.gradeThere,
         // });
-        find += listAll.course_enroll.credit;
+        if (listAll.course_enroll) {
+          find += parseFloat(listAll.course_enroll.credit);
+        }
       });
       return find;
     },
