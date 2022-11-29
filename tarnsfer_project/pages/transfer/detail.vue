@@ -732,7 +732,7 @@
               <tr>
                 <th class="pa-0">ที่</th>
 
-                <th class="pa-0">
+                <th class="pb-6 pl-0 pr-0">
                   <strong style="">รายวิชาที่ต้องการเทียบ</strong><br />
                   (ในหลักสูตร)
                   <tr class="pa-0">
@@ -747,8 +747,8 @@
 
                   <tr class="pa-0">
                     <th width="30%">รหัสวิชา</th>
-                    <th width="40%">ชื่อวิชา</th>
-                    <th width="15%">
+                    <th width="45%">ชื่อวิชา</th>
+                    <th width="20%">
                       หน่วยกิต
                       <!--  <tr>
                         <th>ท</th>
@@ -759,11 +759,11 @@
                     <th width="15%">เกรด</th>
                   </tr>
                 </th>
-                <th class="pa-0">
+                <th width="14%" class="pa-0">
                   ผลการพิจารณา
                   <tr>
-                    <th class="pa-0" width="58%">เทียบได้</th>
-                    <th width="55%">เทียบไม่ได้</th>
+                    <th class="pa-0" width="50%">เทียบได้</th>
+                    <th width="50%">เทียบไม่ได้</th>
                   </tr>
                 </th>
                 <!-- <th>ภาคเรียน</th> -->
@@ -1514,6 +1514,7 @@ export default {
       },
       set() {},
     },
+
     plus() {
       let find = 0;
       this.equivalentCourseByID.equivalent_item.forEach((listAll) => {
