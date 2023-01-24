@@ -175,29 +175,43 @@
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 1"
                     outlined
                     dense
-                    :items="teacher"
-                    item-text="full_name"
+                    :items="committee.name_committee1"
+                    item-text="first_name"
                     item-value="id"
                     v-model="approvOne"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee1.first_name"
+                    label="คณะกรรมการที่ 1"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 2"
                     outlined
                     dense
-                    :items="teacher"
-                    item-text="full_name"
+                    :items="committee.name_committee2"
+                    item-text="first_name"
                     item-value="id"
                     v-model="approvTwo"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee2.first_name"
+                    label="คณะกรรมการที่ 2"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 3"
                     outlined
                     dense
@@ -205,10 +219,17 @@
                     item-text="full_name"
                     item-value="id"
                     v-model="approvThree"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee3.first_name"
+                    label="คณะกรรมการที่ 3"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 4"
                     outlined
                     dense
@@ -216,10 +237,17 @@
                     item-text="full_name"
                     item-value="id"
                     v-model="approvFour"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee4.first_name"
+                    label="คณะกรรมการที่ 4"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 5"
                     outlined
                     dense
@@ -227,10 +255,17 @@
                     item-text="full_name"
                     item-value="id"
                     v-model="approvFive"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee5.first_name"
+                    label="คณะกรรมการที่ 5"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  <v-combobox
+                  <!-- <v-combobox
                     label="คณะกรรมการที่ 6"
                     outlined
                     dense
@@ -238,7 +273,14 @@
                     item-text="full_name"
                     item-value="id"
                     v-model="approvSix"
-                  ></v-combobox>
+                  ></v-combobox> -->
+                  <v-text-field
+                    v-model="committee.name_committee6.first_name"
+                    label="คณะกรรมการที่ 6"
+                    outlined
+                    disabled
+                    dense
+                  ></v-text-field>
                 </v-col>
               </v-row>
             </v-col>
@@ -249,9 +291,9 @@
           <v-btn color="grey" dark @click="e1 = 4"> Next </v-btn>
           <v-btn text @click="e1 = 2"> Back </v-btn>
         </v-stepper-content>
-        <v-stepper-content step="4" class=" pt-2">
-          <v-col class=" pt-0">
-            <div class=" pt-0">
+        <v-stepper-content step="4" class="pt-2">
+          <v-col class="pt-0">
+            <div class="pt-0">
               <v-data-table
                 :headers="headers"
                 :items="lengths"
@@ -473,7 +515,7 @@ export default {
       let find = [];
       this.lengths.forEach((listAll) => {
         find.push({
-          status: "รอตรวจสอบ",
+          status: "รอที่ปรึกษาตรวจสอบ",
           semester: 1,
           student_course1: listAll.nameSubjectTransfer,
           student_course2: listAll.nameSubjectTransfer2,
@@ -516,17 +558,29 @@ export default {
       },
       set() {},
     },
+    committee: {
+      get() {
+        if (this.$store.state.users.committee) {
+          return this.$store.state.users.committee.results[0];
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   async mounted() {
     this.getSchoolCourse();
     this.getEquivalentCourse();
     this.getTeacher();
+    this.getCommittee();
   },
   methods: {
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
       getEquivalentCourse: "transfer/getEquivalentCourse",
       getTeacher: "users/getTeacher",
+      getCommittee: "users/getCommittee",
     }),
     async uploadImage(image) {
       console.log("image", image);
@@ -805,12 +859,12 @@ export default {
         studied_from: null,
         number_of_equivalent: null,
         number_of_credit: 3,
-        name_committee1: appOne,
-        name_committee2: appTwo,
-        name_committee3: appThree,
-        name_committee4: appFour,
-        name_committee5: appFive,
-        name_committee6: appSix,
+        name_committee1: this.committee.name_committee1.id,
+        name_committee2: this.committee.name_committee2.id,
+        name_committee3: this.committee.name_committee3.id,
+        name_committee4: this.committee.name_committee4.id,
+        name_committee5: this.committee.name_committee5.id,
+        name_committee6: this.committee.name_committee6.id,
         advisor: advisorNew,
         head_department: head_department_new,
         head_educational: head_educational_new,
@@ -819,6 +873,7 @@ export default {
         head_academic_p_r: head_academic_p_r_new,
         registrar_officer: registrar_officer_new,
         created_user: this.userId,
+        status: "รอที่ปรึกษาตรวจสอบ",
       };
       console.log(data);
 

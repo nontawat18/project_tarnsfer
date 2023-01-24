@@ -31,7 +31,14 @@
           <v-list-item-title v-text="`เพิ่มรายวิชามหาวิทยาลัย`" />
         </v-list-item>
       </div>
-
+      <div>
+        <v-list-item :to="`/committee/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-account-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`คณะกรรมการ`" />
+        </v-list-item>
+      </div>
       <div>
         <v-list-item :to="`/transfer/`" class="v-list-item">
           <v-list-item-icon>

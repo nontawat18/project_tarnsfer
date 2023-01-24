@@ -8,7 +8,8 @@ export const state = () => ({
     key: '',
     teacher: [],
     profile: [],
-    profileAll: []
+    profileAll: [],
+    committee:[]
 });
 
 /* getters */
@@ -39,6 +40,9 @@ export const mutations = {
     },
     getProfileAll(state, data) {
         state.profileAll = data;
+    },
+    getCommittee(state, data) {
+        state.committee = data;
     },
 
 };
@@ -97,6 +101,20 @@ export const actions = {
                 console.log("getProfileAll", response.data);
 
                 commit("getProfileAll", response.data);
+            });
+    },
+    getCommittee({ commit, rootState }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+        let userID = rootState.users.userId
+
+        this.$fixedKeyApi
+            .get(`/committee/`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getCommittee", response.data);
+
+                commit("getCommittee", response.data);
             });
     },
 

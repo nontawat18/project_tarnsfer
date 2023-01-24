@@ -76,10 +76,9 @@
           <v-card outlined width="100%" @click="toDetail(menu.id)">
             <v-col>
               <v-chip class="" small>
-                {{ menu.registrar_officer_approve }}
+                {{ menu.status }}
               </v-chip>
             </v-col>
-
             <v-divider></v-divider>
 
             <v-col>
