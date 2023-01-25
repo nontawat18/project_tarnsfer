@@ -4,7 +4,8 @@ import axios from "axios";
 
 export const state = () => ({
     myCourse: [],
-    schoolCourse: []
+    schoolCourse: [],
+    MyCourseCheck:[]
 });
 
 /* getters */
@@ -28,6 +29,12 @@ export const mutations = {
             ...data,
         };
     },
+    getMyCourseCheck(state, data) {
+        state.MyCourseCheck = {
+            ...state.MyCourseCheck,
+            ...data,
+        };
+    },
 };
 
 /* actions */
@@ -47,6 +54,22 @@ export const actions = {
             console.log("getMyCourse", response.data);
 
             commit("getMyCourse", response.data);
+        });
+    },
+    async getMyCourseCheck({ commit, rootState }) {
+        var self = this;
+        // console.log("getProduct", productSearch);
+        let userID = rootState.users.userId
+
+        await this.$fixedKeyApi
+            // .get(`/my-course/?created_user=${userID}`)
+            .get(`/my-course/?status=ตรวจสอบแล้ว`)
+
+        .then(response => {
+            self.search = response.data;
+            console.log("getMyCourseCheck", response.data);
+
+            commit("getMyCourseCheck", response.data);
         });
     },
     async getSchoolCourse({ commit }) {

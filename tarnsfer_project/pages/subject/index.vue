@@ -12,7 +12,7 @@
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
-          <div v-if="userRole == 'admin'">
+          <!-- <div v-if="userRole == 'admin'"> -->
             <v-dialog v-model="dialog" max-width="90%">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -95,6 +95,14 @@
                           dense
                         ></v-text-field>
                       </v-col>
+                      <v-col cols="12" sm="6" md="4" v-if="formTitle == 'Edit Item'">
+                        <v-text-field
+                          v-model="editedItem.status"
+                          label="สถานะ"
+                          outlined
+                          dense
+                        ></v-text-field>
+                      </v-col>
                       <v-col cols="12" sm="12" md="12">
                         <!-- <v-text-field
                         v-model="editedItem.description_file"
@@ -129,7 +137,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </div>
+          <!-- </div> -->
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -281,7 +289,7 @@ export default {
       // { text: "เกรด", value: "grade", sortable: false },
 
       { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
-      // { text: "หลักสูตร", value: "course", sortable: false },
+      { text: "สถานะ", value: "status", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
@@ -296,6 +304,7 @@ export default {
       description_file: "",
       grade: "",
       school: "",
+      status:""
     },
     defaultItem: {
       id: 0,
@@ -307,6 +316,8 @@ export default {
       description_file: "",
       grade: "",
       school: "",
+      status:""
+
     },
   }),
 
@@ -562,6 +573,7 @@ export default {
           school: this.editedItem.school,
           course: null,
           subject: null,
+          status: this.editedItem.status,
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
           created_user: this.userId,
@@ -583,6 +595,7 @@ export default {
           school: this.editedItem.school,
           course: null,
           subject: null,
+          status: "ยังไม่ตรวจสอบ",
           course_year: this.editedItem.course_year,
           description_file: this.editedItem.description_file,
           created_user: this.userId,

@@ -9,7 +9,7 @@
         <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
         <!-- <v-divider></v-divider> -->
 
-        <v-col>
+        <!-- <v-col>
           <v-row>
             <v-col cols="6" class="pb-0 pl-7">
               <v-checkbox
@@ -18,22 +18,24 @@
                 value="ขอเทียบโอนรายวิชา"
               ></v-checkbox>
             </v-col>
-            <!-- <v-col ols="6" class="pb-0">
+            <v-col ols="6" class="pb-0">
               <v-checkbox
                 v-model="selected"
                 label="ขอเทียบเพื่อเรียนแทน"
                 value="ขอเทียบเพื่อเรียนแทน"
               ></v-checkbox>
-            </v-col> -->
+            </v-col> 
           </v-row>
-        </v-col>
-        <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">
+        </v-col> -->
+        <!-- <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">
           <TransferSubject />
         </v-col>
         <v-col v-else>
           <TransferStudyInstead />
-        </v-col>
+        </v-col> -->
       <!-- </v-card> -->
+      <TransferSubject />
+
     </v-col>
   </div>
 </template>

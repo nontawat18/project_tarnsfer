@@ -500,6 +500,122 @@
         </v-row>
         <v-row>
           <v-col cols="3">
+            <strong>ระดับการศึกษาที่สำเร็จการศึกษา</strong>
+          </v-col>
+          <v-col cols="7">
+            <span>{{ profile.level_studied }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogLevelStudied" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="ระดับการศึกษาที่สำเร็จการศึกษา"
+                          required
+                          outlined
+                          dense
+                          v-model="level_studied"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogLevelStudied = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeLevelStudied()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <strong>สถานศึกษาเดิม</strong>
+          </v-col>
+          <v-col cols="7">
+            <span>{{ profile.studied_from }} </span>
+          </v-col>
+          <v-col cols="2">
+            <v-dialog v-model="dialogStudyFrom" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="red"
+                  small
+                  fab
+                  darkdark
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon dark> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="สถานศึกษาเดิม"
+                          required
+                          outlined
+                          dense
+                          v-model="studied_from"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialogStudyFrom = false"
+                  >
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="changeStudyFrom()">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
             <strong>เบอร์โทรศัพท์</strong>
           </v-col>
           <v-col cols="7">
@@ -744,9 +860,12 @@ export default {
     dialogClassLevel: false,
     dialogFaculty: false,
     dialogStudy: false,
+    dialogStudyFrom: false,
     dialogLevelStudy: false,
     dialogTel: false,
+    dialogLevelStudied:false,
     title: "",
+    studied_from:"",
     student_id: "",
     level_of_study: "",
     faculty: "",
@@ -761,6 +880,7 @@ export default {
     oldpassword: "",
     newpassword: "",
     connewpassword: "",
+    level_studied:"",
     type: [
       {
         id: "ท",
@@ -946,6 +1066,24 @@ export default {
         }
       });
     },
+    changeStudyFrom() {
+      let data = {
+        studied_from: this.studied_from,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogStudyFrom = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
     changeStudentID() {
       let data = {
         student_id: this.student_id,
@@ -1011,6 +1149,24 @@ export default {
         if (response.status == 200) {
           console.log("changeProfile", response.data);
           this.dialogStudy = false;
+          this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
+          this.getProfile();
+        } else {
+          this.$toast.success("แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่").goAway(2000);
+        }
+      });
+    },
+    changeLevelStudied() {
+      let data = {
+        level_studied: this.level_studied,
+      };
+      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      let id = this.userId;
+
+      this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
+        if (response.status == 200) {
+          console.log("changeProfile", response.data);
+          this.dialogLevelStudied = false;
           this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
           this.getProfile();
         } else {

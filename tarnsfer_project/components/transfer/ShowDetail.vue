@@ -78,9 +78,9 @@
             </div> -->
             <div class="mt-10">เรียน คณบดีคณะวิศวกรรมศาสตร์</div>
             <div class="pl-16 ml-10 mt-10">
-              ข้าพเจ้า .........................{{
-                equivalentCourseByID.created_user.first_name
-              }}
+              ข้าพเจ้า .........................
+              {{ equivalentCourseByID.created_user.title.title }}
+              {{ equivalentCourseByID.created_user.first_name }}
               {{
                 equivalentCourseByID.created_user.last_name
               }}...........................
@@ -92,8 +92,8 @@
             </div>
             <div class="mt-4 pl-3">
               <v-row>
-                สาขาวิชา .........{{ this.profile.field_of_study }}.........
-                ชั้นปี ........{{ this.profile.class_level }}........... รอบ
+                สาขาวิชา ...........{{ this.profile.field_of_study }}............
+                ชั้นปี .........{{ this.profile.class_level }}........... รอบ
                 <p
                   style="
                     padding: 8px;
@@ -123,7 +123,7 @@
                     margin-right: 8px;
                   "
                 ></p>
-                สมทบ หมายเลขโทรศัพท์.....{{ this.profile.tel }}........
+                สมทบ หมายเลขโทรศัพท์.........{{ this.profile.tel }}............
               </v-row>
             </div>
             <div class="mt-4">
@@ -133,7 +133,7 @@
               มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
               <v-row class="pl-3 pt-7">
                 <p>
-                  ..................................................................
+                  ...................{{ this.profile.studied_from }}....................
                   ในระดับ
                 </p>
                 <p
@@ -165,8 +165,10 @@
                     margin-right: 8px;
                   "
                 ></p>
-                อื่นๆ................................โดยมีรายละเอียดดังนี้
+                จำนวน...{{equivalentCourseByID.equivalent_item.length}}...วิชา ทั้งหมด...{{ plus }}...หน่วยกิจ
               </v-row>
+              อื่นๆ................................โดยมีรายละเอียดดังนี้
+
               <!-- <v-row class="mt-1">
                 <v-col cols="2"></v-col
                 ><v-col>
@@ -1761,7 +1763,6 @@ export default {
         });
     },
     CancelTransfer() {
-      
       this.$fixedKeyApi
         .delete(`/equivalent-course/${this.equivalentCourseByID.id}/`)
         .then((response) => {

@@ -18,7 +18,7 @@
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที่ 1"
-            :items="myCourse"
+            :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
             outlined
@@ -39,7 +39,7 @@
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที่ 2"
-            :items="myCourse"
+            :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
             outlined
@@ -60,7 +60,7 @@
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที 3"
-            :items="myCourse"
+            :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
             outlined
@@ -180,6 +180,16 @@ export default {
       },
       set() {},
     },
+    MyCourseCheck: {
+      get() {
+        if (this.$store.state.subject.MyCourseCheck) {
+          return this.$store.state.subject.MyCourseCheck.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     equivalentCourse: {
       get() {
         if (this.$store.state.transfer.equivalentCourse) {
@@ -195,7 +205,7 @@ export default {
     this.getSchoolCourse();
     this.getMyCourse();
     this.getEquivalentCourse();
-
+    this.getMyCourseCheck();
     // this.getSubject(
     //    this.$store.dispatch(`subjects/getSubject`, {
     //     id: '',
@@ -216,7 +226,9 @@ export default {
     // },
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
+      getMyCourseCheck: "subject/getMyCourseCheck",
       getMyCourse: "subject/getMyCourse",
+
       getEquivalentCourse: "transfer/getEquivalentCourse",
     }),
     removeFormElement() {
