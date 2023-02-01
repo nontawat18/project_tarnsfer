@@ -12,9 +12,9 @@
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
-          <div v-if="userRole == 'admin'">
-            <v-dialog v-model="dialog" max-width="90%">
-              <template v-slot:activator="{ on, attrs }">
+          <!-- <div v-if="userRole == 'admin'"> -->
+          <v-dialog v-model="dialog" max-width="90%">
+            <!-- <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color=""
                   elevation="0"
@@ -26,16 +26,16 @@
                 >
                   <v-icon> mdi-plus</v-icon>
                 </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formTitle }}</span>
-                </v-card-title>
+              </template> -->
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
 
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <!-- <v-col cols="12" sm="6" md="4">
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <!-- <v-col cols="12" sm="6" md="4">
                           <v-text-field
                             v-model="editedItem.title"
                             label="คำนำหน้า"
@@ -43,86 +43,90 @@
                             dense
                           ></v-text-field>
                         </v-col> -->
-                     
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee1"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee2"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee3"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee4"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee5"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.name_committee6"
-                          label=""
-                          :items="teacher"
-                          item-text="full_name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
-                  <v-btn color="blue darken-1" text @click="save">
-                    บันทึก
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </div>
+
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee1"
+                        label="คณะกรรมการที่ 1"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom1(editedItem.name_committee1)"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee2"
+                        label="คณะกรรมการที่ 2"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom2(editedItem.name_committee2)"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee3"
+                        label="คณะกรรมการที่ 3"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom3(editedItem.name_committee3)"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee4"
+                        label="คณะกรรมการที่ 4"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom4(editedItem.name_committee4)"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee5"
+                        label="คณะกรรมการที่ 5"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom5(editedItem.name_committee5)"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.name_committee6"
+                        label="คณะกรรมการที่ 6"
+                        :items="teacher"
+                        item-text="full_name"
+                        item-value="id"
+                        outlined
+                        dense
+                        @change="updateCom6(editedItem.name_committee6)"
+                      ></v-select>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> บันทึก </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- </div> -->
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -150,7 +154,7 @@
         </v-col>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <div v-if="userRole == 'admin'">
+        <div>
           <v-icon small color="primary" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -158,7 +162,7 @@
             mdi-delete
           </v-icon> -->
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <v-icon
             small
             color="primary"
@@ -168,10 +172,8 @@
           >
             mdi-pencil
           </v-icon>
-          <!-- <v-icon small color="red" disabled @click="deleteItem(item)">
-            mdi-delete
-          </v-icon> -->
-        </div>
+      
+        </div> -->
       </template>
       <!-- <template v-slot:[`item.description_file`]="{ item }">
           <div>
@@ -288,34 +290,61 @@ export default {
         text: "คณะกรรมการที่ 1",
         align: "start",
         sortable: false,
-        value: "name_committee1.first_name" ,
+        value: "name_committee1.first_name",
       },
-      { text: "คณะกรรมการที่ 2", value: "name_committee2.first_name", sortable: false },
-      { text: "คณะกรรมการที่ 3", value: "name_committee3.first_name", sortable: false },
-      { text: "คณะกรรมการที่ 4", value: "name_committee4.first_name", sortable: false },
-      { text: "คณะกรรมการที่ 5", value: "name_committee5.first_name", sortable: false },
-      { text: "คณะกรรมการที่ 6", value: "name_committee6.first_name", sortable: false },
+      {
+        text: "คณะกรรมการที่ 2",
+        value: "name_committee2.first_name",
+        sortable: false,
+      },
+      {
+        text: "คณะกรรมการที่ 3",
+        value: "name_committee3.first_name",
+        sortable: false,
+      },
+      {
+        text: "คณะกรรมการที่ 4",
+        value: "name_committee4.first_name",
+        sortable: false,
+      },
+      {
+        text: "คณะกรรมการที่ 5",
+        value: "name_committee5.first_name",
+        sortable: false,
+      },
+      {
+        text: "คณะกรรมการที่ 6",
+        value: "name_committee6.first_name",
+        sortable: false,
+      },
 
       // { text: "หลักสูตร", value: "course", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
+    com1: 0,
+    com2: 0,
+    com3: 0,
+    com4: 0,
+    com5: 0,
+    com6: 0,
+
     editedItem: {
-        name_committee1: "",
-        name_committee2: "",
-        name_committee3: "",
-        name_committee4: "",
-        name_committee5: "",
-        name_committee6: "",
+      name_committee1: "",
+      name_committee2: "",
+      name_committee3: "",
+      name_committee4: "",
+      name_committee5: "",
+      name_committee6: "",
     },
     defaultItem: {
-        name_committee1: "",
-        name_committee2: "",
-        name_committee3: "",
-        name_committee4: "",
-        name_committee5: "",
-        name_committee6: "",
+      name_committee1: "",
+      name_committee2: "",
+      name_committee3: "",
+      name_committee4: "",
+      name_committee5: "",
+      name_committee6: "",
     },
   }),
 
@@ -411,6 +440,13 @@ export default {
     this.getProfileAll();
     this.getCommittee();
     this.getTeacher();
+
+    this.com1 = this.committee[0].name_committee1.id;
+    this.com2 = this.committee[0].name_committee2.id;
+    this.com3 = this.committee[0].name_committee3.id;
+    this.com4 = this.committee[0].name_committee4.id;
+    this.com5 = this.committee[0].name_committee5.id;
+    this.com6 = this.committee[0].name_committee6.id;
   },
   methods: {
     ...mapActions({
@@ -419,8 +455,25 @@ export default {
       getProfileAll: "users/getProfileAll",
       getCommittee: "users/getCommittee",
       getTeacher: "users/getTeacher",
-
     }),
+    updateCom1(id) {
+      this.com1 = id;
+    },
+    updateCom2(id) {
+      this.com2 = id;
+    },
+    updateCom3(id) {
+      this.com3 = id;
+    },
+    updateCom4(id) {
+      this.com4 = id;
+    },
+    updateCom5(id) {
+      this.com5 = id;
+    },
+    updateCom6(id) {
+      this.com6 = id;
+    },
     download(item) {
       // const url = "/users/download";
       console.log("item", item);
@@ -461,15 +514,15 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.profileAll.indexOf(item);
+      this.editedIndex = this.committee.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       this.idSubject = item.id;
-      console.log("item", this.idSubject, item);
+      console.log("item  fvgb grwgw", this.idSubject, item);
     },
 
     deleteItem(item) {
-      this.editedIndex = this.profileAll.indexOf(item);
+      this.editedIndex = this.committee.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
       this.idSubject = item.id;
@@ -513,29 +566,37 @@ export default {
       if (this.editedIndex > -1) {
         // Object.assign(this.desserts[this.editedIndex], this.editedItem);
         let id = this.idSubject;
+        // let com1 = this.editedItem.name_committee1.id;
+        // let com2 = this.editedItem.name_committee2.id;
+        // let com3 = this.editedItem.name_committee3.id;
+        // let com4 = this.editedItem.name_committee4.id;
+        // let com5 = this.editedItem.name_committee5.id;
+        // let com6 = this.editedItem.name_committee6.id;
         let data = {
-            name_committee1: this.editedItem.name_committee1,
-            name_committee2: this.editedItem.name_committee2,
-            name_committee3: this.editedItem.name_committee3,
-            name_committee4: this.editedItem.name_committee4,
-            name_committee5: this.editedItem.name_committee5,
-            name_committee6: this.editedItem.name_committee6,
+          name_committee1: this.com1,
+          name_committee2: this.com2,
+          name_committee3: this.com3,
+          name_committee4: this.com4,
+          name_committee5: this.com5,
+          name_committee6: this.com6,
         };
         this.$fixedKeyApi.patch(`/committee/${id}/`, data).then((response) => {
           if (response.status == 200) {
-            console.log("patch", response.data);
+            console.log("patch", data);
             this.close();
             this.getCommittee();
+          } else {
+            console.log("patch", data);
           }
         });
       } else {
         let data = {
-            name_committee1: this.editedItem.name_committee1,
-            name_committee2: this.editedItem.name_committee2,
-            name_committee3: this.editedItem.name_committee3,
-            name_committee4: this.editedItem.name_committee4,
-            name_committee5: this.editedItem.name_committee5,
-            name_committee6: this.editedItem.name_committee6,
+          name_committee1: this.editedItem.name_committee1,
+          name_committee2: this.editedItem.name_committee2,
+          name_committee3: this.editedItem.name_committee3,
+          name_committee4: this.editedItem.name_committee4,
+          name_committee5: this.editedItem.name_committee5,
+          name_committee6: this.editedItem.name_committee6,
         };
         this.$fixedKeyApi.post(`/committee/`, data).then((response) => {
           if (response.data) {
