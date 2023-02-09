@@ -92,8 +92,11 @@
             </div>
             <div class="mt-4 pl-3">
               <v-row>
-                สาขาวิชา ...........{{ this.profile.field_of_study }}............
-                ชั้นปี .........{{ this.profile.class_level }}........... รอบ
+                สาขาวิชา ...........{{
+                  this.profile.field_of_study
+                }}............ ชั้นปี .........{{
+                  this.profile.class_level
+                }}........... รอบ
                 <p
                   style="
                     padding: 8px;
@@ -133,8 +136,9 @@
               มีความประสงค์จะขอเทียบโอนผลการเรียนที่เคยศึกษามาแล้วจากสถานศึกษา
               <v-row class="pl-3 pt-7">
                 <p>
-                  ...................{{ this.profile.studied_from }}....................
-                  ในระดับ
+                  ...................{{
+                    this.profile.studied_from
+                  }}.................... ในระดับ
                 </p>
                 <p
                   style="
@@ -165,7 +169,8 @@
                     margin-right: 8px;
                   "
                 ></p>
-                จำนวน...{{equivalentCourseByID.equivalent_item.length}}...วิชา ทั้งหมด...{{ plus }}...หน่วยกิจ
+                จำนวน...{{ equivalentCourseByID.equivalent_item.length }}...วิชา
+                ทั้งหมด...{{ plus }}...หน่วยกิจ
               </v-row>
               อื่นๆ................................โดยมีรายละเอียดดังนี้
 
@@ -282,9 +287,11 @@
             <v-row>
               <v-col cols="6" class="pr-16">
                 ➌ความเห็นคณะกรรมการเทียบโอนฯ อนุญาต
-                เห็นควรให้สามารถเทียบโอนผลการเรียนได้
-                จำนวน..............{{equivalentCourseByID.equivalent_item.length}}............รายวิชา...................{{ plus }}...............หน่วยกิต
-                และต้องการศึกษาเพิ่มเติม
+                เห็นควรให้สามารถเทียบโอนผลการเรียนได้ จำนวน..............{{
+                  equivalentCourseByID.equivalent_item.length
+                }}............รายวิชา...................{{
+                  plus
+                }}...............หน่วยกิต และต้องการศึกษาเพิ่มเติม
                 จำนวน............................หน่วยกิต
                 ....................................ประธานกรรมการเทียบโอน
               </v-col>
@@ -1595,7 +1602,7 @@ export default {
         sortable: false,
       },
       // { text: "หน่วยกิจ", value: "nameSubjectcredit", sortable: false },
-      { text: "เกรด", value: "student_course1.credit", sortable: false },
+      { text: "เกรดรายวิชาที่ 1", value: "credit1", sortable: false },
       // { text: "เกรด", value: "grade", sortable: false },
 
       {
@@ -1604,14 +1611,22 @@ export default {
         sortable: false,
       },
       // { text: "หลักสูตร", value: "course", sortable: false },
-      { text: "เกรด", value: "student_course2.credit", sortable: false },
+      {
+        text: "เกรดรายวิชาที่ 2",
+        value: "credit2",
+        sortable: false,
+      },
       {
         text: "รายวิชาที่เทียบที่ 3",
         value: "student_course3.course_title",
         sortable: false,
       },
       // { text: "หลักสูตร", value: "course", sortable: false },
-      { text: "เกรด", value: "student_course3.credit", sortable: false },
+      {
+        text: "เกรดรายวิชาที่ 3",
+        value: "credit3",
+        sortable: false,
+      },
     ],
     desserts: [],
     editedIndex: -1,
