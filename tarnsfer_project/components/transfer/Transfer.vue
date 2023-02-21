@@ -78,7 +78,7 @@
             v-model="gradeThere"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0">
+        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0" v-if="nameSubjectTransfer != null">
           <v-combobox
             label="วิชาตามหลักสูตร"
             outlined
@@ -86,6 +86,19 @@
             item-text="course_title"
             item-value="id"
             dense
+            v-on:change="onChange()"
+            v-model="nameSubject"
+          ></v-combobox>
+        </v-col>
+        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0" v-else>
+          <v-combobox
+            label="วิชาตามหลักสูตร"
+            outlined
+            :items="schoolCourse"
+            item-text="course_title"
+            item-value="id"
+            dense
+            disabled
             v-on:change="onChange()"
             v-model="nameSubject"
           ></v-combobox>
@@ -244,12 +257,10 @@ export default {
         index: this.index,
         nameSubjectTransfer: this.nameSubjectTransfer,
         nameSubjectTransfer2: this.nameSubjectTransfer2,
-
         nameSubjectTransfer3: this.nameSubjectTransfer3,
         gradeOne: this.gradeOne,
         gradeTwo: this.gradeTwo,
         gradeThere: this.gradeThere,
-
         nameSubject: this.nameSubject,
         nameCourse: this.nameCourse,
       });
