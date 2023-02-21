@@ -19,15 +19,42 @@
             <template v-slot:[`item.nameSubject`]="{ item }">
               <p>{{ item }}</p>
             </template>
+            <template v-slot:[`item.actions`]="{ item }">
+              <div v-if="userRole == 'admin'">
+                <v-icon small color="red" @click="deleteItem(item)">
+                  mdi-delete
+                </v-icon>
+              </div>
+              <div v-else>
+                <v-icon small color="red" disabled @click="deleteItem(item)">
+                  mdi-delete
+                </v-icon>
+              </div>
+            </template>
           </v-data-table>
         </div>
+        <v-dialog v-model="dialogDelete" max-width="500px">
+            <v-card>
+              <v-card-title class="text-h5"
+                >ยืนยันต้องการลบรายวิชานี้ออกจากรายวิชาของมหาวิทยาลัย?</v-card-title
+              >
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="closeDelete">ยกเลิก</v-btn>
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  >ตกลง</v-btn
+                >
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         <v-row class="pa-4">
-          <v-col class="text-center" cols="6">
+          <v-col class="text-center" cols="12" sm="6">
             <v-btn @click="ApproveTransfer" color="green"
               >Approve Transfer</v-btn
             >
           </v-col>
-          <v-col class="text-center" cols="6">
+          <v-col class="text-center" cols="12" sm="6">
             <v-btn @click="CancelTransfer" color="red">Cancel Transfer</v-btn>
           </v-col>
         </v-row>
@@ -1524,6 +1551,7 @@ export default {
   name: "app",
   data: () => ({
     dialog: false,
+    dialogDelete: false,
     search: "",
     selected: "ขอเทียบโอนรายวิชา",
     pdfOption: {
@@ -1602,7 +1630,7 @@ export default {
         sortable: false,
       },
       // { text: "หน่วยกิจ", value: "nameSubjectcredit", sortable: false },
-      { text: "เกรดรายวิชาที่ 1", value: "credit1", sortable: false },
+      { text: "เกรดวิชาที่1", value: "credit1", sortable: false },
       // { text: "เกรด", value: "grade", sortable: false },
 
       {
@@ -1612,7 +1640,7 @@ export default {
       },
       // { text: "หลักสูตร", value: "course", sortable: false },
       {
-        text: "เกรดรายวิชาที่ 2",
+        text: "เกรดวิชาที่2",
         value: "credit2",
         sortable: false,
       },
@@ -1623,10 +1651,16 @@ export default {
       },
       // { text: "หลักสูตร", value: "course", sortable: false },
       {
-        text: "เกรดรายวิชาที่ 3",
+        text: "เกรดวิชาที่3",
         value: "credit3",
         sortable: false,
       },
+      {
+        text: "สถานะ",
+        value: "status",
+        sortable: false,
+      },
+      { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
@@ -1719,6 +1753,16 @@ export default {
       },
       set() {},
     },
+    userRole: {
+      get() {
+        if (this.$store.state.users.userLogin.user) {
+          return this.$store.state.users.userLogin.user.role.role;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     schoolCourse: {
       get() {
         if (this.$store.state.subject.schoolCourse) {
@@ -1738,6 +1782,14 @@ export default {
         }
       },
       set() {},
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
     },
   },
   mounted() {
@@ -1760,6 +1812,27 @@ export default {
       getTeacher: "users/getTeacher",
       getSchoolCourse: "subject/getSchoolCourse",
     }),
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+    deleteItemConfirm() {
+      // this.desserts.splice(this.editedIndex, 1);
+      let id = this.idSubject;
+      // Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      let data = {
+        status: "อนุมัติ",
+      };
+      this.$fixedKeyApi.patch(`/equivalent-item/${id}/`,data).then((response) => {
+        console.log("delete", response);
+        if (response.status == 200) {
+          this.closeDelete();
+          this.getEquivalentCourseByID();        }
+      });
+    },
     ApproveTransfer() {
       let data = {
         status: "ตรวจสอบสำเร็จ",
@@ -1776,6 +1849,13 @@ export default {
             this.getEquivalentCourseByID();
           }
         });
+    },
+    deleteItem(item) {
+      this.editedIndex = this.equivalentCourseByID.equivalent_item.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialogDelete = true;
+      this.idSubject = item.id;
+      console.log("item", this.idSubject, item);
     },
     CancelTransfer() {
       this.$fixedKeyApi
