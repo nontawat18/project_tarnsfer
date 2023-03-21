@@ -9,66 +9,12 @@
         class=""
       ></v-text-field>
     </v-col>
-    <!-- {{ equivalentCourse }} -->
     <v-col class="text-right" v-if="userLogin.role.role != 'teacher'">
-      <!-- <v-btn color="" elevation="0" fab small class="mb-2">
-        <v-icon> mdi-plus</v-icon>
-      </v-btn> -->
+      
       <v-btn color="" elevation="0" fab small class="mb-2" to="/transfer/new/">
         <v-icon> mdi-plus</v-icon>
       </v-btn>
-      <!-- <v-dialog v-model="dialog" width="90%">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color=""
-            elevation="0"
-            fab
-            small
-            class="mb-2"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon> mdi-plus</v-icon>
-          </v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
-          <v-divider></v-divider>
-
-          <v-col>
-            <v-row>
-              <v-col cols="6" class="pb-0 pl-7">
-                <v-checkbox
-                  v-model="selected"
-                  label="ขอเทียบโอนรายวิชา"
-                  value="ขอเทียบโอนรายวิชา"
-                ></v-checkbox>
-              </v-col>
-              <v-col ols="6" class="pb-0">
-                <v-checkbox
-                  v-model="selected"
-                  label="ขอเทียบเพื่อเรียนแทน"
-                  value="ขอเทียบเพื่อเรียนแทน"
-                ></v-checkbox>
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">
-            <TransferSubject />
-          </v-col>
-          <v-col v-else>
-            <TransferStudyInstead />
-          </v-col>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false"> บันทึก </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
+    
     </v-col>
     <div>
       <v-row>
@@ -120,15 +66,7 @@ export default {
       { text: "TF0006", value: "univercity", sortable: false },
       { text: "TF0007", value: "actions", sortable: false },
     ],
-    // teacher: [
-    //   { name: "nontawat", id: 1 },
-    //   { name: "thawat", id: 2 },
-    //   { name: "worachet", id: 3 },
-    //   { name: "piyawat", id: 4 },
-    //   { name: "chalermchai", id: 5 },
-    //   { name: "anantachai", id: 6 },
-    //   { name: "weerawat", id: 7 },
-    // ],
+    
     approvOne: "",
     approvTwo: "",
     approvThree: "",

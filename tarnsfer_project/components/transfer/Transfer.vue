@@ -2,19 +2,6 @@
   <div>
     <v-card class="ma-2 pa-3" elevation="0">
       <v-row>
-        <!-- <v-col cols="12" class="pl-2 pr-2 pt-2 pb-0">
-          <v-combobox
-            label="หลักสูตร"
-            :items="course"
-            item-text="name"
-            item-value="id"
-            outlined
-            dense
-            @v-on:change="onChange()"
-            @change="send(nameCourse)"
-            v-model="nameCourse"
-          ></v-combobox>
-        </v-col> -->
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
             label="วิชาที่จะเทียบที่ 1"
@@ -143,36 +130,7 @@ export default {
     };
   },
   computed: {
-    // subjectStorage: {
-    //   get() {
-    //     if (this.$store.state.subjects.subjectStorage) {
-    //       return this.$store.state.subjects.subjectStorage.result;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    // },
-    // subject: {
-    //   get() {
-    //     if (this.$store.state.subjects.subject) {
-    //       return this.$store.state.subjects.subject.result;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    // },
-    // course: {
-    //   get() {
-    //     if (this.$store.state.subjects.course) {
-    //       return this.$store.state.subjects.course.result;
-    //     } else {
-    //       return null;
-    //     }
-    //   },
-    //   set() {},
-    //},
+  
     schoolCourse: {
       get() {
         if (this.$store.state.subject.schoolCourse) {
@@ -219,24 +177,10 @@ export default {
     this.getMyCourse();
     this.getEquivalentCourse();
     this.getMyCourseCheck();
-    // this.getSubject(
-    //    this.$store.dispatch(`subjects/getSubject`, {
-    //     id: '',
-    //   })
-    // );
-    // this.getCourse();
+  
   },
   methods: {
-    // ...mapActions({
-    //   getSubjectInStorage: "subjects/getSubjectInStorage",
-    //   getSubject: "subjects/getSubject",
-    //   getCourse: "subjects/getCourse",
-    // }),
-    // send(id){
-    // this.$store.dispatch(`subjects/getSubject`, {
-    //     id: id.id,
-    //   });
-    // },
+    
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
       getMyCourseCheck: "subject/getMyCourseCheck",

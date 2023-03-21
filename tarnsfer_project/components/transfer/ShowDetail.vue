@@ -112,10 +112,7 @@
               เรื่อง {{ equivalentCourseByID.equivalent_type }}
             </div>
 
-            <!-- <div class="mt-10" v-if="equivalentCourseByID.dean != null">
-              เรียน คณบดี {{ equivalentCourseByID.dean.first_name }}
-              {{ equivalentCourseByID.dean.last_name }}
-            </div> -->
+            
             <div class="mt-10">เรียน คณบดีคณะวิศวกรรมศาสตร์</div>
             <div class="pl-16 ml-10 mt-10">
               ข้าพเจ้า .........................
@@ -124,7 +121,6 @@
               {{
                 equivalentCourseByID.created_user.last_name
               }}...........................
-              <!-- {{ equivalentCourseByID }} -->
 
               รหัสนักศึกษา ........................{{
                 this.profile.student_id
@@ -214,73 +210,7 @@
               </v-row>
               อื่นๆ................................โดยมีรายละเอียดดังนี้
 
-              <!-- <v-row class="mt-1">
-                <v-col cols="2"></v-col
-                ><v-col>
-                  <v-row>
-                    <p
-                      style="
-                        padding: 8px;
-                        border: 2px solid black;
-                        width: 8px;
-                        margin-left: 8px;
-                        margin-right: 8px;
-                      "
-                    ></p>
-                    พ้นสถานภาพการเป็นนักศึกษาแล้วสอบกลับเข้ามาใหม่ ภายใน 6
-                    ภาคการศึกษา
-                  </v-row>
-  
-                  <v-row>
-                    <p
-                      style="
-                        padding: 8px;
-                        border: 2px solid black;
-                        width: 8px;
-                        margin-left: 8px;
-                        margin-right: 8px;
-                      "
-                    ></p>
-                    โอนย้ายสาขาวิชา/ย้ายเวลาเรียน
-                    <p
-                      style="
-                        padding: 8px;
-                        border: 2px solid black;
-                        width: 8px;
-                        margin-left: 8px;
-                        margin-right: 8px;
-                      "
-                    ></p>
-                    โอนย้ายสถานศึกษา
-                  </v-row>
-                  <v-row>
-                    <p
-                      style="
-                        padding: 8px;
-                        border: 2px solid black;
-                        width: 8px;
-                        margin-left: 8px;
-                        margin-right: 8px;
-                      "
-                    ></p>
-                    เรียนแทนรายวิชาที่เคยเรียนมาแล้ว
-                    (เฉพาะนักศึกษาที่เคยศึกษาจากมหาวิทยาลัย / สถาบันอื่น)
-                  </v-row>
-                  <v-row>
-                    <p
-                      style="
-                        padding: 8px;
-                        border: 2px solid black;
-                        width: 8px;
-                        margin-left: 8px;
-                        margin-right: 8px;
-                      "
-                    ></p>
-                    อื่นๆ
-                    ..........................................................................................................................................
-                  </v-row>
-                </v-col>
-              </v-row> -->
+             
             </div>
             <div class="mt-6 mb-12">
               <b>หมายเหตุ : แนบเอกสาร</b>
@@ -350,414 +280,10 @@
                 ...............................................................................................................................................................................................................................................................................................คณบดี
               </v-col>
             </v-row>
-            <!-- <div class="mt-10">
-            <v-row>
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16">1. ความเห็นของอาจารย์ที่ปรึกษา</b
-                  ><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10">
-                    <v-row>
-                      <v-col class="text-center">
-                        (ลงชื่อ) {{ equivalentCourseByID.advisor.first_name }}
-                        {{
-                          equivalentCourseByID.advisor.last_name
-                        }}
-                        อาจารย์ที่ปรึกษา<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16">5. ผลการพิจารณาของคณบดี</b><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ) {{ equivalentCourseByID.dean.first_name }}
-                        {{ equivalentCourseByID.dean.last_name }} คณบดี<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16">2. ความเห็นของหัวหน้าสาขา</b><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.head_department.first_name }}
-                        {{
-                          equivalentCourseByID.head_department.last_name
-                        }}
-                        หัวหน้าสาขา<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16"
-                    >6. ความเห็นของหัวหน้างานส่งเสริมวิชาการและงานทะเบียน</b
-                  ><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.head_academic_p_r.first_name }}
-                        {{
-                          equivalentCourseByID.head_academic_p_r.last_name
-                        }}
-                        หัวหน้างานส่งเสริมฯ<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16">3. ความเห็นของหัวหน้าสำนักงานคณบดี</b
-                  ><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.head_academic_p_r.first_name }}
-                        {{
-                          equivalentCourseByID.head_academic_p_r.last_name
-                        }}
-                        หัวหน้าสำนักงานคณบดี<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card>
-                <v-card class="pa-3" outlined>
-                  <b class="pb-16">4. ความเห็นของรองคณบดีฝ่ายวิชาการและวิจัย</b
-                  ><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.deputy_dean_a_r.first_name }}
-                        {{
-                          equivalentCourseByID.deputy_dean_a_r.last_name
-                        }}
-                        รองคณบดีฝ่ายวิชาการฯ<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-              <v-col cols="6" sm="6" class="pa-0"
-                ><v-card class="pa-3" outlined>
-                  <b class="pb-16">7. สำหรับเจ้าหน้าที่แผนกงานทะเบียนและวัดผล</b
-                  ><br /><br /><br />
-                  ........................................................................................................................................................
-                  <div class="mt-10 text-center">
-                    <v-row>
-                      <v-col>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.registrar_officer.first_name }}
-                        {{
-                          equivalentCourseByID.registrar_officer.last_name
-                        }}
-                        เจ้าหน้าที่งานทะเบียน<br />
-                        วันที่............................................................................................
-                      </v-col>
-                    </v-row>
-                  </div>
-                </v-card></v-col
-              >
-            </v-row>
-          </div> -->
-            <!-- <div class="mt-10">
-              <table style="width: 100%">
-                <tr>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>1. ความเห็นของที่ปรึกษา</p>
-                    <p style="padding: 5px">
-                      ........................................................................................................................
-                    </p>
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.advisor != null"
-                    >
-                      <p>
-                        (ลงชื่อ) {{ equivalentCourseByID.advisor.first_name }}
-                        {{ equivalentCourseByID.advisor.last_name }}
-                        อาจารย์ที่ปรึกษา
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div v-else style="text-align: center">
-                      <p>
-                        (ลงชื่อ)
-                        ............................................................
-                        อาจารย์ที่ปรึกษา
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>5. ผลการพิจารณาของคณบดี</p>
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1">
-                      ไม่อนุญาติ
-                      เนื่องจาก........................................................................................</label
-                    ><br />
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1"> อนุญาติ</label>
-  
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.dean != null"
-                    >
-                      <p>
-                        (ลงชื่อ) {{ equivalentCourseByID.dean.first_name }}
-                        {{ equivalentCourseByID.dean.last_name }} คณบดี
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        (ลงชื่อ)
-                        ............................................................
-                        คณบดี
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>2. ความเห็นของที่หัวหน้าสาขาวิชา</p>
-                    <p style="padding: 5px">
-                      ........................................................................................................................
-                    </p>
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.head_department != null"
-                    >
-                      <p>
-                        (ลงชื่อ)
-                        {{ equivalentCourseByID.head_department.first_name }}
-                        {{ equivalentCourseByID.head_department.last_name }}
-                        หัวหน้าสาขาวิชา
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        (ลงชื่อ)
-                        ............................................................
-                        หัวหน้าสาขาวิชา
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>6. ความเห็นของหัวหน้างานส่งเสริมวิชาการและงานทะเบียน</p>
-                    <p style="padding: 5px">
-                      ........................................................................................................................
-                    </p>
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.head_academic_p_r != null"
-                    >
-                      <p>
-                        ลงชื่อ
-                        {{ equivalentCourseByID.head_academic_p_r.first_name }}
-                        {{ equivalentCourseByID.head_academic_p_r.last_name }}
-                        หัวหน้างานส่งเสริม
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        ลงชื่อ
-                        ............................................................
-                        หัวหน้างานส่งเสริม
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>3. ความเห็นของหัวหน้าสำนักงานคณบดี</p>
-                    <p style="padding: 5px">
-                      -เพื่อโปรดพิจารณา.............................................................................................
-                    </p>
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.head_academic_p_r != null"
-                    >
-                      <p>
-                        ลงชื่อ
-                        {{ equivalentCourseByID.head_academic_p_r.first_name }}
-                        {{ equivalentCourseByID.head_academic_p_r.last_name }}
-                        หัวหน้าสำนักงานคณบดี
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        ลงชื่อ
-                        ............................................................
-                        หัวหน้าสำนักงานคณบดี
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>7. สำหรับเจ้าหน้าที่แผนงานทะเบียนและวัดผล</p>
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1"> ดำเนินการเรียบร้อย</label><br />
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1"> รอตรวจสอบ</label><br />
-                    <input
-                      type="checkbox"
-                      id="vehicle1"
-                      name="vehicle1"
-                      value="Bike"
-                    />
-                    <label for="vehicle1">
-                      อื่นๆ...............................................................................................................</label
-                    >
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.registrar_officer != null"
-                    >
-                      <p>
-                        ลงชื่อ
-                        {{ equivalentCourseByID.registrar_officer.first_name }}
-                        {{ equivalentCourseByID.registrar_officer.last_name }}
-                        เจ้าหน้าที่งานทะเบียน
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        ลงชื่อ
-                        ............................................................
-                        เจ้าหน้าที่งานทะเบียน
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    style="
-                      width: 50%;
-                      padding-left: 10px;
-                      border: 1px solid black;
-                    "
-                  >
-                    <p>4. ความเห็นของรองคณบดีฝ่ายวิชาการและวิจัย</p>
-                    <p style="padding: 5px">
-                      -เห็นควร............................................................................................................
-                    </p>
-                    <div
-                      style="text-align: center"
-                      v-if="equivalentCourseByID.deputy_dean_a_r != null"
-                    >
-                      <p>
-                        ลงชื่อ
-                        {{ equivalentCourseByID.deputy_dean_a_r.first_name }}
-                        {{ equivalentCourseByID.deputy_dean_a_r.last_name }}
-                        รองคณบดีฝ่ายวิชาการฯ
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                    <div style="text-align: center" v-else>
-                      <p>
-                        ลงชื่อ
-                        ............................................................
-                        รองคณบดีฝ่ายวิชาการฯ
-                      </p>
-                      <p>วันที่.........................................</p>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div> -->
+          
           </v-card>
         </div>
         <div class="ma-5"></div>
-        <!-- {{ this.profile }} -->
         <div ref="contentTwo">
           <v-card width="1270" class="pa-16 pt-14">
             <v-row>
@@ -779,39 +305,7 @@
             <div class="text-center mb-16 mt-6">
               <u><h2>ราชวิชาที่ขอเทียบโอน</h2></u>
             </div>
-            <!-- <div class="pl-16 ml-10 mt-10">
-              <b>ขอเทียบโอนรายวิชา</b> ทีเคยเรียนมาแล้วจากสถานศึกษา
-              ......................................................................................................
-            </div>
-            <div class="mt-5">
-              ดังเอกสารที่แนบมาพร้อมนี้ จำนวน ........................... ราชวิชา
-              จำนวน ........................ หน่วนกิต ดังรายละเอียดด้านล่าง
-            </div>
-            <div class="pl-16 ml-10 mt-10"><b>ขอเทียบเพื่อเรียนแทน</b></div>
-            <div class="pl-16 ml-16 mt-10">
-              <b><u>รายวิชาเดิมที่ขอเทียบ</u></b>
-              รหัสวิชา............................... ชื่อวิชา
-              .......................................................................................
-            </div>
-            <div class="mt-5">
-              หลักสูตร
-              ............................................................................
-              สาขาวิชา
-              ............................................................ ปี
-              พ.ศ............................
-            </div>
-            <div class="pl-16 ml-16 mt-10">
-              <b><u>รายวิชาเดิมที่ขอเรียนแทน</u></b>
-              รหัสวิชา.................................. ชื่อวิชา
-              ..............................................................................
-            </div>
-            <div class="mt-5">
-              หลักสูตร
-              .................................................................................
-              สาขาวิชา ........................................................ ปี
-              พ.ศ............................
-            </div>
-            <div class="mt-5">ดังรายละเอียดด้านล่าง</div> -->
+     
             <table width="100%">
               <thead class="pa-0">
                 <tr>
@@ -835,11 +329,7 @@
                       <th width="45%">ชื่อวิชา</th>
                       <th width="20%">
                         หน่วยกิต
-                        <!--  <tr>
-                          <th>ท</th>
-                          <th>ป</th>
-                          <th>ร</th>
-                        </tr> -->
+                       
                       </th>
                       <th width="15%">เกรด</th>
                     </tr>
@@ -851,7 +341,6 @@
                       <th width="50%">เทียบไม่ได้</th>
                     </tr>
                   </th>
-                  <!-- <th>ภาคเรียน</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -863,13 +352,7 @@
                 >
                   <td>
                     <div v-if="equivalent_item.status != 'ไม่อนุมัติ'">
-                      <!-- <div v-if="(i - 1) == 1">
-                        {{ i + 1 }}
-                      </div>
-                      <div v-else>
-                        {{ i - 1 }}
-
-                      </div> -->
+                     
                       {{ i + 1 }}
                     </div>
                   </td>
@@ -957,76 +440,14 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course1.credit
                             }}</span>
-                            <!-- <span v-else style="color: red; margin: 0px"
-                                >0</span
-                              > -->
+                            
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
                               equivalent_item.student_course1.credit
                             }}</span>
-                            <!-- <span v-else style="margin: 0px">0</span> -->
                           </div>
-                          <!-- <td>
-                            <div v-if="equivalent_item.credit1 < 2.5">
-                              <span
-                                style="color: red; margin: 0px"
-                                v-if="
-                                  equivalent_item.student_course1.credit_type ==
-                                  'ป'
-                                "
-                                >{{
-                                  equivalent_item.student_course1.credit
-                                }}</span
-                              >
-                              <span v-else style="color: red; margin: 0px"
-                                >0</span
-                              >
-                            </div>
-                            <div v-else>
-                              <span
-                                v-if="
-                                  equivalent_item.student_course1.credit_type ==
-                                  'ป'
-                                "
-                                style="margin: 0px"
-                                >{{
-                                  equivalent_item.student_course1.credit
-                                }}</span
-                              >
-                              <span v-else style="margin: 0px">0</span>
-                            </div>
-                          </td>
-                          <td>
-                            <div v-if="equivalent_item.credit1 < 2.5">
-                              <span
-                                style="color: red; margin: 0px"
-                                v-if="
-                                  equivalent_item.student_course1.credit_type ==
-                                  'ร'
-                                "
-                                >{{
-                                  equivalent_item.student_course1.credit
-                                }}</span
-                              >
-                              <span v-else style="color: red; margin: 0px"
-                                >0</span
-                              >
-                            </div>
-                            <div v-else>
-                              <span
-                                v-if="
-                                  equivalent_item.student_course1.credit_type ==
-                                  'ร'
-                                "
-                                style="margin: 0px"
-                                >{{
-                                  equivalent_item.student_course1.credit
-                                }}</span
-                              >
-                              <span v-else style="margin: 0px">0</span>
-                            </div>
-                          </td> -->
+                       
                         </td>
                         <td width="15%">
                           <tr>
@@ -1083,15 +504,12 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course2.credit
                             }}</span>
-                            <!-- <span v-else style="color: red; margin: 0px"
-                                >0</span
-                              > -->
+                            
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
                               equivalent_item.student_course2.credit
                             }}</span>
-                            <!-- <span v-else style="margin: 0px">0</span> -->
                           </div>
                         </td>
                         <td width="15%">
@@ -1149,15 +567,12 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course3.credit
                             }}</span>
-                            <!-- <span v-else style="color: red; margin: 0px"
-                                >0</span
-                              > -->
+                        
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
                               equivalent_item.student_course3.credit
                             }}</span>
-                            <!-- <span v-else style="margin: 0px">0</span> -->
                           </div>
                         </td>
                         <td width="15%">
@@ -1349,9 +764,7 @@
                   <td>
                     <tr></tr>
                   </td>
-                  <!-- <td>
-                    <tr></tr>
-                  </td> -->
+              
                 </tr>
                 <tr>
                   <td></td>
@@ -1572,9 +985,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import pdfFonts from "~/assets/custom-fonts.js";
 import pdfMake from "pdfmake";
-// import "~/assets/Roboto-Bold-normal.js";
-// import "Sarabun-Bold-normal.js";
-// import { jsPDF } from "jspdf";
+
 
 export default {
   name: "app",
@@ -1732,17 +1143,6 @@ export default {
     plus() {
       let find = 0;
       this.equivalentCourseByID.equivalent_item.forEach((listAll) => {
-        // find.push({
-        //   status: "รอตรวจสอบ",
-        //   semester: 1,
-        //   student_course1: listAll.nameSubjectTransfer,
-        //   student_course2: listAll.nameSubjectTransfer2,
-        //   student_course3: listAll.nameSubjectTransfer3,
-        //   course_enroll: listAll.nameSubject,
-        //   credit1: listAll.gradeOne,
-        //   credit2: listAll.gradeTwo,
-        //   credit3: listAll.gradeThere,
-        // });
         if (listAll.course_enroll) {
           find += parseFloat(listAll.course_enroll.credit);
         }
@@ -1908,15 +1308,6 @@ export default {
       };
       doc.setFont("Sarabun-Bold", "normal");
 
-      // doc.html(document.querySelector("#app"), {
-      //   callback: function (pdf) {
-      //     pdf.save("ใบเทียบโอน.pdf");
-      //   },
-      // });
-      // doc.fromHTML(this.$refs.testHtml, margins.left, margins.top, {
-      //   width: margins.width,
-      // });
-      //doc.save(Date.now() + ".pdf");
 
       html2canvas(this.$refs.content, {
         width: 1590,
@@ -1940,181 +1331,7 @@ export default {
         doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
     },
-    makePDF2() {
-      pdfMake.vfs = pdfFonts.pdfMake.vfs;
-      pdfMake.fonts = {
-        // download default Roboto font from cdnjs.com
-        Roboto: {
-          normal:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf",
-          bold: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf",
-          italics:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf",
-          bolditalics:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
-        },
-        // Kanit Font
-        Sarabun: {
-          normal: "Sarabun-Medium.ttf",
-          bold: "Sarabun-Boil.ttf",
-          italics: "Sarabun-Italic.ttf",
-          bolditalics: "Sarabun-BoilItalic.ttf",
-        },
-      };
-      const docDefinition = {
-        pageOrientation: "app",
 
-        content: [pdfMake.html(document.querySelector("#app"))],
-        defaultStyle: {
-          font: "Sarabun",
-        },
-      };
-      pdfMake.createPdf(docDefinition).open({}, window);
-    },
-    printPDF() {
-      pdfMake.vfs = pdfFonts.pdfMake.vfs;
-      pdfMake.fonts = {
-        // download default Roboto font from cdnjs.com
-        Roboto: {
-          normal:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf",
-          bold: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf",
-          italics:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf",
-          bolditalics:
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
-        },
-        // Kanit Font
-        Sarabun: {
-          normal: "Sarabun-Medium.ttf",
-          bold: "Sarabun-Boil.ttf",
-          italics: "Sarabun-Italic.ttf",
-          bolditalics: "Sarabun-BoilItalic.ttf",
-        },
-      };
-      const docDefinition = {
-        content: [],
-        defaultStyle: {
-          font: "Sarabun",
-        },
-      };
-      pdfMake.createPdf(docDefinition).open({}, window);
-    },
-    generatePdf() {
-      try {
-        let pdf = new jsPDF(this.pdfOption);
-        const pdf_width = pdf.internal.pageSize.width;
-        const pdf_height = pdf.internal.pageSize.height;
-        const margin_l = this.pdfConfig.margin.l;
-        let pdf_position_y = 0;
-        pdf.setFont("Roboto-Bold", "normal"); //set font family
-        pdf.setFontSize(this.pdfConfig.typo.header); //set font size
-        pdf.setTextColor("#005D8E"); //set font color with hex color code
-        pdf_position_y += 40;
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        ); //add text to pdf
-        pdf_position_y += this.pdfConfig.typo.header;
-
-        pdf.setFontSize(this.pdfConfig.typo.large);
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        );
-        pdf_position_y += this.pdfConfig.typo.large;
-
-        pdf.setFontSize(this.pdfConfig.typo.normal);
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        );
-        pdf_position_y += this.pdfConfig.typo.normal;
-
-        pdf.setFont("Sarabun-Bold", "normal");
-        pdf.setTextColor("#025955");
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        );
-        pdf_position_y += this.pdfConfig.typo.normal;
-
-        pdf.setTextColor("red"); //set font color with name
-        pdf.setFontSize(this.pdfConfig.typo.small);
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        );
-        pdf_position_y += this.pdfConfig.typo.small;
-        //new page
-        pdf.addPage(); //new pdf page
-        pdf_position_y = 0;
-        pdf.setFont("Sarabun-Bold", "normal");
-        pdf.setFontSize(this.pdfConfig.typo.header);
-        pdf.setTextColor("#025955");
-        pdf_position_y += 40;
-        pdf.text(
-          "ทดสอบการสร้าง pdf โดย jsPdf",
-          pdf_width / 2,
-          pdf_position_y,
-          null,
-          null,
-          "center"
-        );
-        setTimeout(() => {
-          pdf.setFont("Sarabun-Bold", "normal");
-          pdf.setFontSize(this.pdfConfig.typo.small);
-          pdf.setTextColor("#000");
-          const textDate = new Date().toString();
-
-          const pages = pdf.internal.getNumberOfPages();
-          //add footer page
-          for (let j = 1; j < pages + 1; j++) {
-            pdf.setPage(j);
-            pdf.text(
-              `วันเวลา : ${textDate}`,
-              margin_l,
-              pdf_height - 15,
-              null,
-              null,
-              "left"
-            );
-            pdf.text(
-              `หน้า ${j} จาก ${pages}`,
-              pdf_width - margin_l,
-              pdf_height - 15,
-              null,
-              null,
-              "right"
-            );
-          }
-          //download pdf file
-          pdf.save(Date.now() + ".pdf");
-        }, 0);
-      } catch (err) {
-        console.log(err);
-      }
-    },
   },
 };
 </script>

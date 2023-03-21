@@ -12,21 +12,8 @@
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
-          <!-- <div v-if="userRole == 'admin'"> -->
           <v-dialog v-model="dialog" max-width="90%">
-            <!-- <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  color=""
-                  elevation="0"
-                  fab
-                  small
-                  class="mb-2"
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-icon> mdi-plus</v-icon>
-                </v-btn>
-              </template> -->
+            
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
@@ -35,15 +22,6 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <!-- <v-col cols="12" sm="6" md="4">
-                          <v-text-field
-                            v-model="editedItem.title"
-                            label="คำนำหน้า"
-                            outlined
-                            dense
-                          ></v-text-field>
-                        </v-col> -->
-
                     <v-col cols="12" sm="6" md="4">
                       <v-select
                         v-model="editedItem.name_committee1"
@@ -126,7 +104,6 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <!-- </div> -->
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -158,95 +135,16 @@
           <v-icon small color="primary" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <!-- <v-icon small color="red" @click="deleteItem(item)">
-            mdi-delete
-          </v-icon> -->
+
         </div>
-        <!-- <div v-else>
-          <v-icon
-            small
-            color="primary"
-            disabled
-            class="mr-2"
-            @click="editItem(item)"
-          >
-            mdi-pencil
-          </v-icon>
-      
-        </div> -->
+       
       </template>
-      <!-- <template v-slot:[`item.description_file`]="{ item }">
-          <div>
-            <v-btn
-              class=""
-              small
-              elevation="0"
-              @click="download(item)"
-              dark
-              color="grey"
-            >
-              <v-icon left> mdi-download</v-icon> Download
-            </v-btn>
-          </div>
-        </template> -->
+
     </v-data-table>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
-const dataURItoBlob = (dataURI) => {
-  const bytes =
-    dataURI.split(",")[0].indexOf("base64") >= 0
-      ? atob(dataURI.split(",")[1])
-      : unescape(dataURI.split(",")[1]);
-  const mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
-  const max = bytes.length;
-  const ia = new Uint8Array(max);
-  for (let i = 0; i < max; i += 1) ia[i] = bytes.charCodeAt(i);
-  return new Blob([ia], { type: mime });
-};
-
-const resizeImage = ({ file, maxSize }) => {
-  const reader = new FileReader();
-  const image = new Image();
-  const canvas = document.createElement("canvas");
-
-  const resize = () => {
-    let { width, height } = image;
-
-    if (width > height) {
-      if (width > maxSize) {
-        height *= maxSize / width;
-        width = maxSize;
-      }
-    } else if (height > maxSize) {
-      width *= maxSize / height;
-      height = maxSize;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-    canvas.getContext("2d").drawImage(image, 0, 0, width, height);
-
-    const dataUrl = canvas.toDataURL("image/jpeg");
-
-    return dataURItoBlob(dataUrl);
-  };
-
-  return new Promise((ok, no) => {
-    // if (!file.type.match(/image.*/)) {
-    //   no(new Error("Not an image"));
-    //   return;
-    // }
-
-    reader.onload = (readerEvent) => {
-      image.onload = () => ok(resize());
-      image.src = readerEvent.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  });
-};
 export default {
   data: () => ({
     dialog: false,
@@ -284,7 +182,6 @@ export default {
       },
     ],
     headers: [
-      // { text: "คำนำห้า", value: "title.title", sortable: false },
 
       {
         text: "คณะกรรมการที่ 1",
@@ -318,7 +215,6 @@ export default {
         sortable: false,
       },
 
-      // { text: "หลักสูตร", value: "course", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
@@ -475,11 +371,8 @@ export default {
       this.com6 = id;
     },
     download(item) {
-      // const url = "/users/download";
       console.log("item", item);
-      // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
-      // document.location.href = url;
-      // window.open("data:application/pdf;base64, " + this.abilityById.file);
+
 
       const linkSource = item.description_file;
       const downloadLink = document.createElement("a");
@@ -489,30 +382,6 @@ export default {
       downloadLink.download = fileName;
       downloadLink.click();
     },
-    async uploadImage(image) {
-      console.log("image", image);
-      if (image) {
-        let file = await image;
-        // if (!file.type.match(/image.*/)) {
-        //   no(new Error("Not an image"));
-        //   return;
-        // }
-
-        const reader = new FileReader();
-        // reader.onload = (e) => (this.originalImg = e.target.result);
-        reader.readAsDataURL(file);
-
-        reader.onload = function () {
-          console.log(reader.result);
-        };
-        reader.onerror = function (error) {
-          console.log("Error: ", error);
-        };
-        this.base64 = reader;
-        console.log("base64", this.base64);
-      }
-    },
-
     editItem(item) {
       this.editedIndex = this.committee.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -529,10 +398,7 @@ export default {
       console.log("item", this.idSubject, item);
     },
 
-    // deleteItemConfirm() {
-    //   this.desserts.splice(this.editedIndex, 1);
-    //   this.closeDelete();
-    // },
+
 
     close() {
       this.dialog = false;
@@ -550,9 +416,7 @@ export default {
       });
     },
     deleteItemConfirm() {
-      // this.desserts.splice(this.editedIndex, 1);
       let id = this.idSubject;
-      // Object.assign(this.desserts[this.editedIndex], this.editedItem);
 
       this.$fixedKeyApi.delete(`/users/${id}`).then((response) => {
         console.log("delete", response);
@@ -564,14 +428,8 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
         let id = this.idSubject;
-        // let com1 = this.editedItem.name_committee1.id;
-        // let com2 = this.editedItem.name_committee2.id;
-        // let com3 = this.editedItem.name_committee3.id;
-        // let com4 = this.editedItem.name_committee4.id;
-        // let com5 = this.editedItem.name_committee5.id;
-        // let com6 = this.editedItem.name_committee6.id;
+    
         let data = {
           name_committee1: this.com1,
           name_committee2: this.com2,

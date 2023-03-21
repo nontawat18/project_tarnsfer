@@ -1,21 +1,5 @@
 <template>
   <div>
-    <!-- <v-col class="text-right pa-0">
-      <v-btn color="red" elevation="0" small icon class="mb-2" outlined>
-        <v-icon> mdi-pencil</v-icon>
-      </v-btn>
-    </v-col> -->
-    <!-- <v-col class="text-center pa-0 pt-4">
-      <v-avatar size="100">
-        <img
-          alt="user"
-          src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-        />
-      </v-avatar>
-      <v-col>
-        <h3 class="">{{userLogin.first_name}} {{userLogin.last_name}}</h3>
-      </v-col>
-    </v-col> -->
     <v-card elevation="0" outlined>
       <v-col class="text-right">
         <v-dialog v-model="dialog" persistent max-width="600px">
@@ -69,77 +53,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <!-- <v-dialog v-model="dialog2" persistent max-width="600px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="grey" dark v-bind="attrs" v-on="on">
-              แก้ไขข้อมูลส่วนตัว
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5"> แก้ไขข้อมูลส่วนตัว </span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="คำนำหน้า"
-                      required
-                      outlined
-                      dense
-                      v-model="title"
-                    ></v-text-field>
-                    <v-text-field
-                      label="รหัสนักศึกษา"
-                      required
-                      outlined
-                      dense
-                      v-model="student_id"
-                    ></v-text-field>
-                    <v-text-field
-                      label="ชั้นปี"
-                      required
-                      outlined
-                      dense
-                      v-model="class_level"
-                    ></v-text-field>
-                    <v-text-field
-                      label="คณะ"
-                      required
-                      outlined
-                      dense
-                      v-model="faculty"
-                    ></v-text-field>
-                    <v-text-field
-                      label="สาขา"
-                      required
-                      outlined
-                      dense
-                      v-model="field_of_study"
-                    ></v-text-field>
-                    <v-text-field
-                      label="ระดับการศึกษา"
-                      required
-                      outlined
-                      dense
-                      v-model="level_of_study"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog2 = false">
-                Close
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="changeProfile()">
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog> -->
       </v-col>
       <v-card-text>
         <v-row>
@@ -668,22 +581,7 @@
             </v-dialog>
           </v-col>
         </v-row>
-        <!-- <v-row>
-          <v-col cols="3">
-            <strong>เบอร์โทรศัพท์</strong>
-          </v-col>
-          <v-col cols="9">
-            <span>0924434736</span>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="3">
-            <strong>รหัสนักศึกษา</strong>
-          </v-col>
-          <v-col cols="9">
-            <span>60332110079-5</span>
-          </v-col>
-        </v-row> -->
+       
         <v-row>
           <v-col cols="3">
             <strong>Role</strong>
@@ -692,64 +590,10 @@
             <span>{{ profile.role }}</span>
           </v-col>
         </v-row>
-        <!-- {{ profile }} -->
-        <!-- <v-row>
-          <v-col cols="3">
-            <strong>สาขา</strong>
-          </v-col>
-          <v-col cols="9">
-            <span>วิศวกรรมคอมพิวเตอร์</span>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="3">
-            <strong>มหาวิทยาลัย</strong>
-          </v-col>
-          <v-col cols="9">
-            <span>มหาวิทยาลัยเทคโลโนยีราชมงคลอีสาน วิทยาเขตขอนแก่น</span>
-          </v-col>
-        </v-row> -->
+        
       </v-card-text>
 
-      <!-- <v-card-actions>
-        <v-spacer></v-spacer>
-
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-bookmark</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-share-variant</v-icon>
-        </v-btn>
-      </v-card-actions> -->
-      <!-- <v-col v-if="profile.file_transcrip == null">
-        <v-file-input
-          outlined
-          dense
-          label="Uplaod Transcript"
-          v-model="image"
-          @change="uploadImage(image)"
-        ></v-file-input>
-        <v-col class="text-center">
-          <v-btn color="gray" @click="save"> บันทึก </v-btn>
-        </v-col>
-      </v-col>
-      <v-col v-else class="text-center">
-        <v-btn
-          class=""
-          small
-          elevation="0"
-          @click="download(profile.file_transcrip)"
-          dark
-          color="grey"
-        >
-          <v-icon left> mdi-download</v-icon> Download Transcript
-        </v-btn>
-      </v-col> -->
+      
       <v-row class="pb-3">
         <v-col cols="12" sm="8" class="">
           <v-file-input
@@ -764,17 +608,7 @@
         <v-col cols="12" sm="4" class="text-center">
           <v-btn color="gray" @click="save"> บันทึก </v-btn>
         </v-col>
-        <!-- <v-col cols="12" sm="4" class="text-center">
-          <v-btn
-            class=""
-            elevation="0"
-            @click="download(profile.file_transcrip)"
-            dark
-            color="grey"
-          >
-            <v-icon left> mdi-download</v-icon> Download Transcript
-          </v-btn>
-        </v-col> -->
+     
       </v-row>
     </v-card>
     <v-card
@@ -838,10 +672,7 @@ const resizeImage = ({ file, maxSize }) => {
   };
 
   return new Promise((ok, no) => {
-    // if (!file.type.match(/image.*/)) {
-    //   no(new Error("Not an image"));
-    //   return;
-    // }
+
 
     reader.onload = (readerEvent) => {
       image.onload = () => ok(resize());
@@ -988,7 +819,7 @@ export default {
         new_password1: this.newpassword,
         new_password2: this.connewpassword,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       this.$changePassword.defaults.headers.common["Authorization"] =
         "Token " + this.userToken;
       this.$changePassword
@@ -996,7 +827,6 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             console.log("userToken", response.data);
-            // this.getMyCourse();
             this.dialog = false;
             this.$toast.success("แก้ไขรหัสผ่านเรียบร้อย").goAway(2000);
           } else {
@@ -1015,13 +845,12 @@ export default {
         field_of_study: field,
         class_level: classLe,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
         if (response.status == 200) {
           console.log("changeProfile", response.data);
-          // this.getMyCourse();
           this.dialog2 = false;
           this.$toast.success("แก้ไขข้อมูลเรียบร้อย").goAway(2000);
           this.getProfile();
@@ -1034,7 +863,7 @@ export default {
       let data = {
         tel: this.tel,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1052,7 +881,7 @@ export default {
       let data = {
         title: this.title,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1070,7 +899,7 @@ export default {
       let data = {
         studied_from: this.studied_from,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1088,7 +917,7 @@ export default {
       let data = {
         student_id: this.student_id,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1106,7 +935,7 @@ export default {
       let data = {
         class_level: this.class_level,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1124,7 +953,7 @@ export default {
       let data = {
         class_level: this.class_level,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1142,7 +971,7 @@ export default {
       let data = {
         field_of_study: this.field_of_study,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1160,7 +989,7 @@ export default {
       let data = {
         level_studied: this.level_studied,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1178,7 +1007,7 @@ export default {
       let data = {
         level_of_study: this.level_of_study,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1196,7 +1025,7 @@ export default {
       let data = {
         faculty: this.faculty,
       };
-      // http://147.50.231.70:8050/api/rest-auth/password/change/
+      
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1212,11 +1041,9 @@ export default {
     },
 
     async download(item) {
-      // const url = "/users/download";
+      
       console.log("item", item);
-      // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
-      // document.location.href = url;
-      // window.open("data:application/pdf;base64, " + this.abilityById.file);
+     
 
       const linkSource = item;
       const downloadLink = document.createElement("a");
@@ -1227,7 +1054,6 @@ export default {
       await downloadLink.click();
     },
     save() {
-      // Object.assign(this.desserts[this.editedIndex], this.editedItem);
       let id = this.userId;
       let data = {
         file_transcrip: this.base64.result,
@@ -1243,13 +1069,9 @@ export default {
       console.log("image", image);
       if (image) {
         let file = await image;
-        // if (!file.type.match(/image.*/)) {
-        //   no(new Error("Not an image"));
-        //   return;
-        // }
+        
 
         const reader = new FileReader();
-        // reader.onload = (e) => (this.originalImg = e.target.result);
         reader.readAsDataURL(file);
 
         reader.onload = function () {

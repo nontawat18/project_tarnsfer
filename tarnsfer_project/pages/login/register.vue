@@ -9,7 +9,6 @@
         </v-card-title>
         <v-card-text>
           <p class="text-left">สามารถลงทะเบียนเพื่อเข้าใช้งานระบบ</p>
-          <!-- <AuthLogin /> -->
         </v-card-text>
         <v-form ref="form1" v-model="valid2" lazy-validation>
           <v-col>

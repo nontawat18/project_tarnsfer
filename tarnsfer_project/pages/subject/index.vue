@@ -12,7 +12,6 @@
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
-          <!-- <div v-if="userRole == 'admin'"> -->
             <v-dialog v-model="dialog" max-width="90%">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -137,7 +136,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          <!-- </div> -->
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -182,23 +180,8 @@
           </v-icon>
         </div>
       </template>
-      <!-- <template v-slot:[`item.description_file`]="{ item }">
-        <div>
-          <v-btn
-            class=""
-            small
-            elevation="0"
-            @click="download(item)"
-            dark
-            color="grey"
-          >
-            <v-icon left> mdi-download</v-icon> Download
-          </v-btn>
-        </div>
-      </template> -->
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
+    
+
     </v-data-table>
   </div>
 </template>
@@ -244,11 +227,6 @@ const resizeImage = ({ file, maxSize }) => {
   };
 
   return new Promise((ok, no) => {
-    // if (!file.type.match(/image.*/)) {
-    //   no(new Error("Not an image"));
-    //   return;
-    // }
-
     reader.onload = (readerEvent) => {
       image.onload = () => ok(resize());
       image.src = readerEvent.target.result;
@@ -284,9 +262,7 @@ export default {
         value: "course_code",
       },
       { text: "ชื่อวิชา", value: "course_title", sortable: false },
-      // { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
-      // { text: "เกรด", value: "grade", sortable: false },
 
       { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
       { text: "สถานะ", value: "status", sortable: false },
@@ -376,9 +352,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
+
   mounted() {
     this.getSchoolCourse();
     this.getMyCourse();
@@ -389,11 +363,8 @@ export default {
       getMyCourse: "subject/getMyCourse",
     }),
     download(item) {
-      // const url = "/users/download";
       console.log("item", item);
-      // const url = 'data:application/pdf;base64, ' + this.abilityById.file;
-      // document.location.href = url;
-      // window.open("data:application/pdf;base64, " + this.abilityById.file);
+
 
       const linkSource = item.description_file;
       const downloadLink = document.createElement("a");
@@ -407,13 +378,8 @@ export default {
       console.log("image", image);
       if (image) {
         let file = await image;
-        // if (!file.type.match(/image.*/)) {
-        //   no(new Error("Not an image"));
-        //   return;
-        // }
-
+       
         const reader = new FileReader();
-        // reader.onload = (e) => (this.originalImg = e.target.result);
         reader.readAsDataURL(file);
 
         reader.onload = function () {
@@ -426,90 +392,7 @@ export default {
         console.log("base64", this.base64);
       }
     },
-    initialize() {
-      this.desserts = [
-        {
-          course_code: "Frozen Yogurt",
-          course_title: 159,
-          course: 6.0,
-          credit_type: 24,
-          credit: 4.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Ice cream sandwich",
-          course_title: 237,
-          course: 9.0,
-          credit_type: 37,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Eclair",
-          course_title: 262,
-          course: 16.0,
-          credit_type: 23,
-          credit: 6.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Cupcake",
-          course_title: 305,
-          course: 3.7,
-          credit_type: 67,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Gingerbread",
-          course_title: 356,
-          course: 16.0,
-          credit_type: 49,
-          credit: 3.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Jelly bean",
-          course_title: 375,
-          course: 0.0,
-          credit_type: 94,
-          credit: 0.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Lollipop",
-          course_title: 392,
-          course: 0.2,
-          credit_type: 98,
-          credit: 0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Honeycomb",
-          course_title: 408,
-          course: 3.2,
-          credit_type: 87,
-          credit: 6.5,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Donut",
-          course_title: 452,
-          course: 25.0,
-          credit_type: 51,
-          credit: 4.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "KitKat",
-          course_title: 518,
-          course: 26.0,
-          credit_type: 65,
-          credit: 7,
-          description_file: "RMUTI KKC",
-        },
-      ];
-    },
+ 
 
     editItem(item) {
       this.editedIndex = this.myCourse.indexOf(item);
@@ -527,10 +410,7 @@ export default {
       console.log("item", this.idSubject, item);
     },
 
-    // deleteItemConfirm() {
-    //   this.desserts.splice(this.editedIndex, 1);
-    //   this.closeDelete();
-    // },
+
 
     close() {
       this.dialog = false;
@@ -548,9 +428,7 @@ export default {
       });
     },
     deleteItemConfirm() {
-      // this.desserts.splice(this.editedIndex, 1);
       let id = this.idSubject;
-      // Object.assign(this.desserts[this.editedIndex], this.editedItem);
 
       this.$fixedKeyApi.delete(`/my-course/${id}`).then((response) => {
         console.log("delete", response);
@@ -562,7 +440,6 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
         let id = this.idSubject;
         let data = {
           course_code: this.editedItem.course_code,

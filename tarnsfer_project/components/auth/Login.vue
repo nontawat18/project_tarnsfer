@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-form v-model="valid" @submit.prevent="userLogin">
-      <!-- <Loading ref="loading" /> -->
       <v-container>
         <v-row>
           <v-col>
@@ -69,8 +68,6 @@ export default {
     return {
       valid: false,
       login: {
-        // username: "cha",
-        // password: "12345678",
         username: "admin",
         password: "vrpadmin1234",
       },
@@ -99,38 +96,14 @@ export default {
 
   methods: {
     async userLogin() {
-      // this.$refs.loading.start();
+      ;
       this.loginFailed = false;
       this.error = false;
       try {
-        // let response = await this.$auth
-        //   .loginWith("local1", {
-        //     data: this.login,
-        //   })
-        //   .then((response) => {
-        //     if (response) {
-        //       this.$auth.setUserToken(response.data.key);
-        //       this.$store.dispatch("users/setUserId", response.data.user.id);
-        //       this.$store.dispatch(
-        //         "users/setLoggedInApiToken",
-        //         response.data.key
-        //       );
-        //       this.$store.dispatch("users/setEmployee", response.data.user);
-        //       this.$store.dispatch("users/setDashboardMenus");
-
-        //       this.$toast.success("เข้าสู่ระบบแล้ว").goAway(1500);
-        //       this.$router.push("/");
-        //       this.loginFailed = false;
-        //     } else {
-        //       this.loginFailed = true;
-        //       // this.$refs.loading.finish();
-        //     }
-        //   });
-
+     
         let data = {
           username: this.login.username,
           password: this.login.password,
-          // db: "admin",
         };
 
         this.$fixedKeyApi.post(`/rest-auth/login/`, data).then((response) => {
@@ -149,7 +122,6 @@ export default {
       } catch (err) {
         console.log(err);
         this.error = true;
-        // this.$refs.loading.finish();
       }
     },
   },

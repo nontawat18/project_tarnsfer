@@ -71,22 +71,7 @@
                           dense
                         ></v-text-field>
                       </v-col>
-                      <!-- <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.course"
-                        label="หลักสูตร"
-                        outlined
-                        dense
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.subject"
-                        label="สาขาวิชา"
-                        outlined
-                        dense
-                      ></v-text-field>
-                    </v-col> -->
+                    
                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.course_year"
@@ -96,19 +81,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
-                        <!-- <v-text-field
-                        v-model="editedItem.description_file"
-                        label="คำอธิบายรายวิชา"
-                        outlined
-                        dense
-                      ></v-text-field> -->
-                        <!-- <v-file-input
-                        outlined
-                        dense
-                        label="คำอธิบายรายวิชา"
-                        v-model="editedItem.description_file"
-                        @change="uploadImage(image)"
-                      ></v-file-input> -->
+                        
 
                         <v-textarea
                           outlined
@@ -176,81 +149,12 @@
           </v-icon>
         </div>
       </template>
-      <!-- <template v-slot:[`item.description_file`]="{ item }">
-        <div>
-          <v-btn
-            class=""
-            small
-            elevation="0"
-            @click="download(item)"
-            dark
-            color="grey"
-          >
-            <v-icon left> mdi-download</v-icon> Download
-          </v-btn>
-        </div>
-      </template> -->
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
     </v-data-table>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
-const dataURItoBlob = (dataURI) => {
-  const bytes =
-    dataURI.split(",")[0].indexOf("base64") >= 0
-      ? atob(dataURI.split(",")[1])
-      : unescape(dataURI.split(",")[1]);
-  const mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
-  const max = bytes.length;
-  const ia = new Uint8Array(max);
-  for (let i = 0; i < max; i += 1) ia[i] = bytes.charCodeAt(i);
-  return new Blob([ia], { type: mime });
-};
 
-const resizeImage = ({ file, maxSize }) => {
-  const reader = new FileReader();
-  const image = new Image();
-  const canvas = document.createElement("canvas");
-
-  const resize = () => {
-    let { width, height } = image;
-
-    if (width > height) {
-      if (width > maxSize) {
-        height *= maxSize / width;
-        width = maxSize;
-      }
-    } else if (height > maxSize) {
-      width *= maxSize / height;
-      height = maxSize;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-    canvas.getContext("2d").drawImage(image, 0, 0, width, height);
-
-    const dataUrl = canvas.toDataURL("image/jpeg");
-
-    return dataURItoBlob(dataUrl);
-  };
-
-  return new Promise((ok, no) => {
-    // if (!file.type.match(/image.*/)) {
-    //   no(new Error("Not an image"));
-    //   return;
-    // }
-
-    reader.onload = (readerEvent) => {
-      image.onload = () => ok(resize());
-      image.src = readerEvent.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  });
-};
 export default {
   data: () => ({
     dialog: false,
@@ -278,10 +182,8 @@ export default {
         value: "course_code",
       },
       { text: "ชื่อวิชา", value: "course_title", sortable: false },
-      // { text: "คำอธิบายรายวิชา", value: "description_file", sortable: false },
       { text: "หน่วยกิจ", value: "credit", sortable: false },
       { text: "ประเภทรายวิชา", value: "credit_type", sortable: false },
-      // { text: "หลักสูตร", value: "course", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
     ],
     desserts: [],
@@ -341,9 +243,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
+
   mounted() {
     this.getSchoolCourse();
   },
@@ -366,113 +266,7 @@ export default {
       downloadLink.download = fileName;
       downloadLink.click();
     },
-    async uploadImage(image) {
-      console.log("image", image);
-      if (image) {
-        let file = await image;
-        // if (!file.type.match(/image.*/)) {
-        //   no(new Error("Not an image"));
-        //   return;
-        // }
 
-        const reader = new FileReader();
-        // reader.onload = (e) => (this.originalImg = e.target.result);
-        reader.readAsDataURL(file);
-
-        reader.onload = function () {
-          console.log(reader.result);
-        };
-        reader.onerror = function (error) {
-          console.log("Error: ", error);
-        };
-        this.base64 = reader;
-        console.log("base64", this.base64);
-      }
-    },
-    initialize() {
-      this.desserts = [
-        {
-          course_code: "Frozen Yogurt",
-          course_title: 159,
-          course: 6.0,
-          credit_type: 24,
-          credit: 4.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Ice cream sandwich",
-          course_title: 237,
-          course: 9.0,
-          credit_type: 37,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Eclair",
-          course_title: 262,
-          course: 16.0,
-          credit_type: 23,
-          credit: 6.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Cupcake",
-          course_title: 305,
-          course: 3.7,
-          credit_type: 67,
-          credit: 4.3,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Gingerbread",
-          course_title: 356,
-          course: 16.0,
-          credit_type: 49,
-          credit: 3.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Jelly bean",
-          course_title: 375,
-          course: 0.0,
-          credit_type: 94,
-          credit: 0.0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Lollipop",
-          course_title: 392,
-          course: 0.2,
-          credit_type: 98,
-          credit: 0,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Honeycomb",
-          course_title: 408,
-          course: 3.2,
-          credit_type: 87,
-          credit: 6.5,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "Donut",
-          course_title: 452,
-          course: 25.0,
-          credit_type: 51,
-          credit: 4.9,
-          description_file: "RMUTI KKC",
-        },
-        {
-          course_code: "KitKat",
-          course_title: 518,
-          course: 26.0,
-          credit_type: 65,
-          credit: 7,
-          description_file: "RMUTI KKC",
-        },
-      ];
-    },
 
     editItem(item) {
       this.editedIndex = this.schoolCourse.indexOf(item);

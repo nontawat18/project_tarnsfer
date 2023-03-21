@@ -1,39 +1,9 @@
 <template>
   <div>
     <v-col class="">
-      <!-- <v-btn color="" elevation="0" fab small class="mb-2">
-        <v-icon> mdi-plus</v-icon>
-      </v-btn> -->
-
-      <!-- <v-card> -->
+ 
         <v-card-title class="text-h5"> สร้างการเทียบโอน </v-card-title>
-        <!-- <v-divider></v-divider> -->
 
-        <!-- <v-col>
-          <v-row>
-            <v-col cols="6" class="pb-0 pl-7">
-              <v-checkbox
-                v-model="selected"
-                label="ขอเทียบโอนรายวิชา"
-                value="ขอเทียบโอนรายวิชา"
-              ></v-checkbox>
-            </v-col>
-            <v-col ols="6" class="pb-0">
-              <v-checkbox
-                v-model="selected"
-                label="ขอเทียบเพื่อเรียนแทน"
-                value="ขอเทียบเพื่อเรียนแทน"
-              ></v-checkbox>
-            </v-col> 
-          </v-row>
-        </v-col> -->
-        <!-- <v-col v-if="this.selected == 'ขอเทียบโอนรายวิชา'">
-          <TransferSubject />
-        </v-col>
-        <v-col v-else>
-          <TransferStudyInstead />
-        </v-col> -->
-      <!-- </v-card> -->
       <TransferSubject />
 
     </v-col>
@@ -61,15 +31,7 @@ export default {
       { text: "TF0006", value: "univercity", sortable: false },
       { text: "TF0007", value: "actions", sortable: false },
     ],
-    // teacher: [
-    //   { name: "nontawat", id: 1 },
-    //   { name: "thawat", id: 2 },
-    //   { name: "worachet", id: 3 },
-    //   { name: "piyawat", id: 4 },
-    //   { name: "chalermchai", id: 5 },
-    //   { name: "anantachai", id: 6 },
-    //   { name: "weerawat", id: 7 },
-    // ],
+   
     approvOne: "",
     approvTwo: "",
     approvThree: "",

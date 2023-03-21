@@ -116,7 +116,6 @@
           </v-col>
           <v-btn color="grey" dark @click="e1 = 2"> Next </v-btn>
 
-          <!-- <v-btn text> Cancel </v-btn> -->
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -209,9 +208,7 @@
         </v-stepper-content>
         <v-stepper-content step="3">
           <v-col>
-            <!-- <v-col class="pb-8">
-        <strong>ผลการพิจารณาของคณะกรรมการเทียบโอน</strong>
-      </v-col> -->
+    
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">

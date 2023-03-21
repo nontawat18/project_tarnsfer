@@ -113,9 +113,7 @@
           mdi-delete
         </v-icon>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
+
     </v-data-table>
   </div>
 </template>
@@ -186,9 +184,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
+
   mounted() {
     this.getMyCourse();
   },
@@ -196,90 +192,7 @@ export default {
     ...mapActions({
       getMyCourse: "subject/getMyCourse",
     }),
-    initialize() {
-      this.desserts = [
-        {
-          serail_subject: "Frozen Yogurt",
-          subject_name: 159,
-          description: 6.0,
-          grade: 24,
-          credit: 4.0,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Ice cream sandwich",
-          subject_name: 237,
-          description: 9.0,
-          grade: 37,
-          credit: 4.3,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Eclair",
-          subject_name: 262,
-          description: 16.0,
-          grade: 23,
-          credit: 6.0,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Cupcake",
-          subject_name: 305,
-          description: 3.7,
-          grade: 67,
-          credit: 4.3,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Gingerbread",
-          subject_name: 356,
-          description: 16.0,
-          grade: 49,
-          credit: 3.9,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Jelly bean",
-          subject_name: 375,
-          description: 0.0,
-          grade: 94,
-          credit: 0.0,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Lollipop",
-          subject_name: 392,
-          description: 0.2,
-          grade: 98,
-          credit: 0,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Honeycomb",
-          subject_name: 408,
-          description: 3.2,
-          grade: 87,
-          credit: 6.5,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "Donut",
-          subject_name: 452,
-          description: 25.0,
-          grade: 51,
-          credit: 4.9,
-          univercity: "RMUTI KKC",
-        },
-        {
-          serail_subject: "KitKat",
-          subject_name: 518,
-          description: 26.0,
-          grade: 65,
-          credit: 7,
-          univercity: "RMUTI KKC",
-        },
-      ];
-    },
+
 
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
