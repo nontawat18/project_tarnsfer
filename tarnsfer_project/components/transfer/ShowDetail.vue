@@ -112,7 +112,6 @@
               เรื่อง {{ equivalentCourseByID.equivalent_type }}
             </div>
 
-            
             <div class="mt-10">เรียน คณบดีคณะวิศวกรรมศาสตร์</div>
             <div class="pl-16 ml-10 mt-10">
               ข้าพเจ้า .........................
@@ -120,9 +119,8 @@
               {{ equivalentCourseByID.created_user.first_name }}
               {{
                 equivalentCourseByID.created_user.last_name
-              }}...........................
-
-              รหัสนักศึกษา ........................{{
+              }}........................... รหัสนักศึกษา
+              ........................{{
                 this.profile.student_id
               }}............................
             </div>
@@ -209,9 +207,6 @@
                 ทั้งหมด...{{ plus }}...หน่วยกิจ -->
                 อื่นๆ................................โดยมีรายละเอียดดังนี้
               </v-row>
-             
-
-             
             </div>
             <div class="mt-6 mb-12">
               <b>หมายเหตุ : แนบเอกสาร</b>
@@ -239,9 +234,8 @@
               <v-col cols="3"> </v-col>
               <v-col cols="7" class="text-right"
                 >(...................
-                {{ equivalentCourseByID.created_user.title.title }} {{
-                  equivalentCourseByID.created_user.first_name
-                }}
+                {{ equivalentCourseByID.created_user.title.title }}
+                {{ equivalentCourseByID.created_user.first_name }}
                 {{
                   equivalentCourseByID.created_user.last_name
                 }}....................)</v-col
@@ -282,7 +276,6 @@
                 ...............................................................................................................................................................................................................................................................................................คณบดี
               </v-col>
             </v-row>
-          
           </v-card>
         </div>
         <div class="ma-5"></div>
@@ -307,7 +300,7 @@
             <div class="text-center mb-16 mt-6">
               <u><h2>ราชวิชาที่ขอเทียบโอน</h2></u>
             </div>
-     
+
             <table width="100%">
               <thead class="pa-0">
                 <tr>
@@ -329,10 +322,7 @@
                     <tr class="pa-0">
                       <th width="30%">รหัสวิชา</th>
                       <th width="45%">ชื่อวิชา</th>
-                      <th width="20%">
-                        หน่วยกิต
-                       
-                      </th>
+                      <th width="20%">หน่วยกิต</th>
                       <th width="15%">เกรด</th>
                     </tr>
                   </th>
@@ -354,7 +344,6 @@
                 >
                   <td>
                     <div v-if="equivalent_item.status != 'ไม่อนุมัติ'">
-                     
                       {{ i + 1 }}
                     </div>
                   </td>
@@ -442,14 +431,12 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course1.credit
                             }}</span>
-                            
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
                               equivalent_item.student_course1.credit
                             }}</span>
                           </div>
-                       
                         </td>
                         <td width="15%">
                           <tr>
@@ -506,7 +493,6 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course2.credit
                             }}</span>
-                            
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
@@ -569,7 +555,6 @@
                             <span style="color: red; margin: 0px">{{
                               equivalent_item.student_course3.credit
                             }}</span>
-                        
                           </div>
                           <div v-else class="text-center">
                             <span style="margin: 0px">{{
@@ -763,11 +748,14 @@
                       </tr>
                     </div>
                   </td>
-                  <td>
-                    <tr></tr>
+                  <td class="pa-0">
+                    <tr>
+                      <td class="pa-0" width="50%"><p style="color:white;">xxxxxxxxxxx</p></td>
+                      <td class="pa-0" width="50%"><p style="color:white;">xxxxxxxxxxx</p></td>
+                    </tr>
                   </td>
-              
                 </tr>
+
                 <tr>
                   <td></td>
                   <td class="pa-0">
@@ -917,7 +905,7 @@
                       (......{{
                         equivalentCourseByID.name_committee6.first_name
                       }}
-                      {{ equivalentCourseByID.name_committee6.last_name }}
+                      {{ equivalentCourseByID.name_committee6 }}
                       ......)
                     </v-col>
                     <v-col class="pa-0 text-center" v-else>
@@ -987,7 +975,6 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import pdfFonts from "~/assets/custom-fonts.js";
 import pdfMake from "pdfmake";
-
 
 export default {
   name: "app",
@@ -1310,7 +1297,6 @@ export default {
       };
       doc.setFont("Sarabun-Bold", "normal");
 
-
       html2canvas(this.$refs.content, {
         width: 1590,
         height: 2800,
@@ -1333,7 +1319,6 @@ export default {
         doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
     },
-
   },
 };
 </script>
