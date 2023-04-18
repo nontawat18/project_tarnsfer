@@ -95,7 +95,6 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-  // layout: "empty",
 
   data() {
     return {

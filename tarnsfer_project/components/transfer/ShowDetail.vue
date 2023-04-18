@@ -205,10 +205,11 @@
                     margin-right: 8px;
                   "
                 ></p>
-                จำนวน...{{ equivalentCourseByID.equivalent_item.length }}...วิชา
-                ทั้งหมด...{{ plus }}...หน่วยกิจ
+                <!-- จำนวน...{{ equivalentCourseByID.equivalent_item.length }}...วิชา
+                ทั้งหมด...{{ plus }}...หน่วยกิจ -->
+                อื่นๆ................................โดยมีรายละเอียดดังนี้
               </v-row>
-              อื่นๆ................................โดยมีรายละเอียดดังนี้
+             
 
              
             </div>
@@ -237,7 +238,8 @@
             <v-row class="mb-8">
               <v-col cols="3"> </v-col>
               <v-col cols="7" class="text-right"
-                >(...................{{
+                >(...................
+                {{ equivalentCourseByID.created_user.title.title }} {{
                   equivalentCourseByID.created_user.first_name
                 }}
                 {{
@@ -409,7 +411,7 @@
                         width="100%"
                       >
                         <td width="30%">
-                          <div v-if="equivalent_item.credit1 < 2.5">
+                          <div v-if="equivalent_item.credit1 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course1.course_code }}
                             </p>
@@ -421,7 +423,7 @@
                           </div>
                         </td>
                         <td width="45%">
-                          <div v-if="equivalent_item.credit1 < 2.5">
+                          <div v-if="equivalent_item.credit1 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course1.course_title }}
                             </p>
@@ -434,7 +436,7 @@
                         </td>
                         <td class="pa-0" width="25%">
                           <div
-                            v-if="equivalent_item.credit1 < 2.5"
+                            v-if="equivalent_item.credit1 < 2.0"
                             class="text-center"
                           >
                             <span style="color: red; margin: 0px">{{
@@ -452,7 +454,7 @@
                         <td width="15%">
                           <tr>
                             <div
-                              v-if="equivalent_item.credit1 < 2.5"
+                              v-if="equivalent_item.credit1 < 2.0"
                               class="text-center"
                             >
                               <p style="color: red; margin: 0px">
@@ -473,7 +475,7 @@
                         width="100%"
                       >
                         <td width="30%">
-                          <div v-if="equivalent_item.credit2 < 2.5">
+                          <div v-if="equivalent_item.credit2 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course2.course_code }}
                             </p>
@@ -485,7 +487,7 @@
                           </div>
                         </td>
                         <td width="40%">
-                          <div v-if="equivalent_item.credit2 < 2.5">
+                          <div v-if="equivalent_item.credit2 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course2.course_title }}
                             </p>
@@ -498,7 +500,7 @@
                         </td>
                         <td class="pa-0" width="15%">
                           <div
-                            v-if="equivalent_item.credit2 < 2.5"
+                            v-if="equivalent_item.credit2 < 2.0"
                             class="text-center"
                           >
                             <span style="color: red; margin: 0px">{{
@@ -515,7 +517,7 @@
                         <td width="15%">
                           <tr>
                             <div
-                              v-if="equivalent_item.credit2 < 2.5"
+                              v-if="equivalent_item.credit2 < 2.0"
                               class="text-center"
                             >
                               <p style="color: red; margin: 0px">
@@ -536,7 +538,7 @@
                         width="100%"
                       >
                         <td width="30%">
-                          <div v-if="equivalent_item.credit3 < 2.5">
+                          <div v-if="equivalent_item.credit3 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course3.course_code }}
                             </p>
@@ -548,7 +550,7 @@
                           </div>
                         </td>
                         <td width="40%">
-                          <div v-if="equivalent_item.credit3 < 2.5">
+                          <div v-if="equivalent_item.credit3 < 2.0">
                             <p style="color: red; margin: 0px">
                               {{ equivalent_item.student_course3.course_title }}
                             </p>
@@ -561,7 +563,7 @@
                         </td>
                         <td class="pa-0" width="25%">
                           <div
-                            v-if="equivalent_item.credit3 < 2.5"
+                            v-if="equivalent_item.credit3 < 2.0"
                             class="text-center"
                           >
                             <span style="color: red; margin: 0px">{{
@@ -578,7 +580,7 @@
                         <td width="15%">
                           <tr>
                             <div
-                              v-if="equivalent_item.credit3 < 2.5"
+                              v-if="equivalent_item.credit3 < 2.0"
                               class="text-center"
                             >
                               <p style="color: red; margin: 0px">
@@ -1311,11 +1313,11 @@ export default {
 
       html2canvas(this.$refs.content, {
         width: 1590,
-        height: 1800,
+        height: 2800,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
-        doc.addImage(img, "png", 20, 2, 940, 1300);
+        doc.addImage(img, "png", 20, 2, 960, 1800);
 
         doc.save("ใบคำขอเทียบโอน_1_" + Date.now() + ".pdf");
       });
