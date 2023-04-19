@@ -62,12 +62,12 @@
           </v-card>
         </v-dialog>
         <v-row class="pa-4">
-          <v-col class="text-center" cols="12" sm="6">
+          <v-col class="text-center" cols="12" sm="6" v-if="userRole == 'teacher'">
             <v-btn @click="ApproveTransfer" color="green"
               >Approve Transfer</v-btn
             >
           </v-col>
-          <v-col class="text-center" cols="12" sm="6">
+          <v-col class="text-center" cols="12" sm="6" v-if="userRole == 'teacher'">
             <v-btn @click="CancelTransfer" color="red">Cancel Transfer</v-btn>
           </v-col>
         </v-row>
