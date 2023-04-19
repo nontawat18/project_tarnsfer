@@ -936,13 +936,12 @@
         </div>
       </v-row>
       <v-row>
-        <v-col class="text-center" cols="6">
+        <v-col class="text-center" cols="12" sm="6" >
           <v-btn @click="makePDF"
             >Download Transfer (ดาวน์โหลดใบเทียบโอน)</v-btn
           >
         </v-col>
-        <v-col class="text-center" cols="6">
-          <v-row justify="center">
+        <v-col class="text-center" cols="12" sm="3">
             <v-dialog
               v-model="dialog"
               fullscreen
@@ -977,7 +976,30 @@
                 </v-col>
               </v-card>
             </v-dialog>
-          </v-row>
+        </v-col>
+        <v-col class="text-center" cols="12" sm="3" v-if="userRole == 'admin'">
+         
+        <v-dialog v-model="dialogDelete" max-width="500px">
+          <template v-slot:activator="{ on, attrs }">
+                <v-btn color="red" dark v-bind="attrs" v-on="on">
+                  ลบใบเทียบโอน
+                </v-btn>
+              </template>
+            <v-card>
+              <v-card-title class="text-h5"
+                >ยืนยันต้องการลบใบเทียบโอนนี้?</v-card-title
+              >
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="closeDelete">ยกเลิก</v-btn>
+                <v-btn color="blue darken-1" text @click="CancelTransfer"
+                  >ตกลง</v-btn
+                >
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+            
         </v-col>
       </v-row>
     </div>

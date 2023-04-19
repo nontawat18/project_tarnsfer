@@ -13,7 +13,6 @@
 
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="90%">
-            
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
@@ -135,11 +134,8 @@
           <v-icon small color="primary" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-
         </div>
-       
       </template>
-
     </v-data-table>
   </div>
 </template>
@@ -182,7 +178,6 @@ export default {
       },
     ],
     headers: [
-
       {
         text: "คณะกรรมการที่ 1",
         align: "start",
@@ -337,12 +332,44 @@ export default {
     this.getCommittee();
     this.getTeacher();
 
-    this.com1 = this.committee[0].name_committee1.id;
-    this.com2 = this.committee[0].name_committee2.id;
-    this.com3 = this.committee[0].name_committee3.id;
-    this.com4 = this.committee[0].name_committee4.id;
-    this.com5 = this.committee[0].name_committee5.id;
-    this.com6 = this.committee[0].name_committee6.id;
+    // this.com1 = this.committee[0].name_committee1.id;
+    // this.com2 = this.committee[0].name_committee2.id;
+    // this.com3 = this.committee[0].name_committee3.id;
+    // this.com4 = this.committee[0].name_committee4.id;
+    // this.com5 = this.committee[0].name_committee5.id;
+    // this.com6 = this.committee[0].name_committee6.id;
+
+    if (this.committee[0].name_committee1 == null) {
+      this.com1 = 0;
+    } else {
+      this.com1 = this.committee[0].name_committee1.id;
+    }
+    if (this.committee[0].name_committee2 == null) {
+      this.com2 = 0;
+    } else {
+      this.com2 = this.committee[0].name_committee2.id;
+     
+    }
+    if (this.committee[0].name_committee3 == null) {
+      this.com3 = 0;
+    } else {
+      this.com3 = this.committee[0].name_committee3.id;
+    }
+    if (this.committee[0].name_committee4 == null) {
+      this.com4 = 0;
+    } else {
+      this.com4 = this.committee[0].name_committee4.id;
+    }
+    if (this.committee[0].name_committee5 == null) {
+      this.com5 = 0;
+    } else {
+      this.com5 = this.committee[0].name_committee5.id;
+    }
+    if (this.committee[0].name_committee6.id == null) {
+      this.com6 = 0;
+    } else {
+      this.com6 = this.committee[0].name_committee6.id;
+    }
   },
   methods: {
     ...mapActions({
@@ -373,7 +400,6 @@ export default {
     download(item) {
       console.log("item", item);
 
-
       const linkSource = item.description_file;
       const downloadLink = document.createElement("a");
       const fileName = "คำอธิบายรายวิชา.pdf";
@@ -397,8 +423,6 @@ export default {
       this.idSubject = item.id;
       console.log("item", this.idSubject, item);
     },
-
-
 
     close() {
       this.dialog = false;
@@ -429,7 +453,7 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         let id = this.idSubject;
-    
+
         let data = {
           name_committee1: this.com1,
           name_committee2: this.com2,
