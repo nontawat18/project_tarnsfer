@@ -750,8 +750,19 @@
                   </td>
                   <td class="pa-0">
                     <tr>
-                      <td class="pa-0" width="50%"><p style="color:white;">xxxxxxxxxxx</p></td>
-                      <td class="pa-0" width="50%"><p style="color:white;">xxxxxxxxxxx</p></td>
+                      <td class="pa-0" width="50%">
+                        <p
+                          style="
+                            padding: 10px;
+                            border: 1px solid white;
+                            width: 80px;
+                            margin: 0px;
+                          "
+                        ></p>
+                      </td>
+                      <td class="pa-0" width="50%">
+                        <p style="color: white"></p>
+                      </td>
                     </tr>
                   </td>
                 </tr>
@@ -798,8 +809,9 @@
                       v-if="equivalentCourseByID.name_committee1 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee1.first_name
+                        equivalentCourseByID.name_committee1.title.title
                       }}
+                      {{ equivalentCourseByID.name_committee1.first_name }}
                       {{
                         equivalentCourseByID.name_committee1.last_name
                       }}......)
@@ -820,8 +832,9 @@
                       v-if="equivalentCourseByID.name_committee2 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee2.first_name
+                        equivalentCourseByID.name_committee2.title.title
                       }}
+                      {{ equivalentCourseByID.name_committee2.first_name }}
                       {{
                         equivalentCourseByID.name_committee2.last_name
                       }}......)
@@ -841,8 +854,9 @@
                       v-if="equivalentCourseByID.name_committee3 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee3.first_name
+                        equivalentCourseByID.name_committee3.title.title
                       }}
+                      {{ equivalentCourseByID.name_committee3.first_name }}
                       {{ equivalentCourseByID.name_committee3.last_name }}
                       ......)
                     </v-col>
@@ -861,8 +875,9 @@
                       v-if="equivalentCourseByID.name_committee4 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee4.first_name
+                        equivalentCourseByID.name_committee4.title.title
                       }}
+                      {{ equivalentCourseByID.name_committee4.first_name }}
                       {{
                         equivalentCourseByID.name_committee4.last_name
                       }}......)
@@ -882,8 +897,9 @@
                       v-if="equivalentCourseByID.name_committee5 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee5.first_name
+                        equivalentCourseByID.name_committee5.title.title
                       }}
+                      {{ equivalentCourseByID.name_committee5.first_name }}
                       {{
                         equivalentCourseByID.name_committee5.last_name
                       }}......)
@@ -903,9 +919,10 @@
                       v-if="equivalentCourseByID.name_committee6 != null"
                     >
                       (......{{
-                        equivalentCourseByID.name_committee6.first_name
+                        equivalentCourseByID.name_committee6.title.title
                       }}
-                      {{ equivalentCourseByID.name_committee6 }}
+                      {{ equivalentCourseByID.name_committee6.first_name }}
+                      {{ equivalentCourseByID.name_committee6.last_name }}
                       ......)
                     </v-col>
                     <v-col class="pa-0 text-center" v-else>
@@ -1202,7 +1219,7 @@ export default {
     this.getEquivalentCourseByID();
     this.getTeacher();
     this.getSchoolCourse();
-
+    console.log(this.equivalentCourseByID);
     this.$fixedKeyApi
       .get(`/profile/${this.equivalentCourseByID.created_user.id}/`)
       .then((response) => {
