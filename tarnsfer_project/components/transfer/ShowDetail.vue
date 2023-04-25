@@ -20,7 +20,7 @@
               <p>{{ item }}</p>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
-              <div v-if="userRole == 'admin'">
+              <div v-if="userRole == 'teacher'">
                 <v-icon small color="primary" @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
@@ -28,7 +28,7 @@
               <div v-else>
                 <v-icon
                   small
-                  color="primary"
+                  color="grey"
                   disabled
                   @click="deleteItem(item)"
                 >
@@ -62,12 +62,22 @@
           </v-card>
         </v-dialog>
         <v-row class="pa-4">
-          <v-col class="text-center" cols="12" sm="6" v-if="userRole == 'teacher'">
+          <v-col
+            class="text-center"
+            cols="12"
+            sm="6"
+            v-if="userRole == 'teacher'"
+          >
             <v-btn @click="ApproveTransfer" color="green"
               >Approve Transfer</v-btn
             >
           </v-col>
-          <v-col class="text-center" cols="12" sm="6" v-if="userRole == 'teacher'">
+          <v-col
+            class="text-center"
+            cols="12"
+            sm="6"
+            v-if="userRole == 'teacher'"
+          >
             <v-btn @click="CancelTransfer" color="red">Cancel Transfer</v-btn>
           </v-col>
         </v-row>
@@ -75,8 +85,8 @@
     </div>
     <div v-if="equivalentCourseByID.status == 'ตรวจสอบสำเร็จ'">
       <v-row class="mt-5 mb-10" justify="center" id="app">
-        <div ref="content">
-          <v-card width="1270" class="pa-16 pt-14">
+        <div ref="content" style="background-color:white">
+          <v-card width="1270"  class="pa-16 pt-14">
             <v-row>
               <v-col cols="1" class="">
                 <img
@@ -276,11 +286,12 @@
                 ...............................................................................................................................................................................................................................................................................................คณบดี
               </v-col>
             </v-row>
+           
+
           </v-card>
         </div>
-        <div class="ma-5"></div>
-        <div ref="contentTwo">
-          <v-card width="1270" class="pa-16 pt-14">
+        <div ref="contentTwo" style="background-color:white">
+          <v-card width="1270" height="2200" class="pa-16 pt-14">
             <v-row>
               <v-col cols="1" class="">
                 <img
@@ -932,59 +943,54 @@
                 </v-col>
               </v-row>
             </div>
+            <div class="pa-16 ma-16"></div>
+            <div class="pa-16 ma-16"></div>
+
           </v-card>
         </div>
       </v-row>
       <v-row>
-        <v-col class="text-center" cols="12" sm="6" >
+        <v-col class="text-center" cols="12" sm="6">
           <v-btn @click="makePDF"
             >Download Transfer (ดาวน์โหลดใบเทียบโอน)</v-btn
           >
         </v-col>
         <v-col class="text-center" cols="12" sm="3">
-            <v-dialog
-              v-model="dialog"
-              fullscreen
-              hide-overlay
-              transition="dialog-bottom-transition"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn color="#BDBDBD" dark v-bind="attrs" v-on="on">
-                  ใบแสดงผลการศึกษา
+          <v-dialog
+            v-model="dialog"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="#BDBDBD" dark v-bind="attrs" v-on="on">
+                ใบแสดงผลการศึกษา
+              </v-btn>
+            </template>
+            <v-card>
+              <v-toolbar dark color="#BDBDBD">
+                <v-toolbar-title>ใบแสดงผลการศึกษา</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon dark @click="dialog = false">
+                  <v-icon color="red"> mdi-close</v-icon>
                 </v-btn>
-              </template>
-              <v-card>
-                <v-toolbar dark color="#BDBDBD">
-                  <v-toolbar-title>ใบแสดงผลการศึกษา</v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-btn icon dark @click="dialog = false">
-                    <v-icon color="red"> mdi-close</v-icon>
-                  </v-btn>
-                </v-toolbar>
-                <v-col
-                  class="text-center"
-                  v-if="profile.file_transcrip == null"
-                >
-                  <h3>ไม่มีใบแสดงผลการเรียน</h3>
-                </v-col>
-                <v-col class="text-center" v-else>
-                  <img
-                    height="50%"
-                    width="100%"
-                    :src="profile.file_transcrip"
-                  />
-                </v-col>
-              </v-card>
-            </v-dialog>
+              </v-toolbar>
+              <v-col class="text-center" v-if="profile.file_transcrip == null">
+                <h3>ไม่มีใบแสดงผลการเรียน</h3>
+              </v-col>
+              <v-col class="text-center" v-else>
+                <img height="50%" width="100%" :src="profile.file_transcrip" />
+              </v-col>
+            </v-card>
+          </v-dialog>
         </v-col>
         <v-col class="text-center" cols="12" sm="3" v-if="userRole == 'admin'">
-         
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-                <v-btn color="red" dark v-bind="attrs" v-on="on">
-                  ลบใบเทียบโอน
-                </v-btn>
-              </template>
+          <v-dialog v-model="dialogDelete" max-width="500px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="red" dark v-bind="attrs" v-on="on">
+                ลบใบเทียบโอน
+              </v-btn>
+            </template>
             <v-card>
               <v-card-title class="text-h5"
                 >ยืนยันต้องการลบใบเทียบโอนนี้?</v-card-title
@@ -999,7 +1005,6 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-            
         </v-col>
       </v-row>
     </div>
@@ -1041,20 +1046,6 @@ export default {
         name: "อนุมัติ",
       },
     ],
-    pdfConfig: {
-      typo: {
-        header: 25,
-        large: 20,
-        normal: 18,
-        small: 14,
-      },
-      margin: {
-        t: 20,
-        b: 20,
-        l: 20,
-        r: 20,
-      },
-    },
 
     approvOne: "",
     approvTwo: "",
@@ -1320,7 +1311,7 @@ export default {
           }
         });
     },
-    makePDF() {
+    async makePDF() {
       window.html2canvas = html2canvas;
       const doc = new jsPDF({
         orientation: "p",
@@ -1328,36 +1319,37 @@ export default {
         format: "a4",
         hotfixes: ["px_scaling"],
       });
-      let margins = {
-        top: 80,
-        bottom: 60,
-        left: 40,
-        width: 522,
-      };
       doc.setFont("Sarabun-Bold", "normal");
 
-      html2canvas(this.$refs.content, {
-        width: 1590,
-        height: 2800,
+      await html2canvas(this.$refs.content, {
+        width: 2480,
+        height: 3508,
+        allowTaint: false,
+        useCORS: true,
+        backgroundColor: "transparent",
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
-        doc.addImage(img, "png", 20, 2, 960, 1800);
+        doc.addImage(img, "png", -2, -2, 0, 2202);
 
         doc.save("ใบคำขอเทียบโอน_1_" + Date.now() + ".pdf");
       });
+      await html2canvas(this.$refs.contentTwo, {
+        width: 2480,
+        height: 3508,
+        allowTaint: false,
+        useCORS: true,
+        backgroundColor: "white",
 
-      html2canvas(this.$refs.contentTwo, {
-        width: 1590,
-        height: 2800,
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
-        doc.addImage(img, "png", 20, 2, 960, 1800);
+        doc.addImage(img, "png", -2, -2, 0, 2202);
 
         doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
     },
+    
   },
 };
 </script>
@@ -1373,8 +1365,6 @@ caption {
 table {
   border-collapse: collapse;
   border: 2px solid rgb(200, 200, 200);
-  // letter-spacing: 1px;
-  // font-family: sans-serif;
   font-size: 0.8rem;
 }
 
@@ -1382,9 +1372,5 @@ td,
 th {
   border: 1px solid rgb(190, 190, 190);
   padding: 5px 10px;
-}
-
-td {
-  // text-align: center;
 }
 </style>
