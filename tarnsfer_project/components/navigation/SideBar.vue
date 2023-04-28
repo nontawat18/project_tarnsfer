@@ -32,6 +32,14 @@
         </v-list-item>
       </div>
       <div>
+        <v-list-item :to="`/title/`" class="v-list-item">
+          <v-list-item-icon>
+            <v-icon>mdi-card-account-details</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title v-text="`คำนำหน้า`" />
+        </v-list-item>
+      </div>
+      <div>
         <v-list-item :to="`/committee/`" class="v-list-item">
           <v-list-item-icon>
             <v-icon>mdi-account-cog</v-icon>

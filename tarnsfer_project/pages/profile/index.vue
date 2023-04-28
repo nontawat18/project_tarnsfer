@@ -85,13 +85,23 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        <v-text-field
+                        <!-- <v-text-field
                           label="คำนำหน้า"
                           required
                           outlined
                           dense
                           v-model="title"
-                        ></v-text-field>
+                        ></v-text-field> -->
+                        <v-combobox
+                          label="คำนำหน้า"
+                          required
+                          outlined
+                          dense
+                          :items="titleList"
+                          item-text="name"
+                          item-value="name"
+                          v-model="title"
+                        ></v-combobox>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -461,7 +471,11 @@
                   >
                     Close
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="changeLevelStudied()">
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="changeLevelStudied()"
+                  >
                     Save
                   </v-btn>
                 </v-card-actions>
@@ -581,7 +595,7 @@
             </v-dialog>
           </v-col>
         </v-row>
-       
+
         <v-row>
           <v-col cols="3">
             <strong>Role</strong>
@@ -590,10 +604,8 @@
             <span>{{ profile.role }}</span>
           </v-col>
         </v-row>
-        
       </v-card-text>
 
-      
       <v-row class="pb-3">
         <v-col cols="12" sm="8" class="">
           <v-file-input
@@ -608,7 +620,6 @@
         <v-col cols="12" sm="4" class="text-center">
           <v-btn color="gray" @click="save"> บันทึก </v-btn>
         </v-col>
-     
       </v-row>
     </v-card>
     <v-card
@@ -672,8 +683,6 @@ const resizeImage = ({ file, maxSize }) => {
   };
 
   return new Promise((ok, no) => {
-
-
     reader.onload = (readerEvent) => {
       image.onload = () => ok(resize());
       image.src = readerEvent.target.result;
@@ -694,9 +703,9 @@ export default {
     dialogStudyFrom: false,
     dialogLevelStudy: false,
     dialogTel: false,
-    dialogLevelStudied:false,
+    dialogLevelStudied: false,
     title: "",
-    studied_from:"",
+    studied_from: "",
     student_id: "",
     level_of_study: "",
     faculty: "",
@@ -711,7 +720,7 @@ export default {
     oldpassword: "",
     newpassword: "",
     connewpassword: "",
-    level_studied:"",
+    level_studied: "",
     type: [
       {
         id: "ท",
@@ -805,13 +814,25 @@ export default {
       },
       set() {},
     },
+    titleList: {
+      get() {
+        if (this.$store.state.users.title) {
+          return this.$store.state.users.title.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
   },
   mounted() {
     this.getProfile();
+    this.getTitle();
   },
   methods: {
     ...mapActions({
       getProfile: "users/getProfile",
+      getTitle: "users/getTitle",
     }),
     change() {
       let data = {
@@ -819,7 +840,7 @@ export default {
         new_password1: this.newpassword,
         new_password2: this.connewpassword,
       };
-      
+
       this.$changePassword.defaults.headers.common["Authorization"] =
         "Token " + this.userToken;
       this.$changePassword
@@ -845,7 +866,7 @@ export default {
         field_of_study: field,
         class_level: classLe,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -863,7 +884,7 @@ export default {
       let data = {
         tel: this.tel,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -879,9 +900,9 @@ export default {
     },
     changeTitle() {
       let data = {
-        title: this.title,
+        title: this.title.name,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -899,7 +920,7 @@ export default {
       let data = {
         studied_from: this.studied_from,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -917,7 +938,7 @@ export default {
       let data = {
         student_id: this.student_id,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -935,7 +956,7 @@ export default {
       let data = {
         class_level: this.class_level,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -953,7 +974,7 @@ export default {
       let data = {
         class_level: this.class_level,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -971,7 +992,7 @@ export default {
       let data = {
         field_of_study: this.field_of_study,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -989,7 +1010,7 @@ export default {
       let data = {
         level_studied: this.level_studied,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1007,7 +1028,7 @@ export default {
       let data = {
         level_of_study: this.level_of_study,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1025,7 +1046,7 @@ export default {
       let data = {
         faculty: this.faculty,
       };
-      
+
       let id = this.userId;
 
       this.$fixedKeyApi.patch(`/profile/${id}/`, data).then((response) => {
@@ -1041,9 +1062,7 @@ export default {
     },
 
     async download(item) {
-      
       console.log("item", item);
-     
 
       const linkSource = item;
       const downloadLink = document.createElement("a");
@@ -1069,7 +1088,6 @@ export default {
       console.log("image", image);
       if (image) {
         let file = await image;
-        
 
         const reader = new FileReader();
         reader.readAsDataURL(file);

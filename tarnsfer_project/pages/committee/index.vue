@@ -22,7 +22,7 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee1"
                         label="คณะกรรมการที่ 1"
                         :items="teacher"
@@ -31,10 +31,10 @@
                         outlined
                         dense
                         @change="updateCom1(editedItem.name_committee1)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee2"
                         label="คณะกรรมการที่ 2"
                         :items="teacher"
@@ -43,10 +43,10 @@
                         outlined
                         dense
                         @change="updateCom2(editedItem.name_committee2)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee3"
                         label="คณะกรรมการที่ 3"
                         :items="teacher"
@@ -55,10 +55,10 @@
                         outlined
                         dense
                         @change="updateCom3(editedItem.name_committee3)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee4"
                         label="คณะกรรมการที่ 4"
                         :items="teacher"
@@ -67,10 +67,10 @@
                         outlined
                         dense
                         @change="updateCom4(editedItem.name_committee4)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee5"
                         label="คณะกรรมการที่ 5"
                         :items="teacher"
@@ -79,10 +79,10 @@
                         outlined
                         dense
                         @change="updateCom5(editedItem.name_committee5)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select
+                      <v-combobox
                         v-model="editedItem.name_committee6"
                         label="คณะกรรมการที่ 6"
                         :items="teacher"
@@ -91,7 +91,7 @@
                         outlined
                         dense
                         @change="updateCom6(editedItem.name_committee6)"
-                      ></v-select>
+                      ></v-combobox>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -380,22 +380,52 @@ export default {
       getTeacher: "users/getTeacher",
     }),
     updateCom1(id) {
-      this.com1 = id;
+      if(id == null){
+        this.com1 = null;
+      }
+      else{
+        this.com1 = id.id;
+      }
     },
     updateCom2(id) {
-      this.com2 = id;
+      if(id == null){
+        this.com2 = null;
+      }
+      else{
+        this.com2 = id.id;
+      }
     },
     updateCom3(id) {
-      this.com3 = id;
+      if(id == null){
+        this.com3 = null;
+      }
+      else{
+        this.com3 = id.id;
+      }
     },
     updateCom4(id) {
-      this.com4 = id;
+      if(id == null){
+        this.com4 = null;
+      }
+      else{
+        this.com4 = id.id;
+      }
     },
     updateCom5(id) {
-      this.com5 = id;
+      if(id == null){
+        this.com5 = null;
+      }
+      else{
+        this.com5 = id.id;
+      }
     },
     updateCom6(id) {
-      this.com6 = id;
+      if(id == null){
+        this.com6 = null;
+      }
+      else{
+        this.com6 = id.id;
+      }
     },
     download(item) {
       console.log("item", item);

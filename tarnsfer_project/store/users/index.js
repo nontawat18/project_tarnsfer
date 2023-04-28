@@ -9,7 +9,8 @@ export const state = () => ({
     teacher: [],
     profile: [],
     profileAll: [],
-    committee:[]
+    committee:[],
+    title:[]
 });
 
 /* getters */
@@ -44,7 +45,9 @@ export const mutations = {
     getCommittee(state, data) {
         state.committee = data;
     },
-
+    getTitle(state, data) {
+        state.title = data;
+    },
 };
 
 /* actions */
@@ -115,6 +118,17 @@ export const actions = {
                 console.log("getCommittee", response.data);
 
                 commit("getCommittee", response.data);
+            });
+    },
+    getTitle({ commit, rootState }) {
+        var self = this;
+        this.$fixedKeyApi
+            .get(`/title/`)
+            .then(response => {
+                self.search = response.data;
+                console.log("getTitle", response.data);
+
+                commit("getTitle", response.data);
             });
     },
 
