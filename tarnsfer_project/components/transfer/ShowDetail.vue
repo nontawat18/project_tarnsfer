@@ -26,12 +26,7 @@
                 </v-icon>
               </div>
               <div v-else>
-                <v-icon
-                  small
-                  color="grey"
-                  disabled
-                  @click="deleteItem(item)"
-                >
+                <v-icon small color="grey" disabled @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
               </div>
@@ -85,8 +80,8 @@
     </div>
     <div v-if="equivalentCourseByID.status == 'ตรวจสอบสำเร็จ'">
       <v-row class="mt-5 mb-10" justify="center" id="app">
-        <div ref="content" style="background-color:white">
-          <v-card width="1270"  class="pa-16 pt-14">
+        <div ref="content" style="background-color: white">
+          <v-card width="1270" class="pa-16 pt-14">
             <v-row>
               <v-col cols="1" class="">
                 <img
@@ -125,7 +120,7 @@
             <div class="mt-10">เรียน คณบดีคณะวิศวกรรมศาสตร์</div>
             <div class="pl-16 ml-10 mt-10">
               ข้าพเจ้า .........................
-              {{ equivalentCourseByID.created_user.title.title }}
+              {{ equivalentCourseByID.created_user.title }}
               {{ equivalentCourseByID.created_user.first_name }}
               {{
                 equivalentCourseByID.created_user.last_name
@@ -244,7 +239,7 @@
               <v-col cols="3"> </v-col>
               <v-col cols="7" class="text-right"
                 >(...................
-                {{ equivalentCourseByID.created_user.title.title }}
+                {{ equivalentCourseByID.created_user.title }}
                 {{ equivalentCourseByID.created_user.first_name }}
                 {{
                   equivalentCourseByID.created_user.last_name
@@ -286,11 +281,9 @@
                 ...............................................................................................................................................................................................................................................................................................คณบดี
               </v-col>
             </v-row>
-           
-
           </v-card>
         </div>
-        <div ref="contentTwo" style="background-color:white">
+        <div ref="contentTwo" style="background-color: white">
           <v-card width="1270" height="2200" class="pa-16 pt-14">
             <v-row>
               <v-col cols="1" class="">
@@ -819,9 +812,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee1 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee1.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee1.title }}
                       {{ equivalentCourseByID.name_committee1.first_name }}
                       {{
                         equivalentCourseByID.name_committee1.last_name
@@ -842,9 +833,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee2 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee2.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee2.title }}
                       {{ equivalentCourseByID.name_committee2.first_name }}
                       {{
                         equivalentCourseByID.name_committee2.last_name
@@ -864,9 +853,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee3 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee3.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee3.title }}
                       {{ equivalentCourseByID.name_committee3.first_name }}
                       {{ equivalentCourseByID.name_committee3.last_name }}
                       ......)
@@ -885,9 +872,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee4 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee4.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee4.title }}
                       {{ equivalentCourseByID.name_committee4.first_name }}
                       {{
                         equivalentCourseByID.name_committee4.last_name
@@ -907,9 +892,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee5 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee5.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee5.title }}
                       {{ equivalentCourseByID.name_committee5.first_name }}
                       {{
                         equivalentCourseByID.name_committee5.last_name
@@ -929,9 +912,7 @@
                       class="pa-0 text-center"
                       v-if="equivalentCourseByID.name_committee6 != null"
                     >
-                      (......{{
-                        equivalentCourseByID.name_committee6.title.title
-                      }}
+                      (......{{ equivalentCourseByID.name_committee6.title }}
                       {{ equivalentCourseByID.name_committee6.first_name }}
                       {{ equivalentCourseByID.name_committee6.last_name }}
                       ......)
@@ -945,7 +926,6 @@
             </div>
             <div class="pa-16 ma-16"></div>
             <div class="pa-16 ma-16"></div>
-
           </v-card>
         </div>
       </v-row>
@@ -1340,7 +1320,6 @@ export default {
         allowTaint: false,
         useCORS: true,
         backgroundColor: "white",
-
       }).then((canvas) => {
         const img = canvas.toDataURL("image/png");
 
@@ -1349,7 +1328,6 @@ export default {
         doc.save("ใบคำขอเทียบโอน_2_ " + Date.now() + ".pdf");
       });
     },
-    
   },
 };
 </script>
