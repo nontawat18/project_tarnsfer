@@ -35,8 +35,18 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="4" md="4">
+                        <v-select
+                          v-model="editedItem.title"
+                          :items="titleUsers"
+                          label="คำนำหน้า"
+                          outlined
+                          dense
+                          item-value="name"
+                          item-text="name"
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12" sm="4" md="4">
                         <v-text-field
                           v-model="editedItem.first_name"
                           label="ชื่อ"
@@ -44,7 +54,7 @@
                           dense
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="4" md="4">
                         <v-text-field
                           v-model="editedItem.last_name"
                           label="นามสกุล"
@@ -64,7 +74,7 @@
                       <v-col
                         sm="6"
                         cols="12"
-                         md="4"
+                        md="4"
                         v-if="formTitle == 'New Item'"
                       >
                         <v-text-field
@@ -83,7 +93,7 @@
                       <v-col
                         sm="6"
                         cols="12"
-                         md="4"
+                        md="4"
                         v-if="formTitle == 'New Item'"
                       >
                         <v-text-field
@@ -112,7 +122,7 @@
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-select
-                          v-model="editedItem.role"
+                          v-model="editedItem.role.role"
                           label="Role"
                           :items="role"
                           item-text="name"
@@ -184,13 +194,11 @@
           </v-icon>
         </div>
       </template>
-  
     </v-data-table>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
-
 
 export default {
   data: () => ({
@@ -229,6 +237,12 @@ export default {
       },
     ],
     headers: [
+      {
+        text: "คำนำหน้า",
+        align: "start",
+        sortable: false,
+        value: "title",
+      },
 
       {
         text: "ชื่อ",
@@ -245,27 +259,42 @@ export default {
     desserts: [],
     editedIndex: -1,
     editedItem: {
+      title: "",
       first_name: "",
       last_name: "",
       username: "",
       password: "",
       confirm_password: "",
-      role: "",
+      role: {
+        role: "",
+      },
       email: "",
-
     },
     defaultItem: {
+      title: "",
       first_name: "",
       last_name: "",
       username: "",
       password: "",
       confirm_password: "",
-      role: "",
+      role: {
+        role: "",
+      },
       email: "",
     },
   }),
 
   computed: {
+    titleUsers: {
+      get() {
+        if (this.$store.state.users.title) {
+          return this.$store.state.users.title.results;
+        } else {
+          return null;
+        }
+      },
+      set() {},
+    },
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
@@ -334,16 +363,18 @@ export default {
   mounted() {
     this.getSchoolCourse();
     this.getMyCourse();
+    this.getTitleUsers();
     this.getProfileAll();
   },
   methods: {
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
       getMyCourse: "subject/getMyCourse",
+      getTitleUsers: "users/getTitle",
       getProfileAll: "users/getProfileAll",
     }),
     download(item) {
-      console.log("item", item);    
+      console.log("item", item);
       const linkSource = item.description_file;
       const downloadLink = document.createElement("a");
       const fileName = "คำอธิบายรายวิชา.pdf";
@@ -397,31 +428,45 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         let id = this.idSubject;
+        let dataProfile = {
+          title: this.editedItem.title,
+        };
         let data = {
+          title: this.editedItem.title,
           first_name: this.editedItem.first_name,
           last_name: this.editedItem.last_name,
           username: this.editedItem.username,
           password: this.editedItem.password,
           confirm_password: this.editedItem.confirm_password,
           email: this.editedItem.email,
-          role: this.editedItem.role,
+          role: this.editedItem.role.role,
         };
         this.$fixedKeyApi.patch(`/users/${id}/`, data).then((response) => {
-          if (response.status == 200) {
-            console.log("patch", response.data);
-            this.close();
-            this.getProfileAll();
-          }
+          // if (response.status == 200) {
+          console.log("patch", response.data);
+          // this.close();
+          // this.getProfileAll();
+          this.$fixedKeyApi
+            .patch(`/profile/${id}/`, dataProfile)
+            .then((response) => {
+              if (response.status == 200) {
+                console.log("patch", response.data);
+                this.close();
+                this.getProfileAll();
+              }
+            });
+          // }
         });
       } else {
         let data = {
+          title: this.editedItem.title,
           first_name: this.editedItem.first_name,
           last_name: this.editedItem.last_name,
           username: this.editedItem.username,
           password: this.editedItem.password,
           confirm_password: this.editedItem.confirm_password,
           email: this.editedItem.email,
-          role: this.editedItem.role,
+          role: this.editedItem.role.role,
         };
         this.$fixedKeyApi.post(`/users/`, data).then((response) => {
           if (response.data) {

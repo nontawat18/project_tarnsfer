@@ -3,7 +3,20 @@
     <v-card elevation="1">
       <v-col>
         <v-row class="pa-4">
-          <v-col sm="6" cols="12" class="pt-0 pb-0">
+          <v-col sm="4" cols="12" class="pt-0 pb-0">
+            <v-select
+              v-model="title"
+              :rules="[rules.required]"
+              :items="titleUsers"
+              label="คำนำหน้า"
+              outlined
+              dense
+              item-value="name"
+              item-text="name"
+            ></v-select>
+          </v-col>
+
+          <v-col sm="4" cols="12" class="pt-0 pb-0">
             <v-text-field
               v-model="first_name"
               :rules="[rules.required]"
@@ -14,7 +27,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col sm="6" cols="12" class="pt-0 pb-0">
+          <v-col sm="4" cols="12" class="pt-0 pb-0">
             <v-text-field
               v-model="last_name"
               :rules="[rules.required]"
@@ -95,7 +108,6 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-
   data() {
     return {
       valid2: false,
@@ -163,8 +175,8 @@ export default {
   computed: {
     titleUsers: {
       get() {
-        if (this.$store.state.users.titleUsers) {
-          return this.$store.state.users.titleUsers.result;
+        if (this.$store.state.users.title) {
+          return this.$store.state.users.title.results;
         } else {
           return null;
         }
@@ -177,7 +189,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getTitleUsers: "users/getTitleUsers",
+      getTitleUsers: "users/getTitle",
     }),
     create() {
       let data = {
@@ -188,6 +200,7 @@ export default {
         confirm_password: this.confirm_password,
         email: this.email,
         role: this.role.name,
+        title: this.title,
       };
 
       this.$fixedKeyApi.post(`/users/`, data).then((response) => {

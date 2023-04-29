@@ -13,7 +13,19 @@
         <v-form ref="form1" v-model="valid2" lazy-validation>
           <v-col>
             <v-row>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
+              <v-col sm="4" cols="12" class="pt-0 pb-0">
+                <v-select
+                  v-model="title"
+                  :rules="[rules.required]"
+                  :items="titleUsers"
+                  label="คำนำหน้า"
+                  outlined
+                  dense
+                  item-value="name"
+                  item-text="name"
+                ></v-select>
+              </v-col>
+              <v-col sm="4" cols="12" class="pt-0 pb-0">
                 <v-text-field
                   v-model="firstName"
                   :rules="[rules.required]"
@@ -23,7 +35,7 @@
                   dense
                 ></v-text-field>
               </v-col>
-              <v-col sm="6" cols="12" class="pt-0 pb-0">
+              <v-col sm="4" cols="12" class="pt-0 pb-0">
                 <v-text-field
                   v-model="lastName"
                   :rules="[rules.required]"
@@ -168,9 +180,10 @@ export default {
       title: "",
       name: "",
       tel: "",
-      firstName:"",
-      lastName:"",
-      userName:'',
+      title: "",
+      firstName: "",
+      lastName: "",
+      userName: "",
       userStudy: "",
       serailNumber: "",
       education: "",
@@ -222,8 +235,8 @@ export default {
   computed: {
     titleUsers: {
       get() {
-        if (this.$store.state.users.titleUsers) {
-          return this.$store.state.users.titleUsers.result;
+        if (this.$store.state.users.title) {
+          return this.$store.state.users.title.results;
         } else {
           return null;
         }
@@ -232,12 +245,15 @@ export default {
     },
   },
   mounted() {
+    this.getTitleUsers();
   },
   methods: {
-
+    ...mapActions({
+      getTitleUsers: "users/getTitle",
+    }),
     create() {
-     let data = {
-
+      let data = {
+        title: this.title,
         first_name: this.firstName,
         last_name: this.lastName,
         username: this.username,

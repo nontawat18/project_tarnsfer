@@ -8,7 +8,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>หลักสูตร</v-toolbar-title>
+          <v-toolbar-title>คำนำหน้า</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
@@ -40,7 +40,6 @@
                         label="คำนำหน้า"
                       ></v-text-field>
                     </v-col>
-                   
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -102,24 +101,20 @@ export default {
     search: "",
     dialogDelete: false,
     headers: [
-      
       { text: "ชื่อ", value: "name", sortable: false },
       { text: "ตัวดำเนินการ", value: "actions", sortable: false },
-
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
       id: 0,
-      name:"",
-     
+      name: "",
     },
     defaultItem: {
-    id: 0,
-      name:"",
+      id: 0,
+      name: "",
     },
     idTitle: "",
-
   }),
 
   computed: {
@@ -162,18 +157,18 @@ export default {
   },
   methods: {
     ...mapActions({
-        getTitle: "users/getTitle",
+      getTitle: "users/getTitle",
     }),
 
     editItem(item) {
-        this.editedIndex = this.title.indexOf(item);
+      this.editedIndex = this.title.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.idTitle = item.id;
       this.dialog = true;
     },
 
     deleteItem(item) {
-        this.editedIndex = this.title.indexOf(item);
+      this.editedIndex = this.title.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.idTitle = item.id;
       this.dialogDelete = true;
@@ -213,7 +208,6 @@ export default {
 
         let data = {
           name: this.editedItem.name,
-        
         };
         this.$fixedKeyApi.patch(`/title/${id}/`, data).then((response) => {
           if (response.status == 200) {
@@ -226,8 +220,7 @@ export default {
         });
       } else {
         let data = {
-            name: this.editedItem.name,
-         
+          name: this.editedItem.name,
         };
         this.$fixedKeyApi.post(`/title/`, data).then((response) => {
           if (response.data) {
