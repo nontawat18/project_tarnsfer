@@ -325,11 +325,11 @@ export default {
   },
 
   created() {},
-  mounted() {
+  async mounted() {
     this.getSchoolCourse();
     this.getMyCourse();
     this.getProfileAll();
-    this.getCommittee();
+    await this.getCommittee();
     this.getTeacher();
 
     // this.com1 = this.committee[0].name_committee1.id;
@@ -348,7 +348,6 @@ export default {
       this.com2 = 0;
     } else {
       this.com2 = this.committee[0].name_committee2.id;
-     
     }
     if (this.committee[0].name_committee3 == null) {
       this.com3 = 0;
@@ -380,50 +379,44 @@ export default {
       getTeacher: "users/getTeacher",
     }),
     updateCom1(id) {
-      if(id == null){
+      if (id == null) {
         this.com1 = null;
-      }
-      else{
+      } else {
         this.com1 = id.id;
       }
     },
     updateCom2(id) {
-      if(id == null){
+      if (id == null) {
         this.com2 = null;
-      }
-      else{
+      } else {
         this.com2 = id.id;
       }
     },
     updateCom3(id) {
-      if(id == null){
+      if (id == null) {
         this.com3 = null;
-      }
-      else{
+      } else {
         this.com3 = id.id;
       }
     },
     updateCom4(id) {
-      if(id == null){
+      if (id == null) {
         this.com4 = null;
-      }
-      else{
+      } else {
         this.com4 = id.id;
       }
     },
     updateCom5(id) {
-      if(id == null){
+      if (id == null) {
         this.com5 = null;
-      }
-      else{
+      } else {
         this.com5 = id.id;
       }
     },
     updateCom6(id) {
-      if(id == null){
+      if (id == null) {
         this.com6 = null;
-      }
-      else{
+      } else {
         this.com6 = id.id;
       }
     },
