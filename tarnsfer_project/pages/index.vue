@@ -10,37 +10,38 @@
       ></v-text-field>
     </v-col>
     <v-col class="text-right" v-if="userLogin.role.role != 'teacher'">
-      
       <v-btn color="" elevation="0" fab small class="mb-2" to="/transfer/new/">
         <v-icon> mdi-plus</v-icon>
       </v-btn>
-    
     </v-col>
     <div>
-      <v-row>
-        <v-col v-for="menu in equivalentCourse" :key="menu.id" cols="12" sm="3">
-          <v-card outlined width="100%" @click="toDetail(menu.id)">
-            <v-col>
-              <v-chip class="" small>
-                {{ menu.registrar_officer_approve }}
-              </v-chip>
-            </v-col>
+      <v-data-table
+        :headers="headers"
+        :items="equivalentCourse"
+        :search="search"
+        class="elevation-1"
+      >
+        <template v-slot:top>
+          <v-toolbar flat>
+            <v-toolbar-title>รายขอเทียบโอน</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
 
-            <v-divider></v-divider>
-
-            <v-col>
-              {{ menu.equivalent_type }}
-            </v-col>
-             <v-col class="pt-0 ">
-              {{ menu.created_user.first_name }}
-              {{ menu.created_user.last_name }}
-            </v-col>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-col v-if="count == 0">
-        <strong>ไม่มีใบเทียบโอน</strong>
-      </v-col>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+        </template>
+        <template v-slot:[`item.actions`]="{ item }">
+          <div>
+            <v-btn
+              small
+              color="primary"
+              class="mr-2"
+              @click="toDetail(item.id)"
+            >
+              ดูข้อมูล
+            </v-btn>
+          </div>
+        </template>
+      </v-data-table>
     </div>
   </div>
 </template>
@@ -52,21 +53,6 @@ export default {
     dialog: false,
     search: "",
     selected: "ขอเทียบโอนรายวิชา",
-    headers: [
-      {
-        text: "TF0001",
-        align: "start",
-        sortable: false,
-        value: "serail_subject",
-      },
-      { text: "TF0002", value: "subject_name", sortable: false },
-      { text: "TF0003", value: "description", sortable: false },
-      { text: "TF0004", value: "grade", sortable: false },
-      { text: "TF0005", value: "credit", sortable: false },
-      { text: "TF0006", value: "univercity", sortable: false },
-      { text: "TF0007", value: "actions", sortable: false },
-    ],
-    
     approvOne: "",
     approvTwo: "",
     approvThree: "",
@@ -80,6 +66,24 @@ export default {
     head_educational: "",
     head_department: "",
     advisor: "",
+    headers: [
+      {
+        text: "ผู้ขอเทียบโอน",
+        align: "start",
+        sortable: false,
+        value: "created_user.full_name",
+      },
+      {
+        text: "วันที่ขอ",
+        value: "created_at",
+      },
+      {
+        text: "สถานะ",
+        value: "status",
+      },
+
+      { text: "ตัวดำเนินการ", value: "actions", sortable: false },
+    ],
   }),
   computed: {
     formTitle() {
@@ -151,7 +155,6 @@ export default {
     this.getTeacher();
     this.getSchoolCourse();
     this.getProfile();
-
   },
   methods: {
     ...mapActions({

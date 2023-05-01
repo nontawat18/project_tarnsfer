@@ -302,7 +302,7 @@
               </v-col>
             </v-row>
             <div class="text-center mb-16 mt-6">
-              <u><h2>ราชวิชาที่ขอเทียบโอน</h2></u>
+              <u><h2>รายวิชาที่ขอเทียบโอน</h2></u>
             </div>
 
             <table width="100%">

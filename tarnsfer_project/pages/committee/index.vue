@@ -165,10 +165,6 @@ export default {
         name: "admin",
       },
       {
-        id: "judge",
-        name: "judge",
-      },
-      {
         id: "teacher",
         name: "teacher",
       },
