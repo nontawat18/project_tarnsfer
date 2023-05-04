@@ -44,9 +44,18 @@ export const actions = {
 
           commit("getEquivalentCourse", response.data);
         });
-    } else {
+    } else if (role == "teacher") {
       await this.$fixedKeyApi
         .get(`/equivalent-course-all/?advisor=${userID}`)
+        .then((response) => {
+          self.search = response.data;
+          console.log("getEquivalentCourse", response.data);
+
+          commit("getEquivalentCourse", response.data);
+        });
+    } else {
+      await this.$fixedKeyApi
+        .get(`/equivalent-course-all/`)
         .then((response) => {
           self.search = response.data;
           console.log("getEquivalentCourse", response.data);
