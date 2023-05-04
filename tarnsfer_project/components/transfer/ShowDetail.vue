@@ -1252,6 +1252,9 @@ export default {
             });
             this.closeDelete();
             this.getEquivalentCourseByID();
+            if (this.statusApprove == "อนุมัติ") {
+              this.ApproveTransfer();
+            }
           }
         });
     },
