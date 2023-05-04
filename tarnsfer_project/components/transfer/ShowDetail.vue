@@ -26,7 +26,7 @@
                 </v-icon>
               </div>
               <div v-else>
-                <v-icon small color="grey" @click="deleteItem(item)">
+                <v-icon small disabled color="grey" @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
               </div>
