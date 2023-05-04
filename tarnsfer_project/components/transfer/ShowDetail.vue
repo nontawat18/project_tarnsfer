@@ -10,7 +10,7 @@
           >
             <template v-slot:top>
               <v-toolbar flat>
-                <v-toolbar-title>สรุปการเทียบโอน</v-toolbar-title>
+                <v-toolbar-title>สรุปการเทียบโอน </v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
 
                 <v-spacer></v-spacer>
@@ -26,7 +26,7 @@
                 </v-icon>
               </div>
               <div v-else>
-                <v-icon small color="grey" disabled @click="deleteItem(item)">
+                <v-icon small color="grey" @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
               </div>
@@ -1148,6 +1148,16 @@ export default {
       });
       return find;
     },
+    checkStatus() {
+      let find = 0;
+      this.equivalentCourseByID.equivalent_item.forEach((listAll) => {
+        if (listAll.status != "รอที่ปรึกษาตรวจสอบ") {
+          find += 1;
+        }
+      });
+      console.log(find);
+      return find;
+    },
 
     count: {
       get() {
@@ -1252,7 +1262,10 @@ export default {
             });
             this.closeDelete();
             this.getEquivalentCourseByID();
-            if (this.statusApprove == "อนุมัติ") {
+            if (
+              this.checkStatus ==
+              this.equivalentCourseByID.equivalent_item.length - 1
+            ) {
               this.ApproveTransfer();
             }
           }
