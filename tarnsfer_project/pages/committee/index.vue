@@ -335,35 +335,37 @@ export default {
     // this.com5 = this.committee[0].name_committee5.id;
     // this.com6 = this.committee[0].name_committee6.id;
 
-    if (this.committee[0].name_committee1 == null) {
-      this.com1 = 0;
-    } else {
-      this.com1 = this.committee[0].name_committee1.id;
-    }
-    if (this.committee[0].name_committee2 == null) {
-      this.com2 = 0;
-    } else {
-      this.com2 = this.committee[0].name_committee2.id;
-    }
-    if (this.committee[0].name_committee3 == null) {
-      this.com3 = 0;
-    } else {
-      this.com3 = this.committee[0].name_committee3.id;
-    }
-    if (this.committee[0].name_committee4 == null) {
-      this.com4 = 0;
-    } else {
-      this.com4 = this.committee[0].name_committee4.id;
-    }
-    if (this.committee[0].name_committee5 == null) {
-      this.com5 = 0;
-    } else {
-      this.com5 = this.committee[0].name_committee5.id;
-    }
-    if (this.committee[0].name_committee6.id == null) {
-      this.com6 = 0;
-    } else {
-      this.com6 = this.committee[0].name_committee6.id;
+    if (this.committee) {
+      if (this.committee[0].name_committee1 == null) {
+        this.com1 = 0;
+      } else {
+        this.com1 = this.committee[0].name_committee1.id;
+      }
+      if (this.committee[0].name_committee2 == null) {
+        this.com2 = 0;
+      } else {
+        this.com2 = this.committee[0].name_committee2.id;
+      }
+      if (this.committee[0].name_committee3 == null) {
+        this.com3 = 0;
+      } else {
+        this.com3 = this.committee[0].name_committee3.id;
+      }
+      if (this.committee[0].name_committee4 == null) {
+        this.com4 = 0;
+      } else {
+        this.com4 = this.committee[0].name_committee4.id;
+      }
+      if (this.committee[0].name_committee5 == null) {
+        this.com5 = 0;
+      } else {
+        this.com5 = this.committee[0].name_committee5.id;
+      }
+      if (this.committee[0].name_committee6 == null) {
+        this.com6 = 0;
+      } else {
+        this.com6 = this.committee[0].name_committee6.id;
+      }
     }
   },
   methods: {
@@ -471,41 +473,65 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        let id = this.idSubject;
+        if (
+          this.com1 &&
+          this.com2 &&
+          this.com3 &&
+          this.com4 &&
+          this.com5 &&
+          this.com6
+        ) {
+          let id = this.idSubject;
 
-        let data = {
-          name_committee1: this.com1,
-          name_committee2: this.com2,
-          name_committee3: this.com3,
-          name_committee4: this.com4,
-          name_committee5: this.com5,
-          name_committee6: this.com6,
-        };
-        this.$fixedKeyApi.patch(`/committee/${id}/`, data).then((response) => {
-          if (response.status == 200) {
-            console.log("patch", data);
-            this.close();
-            this.getCommittee();
-          } else {
-            console.log("patch", data);
-          }
-        });
+          let data = {
+            name_committee1: this.com1,
+            name_committee2: this.com2,
+            name_committee3: this.com3,
+            name_committee4: this.com4,
+            name_committee5: this.com5,
+            name_committee6: this.com6,
+          };
+          this.$fixedKeyApi
+            .patch(`/committee/${id}/`, data)
+            .then((response) => {
+              if (response.status == 200) {
+                console.log("patch", data);
+                this.close();
+                this.getCommittee();
+              } else {
+                console.log("patch", data);
+              }
+            });
+        } else {
+          alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
+        }
       } else {
-        let data = {
-          name_committee1: this.editedItem.name_committee1,
-          name_committee2: this.editedItem.name_committee2,
-          name_committee3: this.editedItem.name_committee3,
-          name_committee4: this.editedItem.name_committee4,
-          name_committee5: this.editedItem.name_committee5,
-          name_committee6: this.editedItem.name_committee6,
-        };
-        this.$fixedKeyApi.post(`/committee/`, data).then((response) => {
-          if (response.data) {
-            console.log("post", response.data);
-            this.close();
-            this.getCommittee();
-          }
-        });
+        if (
+          this.editedItem.name_committee1 &&
+          this.editedItem.name_committee2 &&
+          this.editedItem.name_committee3 &&
+          this.editedItem.name_committee4 &&
+          this.editedItem.name_committee5 &&
+          this.editedItem.name_committee6
+        ) {
+          let data = {
+            name_committee1: this.editedItem.name_committee1,
+            name_committee2: this.editedItem.name_committee2,
+            name_committee3: this.editedItem.name_committee3,
+            name_committee4: this.editedItem.name_committee4,
+            name_committee5: this.editedItem.name_committee5,
+            name_committee6: this.editedItem.name_committee6,
+          };
+          this.$fixedKeyApi.post(`/committee/`, data).then((response) => {
+            if (response.data) {
+              console.log("post", response.data);
+              this.close();
+              this.getCommittee();
+            }
+          });
+        } else {
+          alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
+        }
       }
     },
   },

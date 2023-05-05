@@ -51,7 +51,6 @@
             </div>
           </v-form>
           <v-btn color="grey" dark @click="e1 = 2"> Next </v-btn>
-
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -138,7 +137,7 @@
               </v-row>
             </v-col>
           </v-col>
-          <v-btn color="grey" dark @click="e1 = 3"> Next </v-btn>
+          <v-btn color="grey" dark @click="toStep3"> Next </v-btn>
 
           <v-btn text @click="e1 = 1"> Back </v-btn>
         </v-stepper-content>
@@ -147,7 +146,6 @@
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                  
                   <v-text-field
                     v-model="committee.name_committee1.first_name"
                     label="คณะกรรมการที่ 1"
@@ -157,7 +155,6 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                 
                   <v-text-field
                     v-model="committee.name_committee2.first_name"
                     label="คณะกรรมการที่ 2"
@@ -167,7 +164,6 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                 
                   <v-text-field
                     v-model="committee.name_committee3.first_name"
                     label="คณะกรรมการที่ 3"
@@ -177,7 +173,6 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                 
                   <v-text-field
                     v-model="committee.name_committee4.first_name"
                     label="คณะกรรมการที่ 4"
@@ -187,7 +182,6 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                
                   <v-text-field
                     v-model="committee.name_committee5.first_name"
                     label="คณะกรรมการที่ 5"
@@ -197,7 +191,6 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
-                 
                   <v-text-field
                     v-model="committee.name_committee6.first_name"
                     label="คณะกรรมการที่ 6"
@@ -244,7 +237,6 @@
     </v-stepper>
 
     <v-col class="text-center"> </v-col>
-   
   </div>
 </template>
 <script>
@@ -252,8 +244,6 @@ import Transfer from "./Transfer";
 
 import { v4 as uuid } from "uuid";
 import { mapActions, mapState } from "vuex";
-
-
 
 export default {
   data() {
@@ -433,6 +423,21 @@ export default {
       getTeacher: "users/getTeacher",
       getCommittee: "users/getCommittee",
     }),
+    toStep3() {
+      // if (
+      //   !this.advisor ||
+      //   !this.head_department ||
+      //   !this.head_educational ||
+      //   !this.deputy_dean_a_r ||
+      //   !this.dean ||
+      //   !this.head_academic_p_r ||
+      //   !this.registrar_officer
+      // ) {
+      //   alert("กรุณาใส่ข้อมูลเลือกผู้เห็นชอบให้ครบ");
+      // } else {
+      this.e1 = 3;
+      // }
+    },
 
     addLength() {
       this.index += 1;
@@ -449,7 +454,6 @@ export default {
         gradeThere: 0,
       });
     },
-
 
     setUUID() {
       this._uuid = uuid();
@@ -502,7 +506,6 @@ export default {
         this.lengths[data.index].gradeTwo = data.gradeTwo;
         this.lengths[data.index].gradeThere = data.gradeThere;
         console.log(this.lengths);
-      
       }
     },
 
@@ -516,10 +519,9 @@ export default {
           data.nameSubjectTransfer3.id.toFixed(0);
         this.lengths[data.index].nameSubject = data.nameSubject.id.toFixed(0);
         console.log(this.lengths);
-        
       }
     },
-    
+
     next() {
       console.log(this.subjectAllList);
     },
@@ -537,7 +539,17 @@ export default {
       let dean_new = null;
       let head_academic_p_r_new = null;
       let registrar_officer_new = null;
-
+      // if (
+      //   !this.advisor ||
+      //   !this.head_department ||
+      //   !this.head_educational ||
+      //   !this.deputy_dean_a_r ||
+      //   !this.dean ||
+      //   !this.head_academic_p_r ||
+      //   !this.registrar_officer
+      // ) {
+      //   alert("กรุณาใส่ข้อมูลเลือกผู้เห็นชอบให้ครบ");
+      // } else {
       if (this.advisor == null) {
         advisorNew = null;
       } else {
@@ -641,6 +653,7 @@ export default {
         }
       });
     },
+    // },
   },
 };
 </script>
