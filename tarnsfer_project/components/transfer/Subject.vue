@@ -145,7 +145,12 @@
           <v-col>
             <v-col>
               <v-row>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee1"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee1.first_name"
                     label="คณะกรรมการที่ 1"
@@ -154,7 +159,12 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee2"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee2.first_name"
                     label="คณะกรรมการที่ 2"
@@ -163,7 +173,12 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee3"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee3.first_name"
                     label="คณะกรรมการที่ 3"
@@ -172,7 +187,12 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee4"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee4.first_name"
                     label="คณะกรรมการที่ 4"
@@ -181,7 +201,12 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee5"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee5.first_name"
                     label="คณะกรรมการที่ 5"
@@ -190,7 +215,12 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" class="pt-0 pb-0">
+                <v-col
+                  v-if="committee.name_committee6"
+                  cols="12"
+                  sm="6"
+                  class="pt-0 pb-0"
+                >
                   <v-text-field
                     v-model="committee.name_committee6.first_name"
                     label="คณะกรรมการที่ 6"
@@ -628,12 +658,6 @@ export default {
         studied_from: null,
         number_of_equivalent: null,
         number_of_credit: 3,
-        name_committee1: this.committee.name_committee1.id,
-        name_committee2: this.committee.name_committee2.id,
-        name_committee3: this.committee.name_committee3.id,
-        name_committee4: this.committee.name_committee4.id,
-        name_committee5: this.committee.name_committee5.id,
-        name_committee6: this.committee.name_committee6.id,
         advisor: advisorNew,
         head_department: head_department_new,
         head_educational: head_educational_new,
@@ -644,7 +668,36 @@ export default {
         created_user: this.userId,
         status: "รอที่ปรึกษาตรวจสอบ",
       };
-      console.log(data);
+      if (this.committee.name_committee1) {
+        data["name_committee1"] = this.committee.name_committee1.id;
+      } else {
+        data["name_committee1"] = null;
+      }
+      if (this.committee.name_committee2) {
+        data["name_committee2"] = this.committee.name_committee2.id;
+      } else {
+        data["name_committee2"] = null;
+      }
+      if (this.committee.name_committee3) {
+        data["name_committee3"] = this.committee.name_committee3.id;
+      } else {
+        data["name_committee3"] = null;
+      }
+      if (this.committee.name_committee4) {
+        data["name_committee4"] = this.committee.name_committee4.id;
+      } else {
+        data["name_committee4"] = null;
+      }
+      if (this.committee.name_committee5) {
+        data["name_committee5"] = this.committee.name_committee5.id;
+      } else {
+        data["name_committee5"] = null;
+      }
+      if (this.committee.name_committee6) {
+        data["name_committee6"] = this.committee.name_committee6.id;
+      } else {
+        data["name_committee6"] = null;
+      }
 
       this.$fixedKeyApi.post(`/equivalent-course/`, data).then((response) => {
         if (response.data) {

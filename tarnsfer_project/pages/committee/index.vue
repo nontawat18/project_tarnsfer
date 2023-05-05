@@ -473,65 +473,63 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        if (
-          this.com1 &&
-          this.com2 &&
-          this.com3 &&
-          this.com4 &&
-          this.com5 &&
-          this.com6
-        ) {
-          let id = this.idSubject;
+        // if (
+        //   this.com1 &&
+        //   this.com2 &&
+        //   this.com3 &&
+        //   this.com4 &&
+        //   this.com5 &&
+        //   this.com6
+        // ) {
+        let id = this.idSubject;
 
-          let data = {
-            name_committee1: this.com1,
-            name_committee2: this.com2,
-            name_committee3: this.com3,
-            name_committee4: this.com4,
-            name_committee5: this.com5,
-            name_committee6: this.com6,
-          };
-          this.$fixedKeyApi
-            .patch(`/committee/${id}/`, data)
-            .then((response) => {
-              if (response.status == 200) {
-                console.log("patch", data);
-                this.close();
-                this.getCommittee();
-              } else {
-                console.log("patch", data);
-              }
-            });
-        } else {
-          alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
-        }
+        let data = {
+          name_committee1: this.com1,
+          name_committee2: this.com2,
+          name_committee3: this.com3,
+          name_committee4: this.com4,
+          name_committee5: this.com5,
+          name_committee6: this.com6,
+        };
+        this.$fixedKeyApi.patch(`/committee/${id}/`, data).then((response) => {
+          if (response.status == 200) {
+            console.log("patch", data);
+            this.close();
+            this.getCommittee();
+          } else {
+            console.log("patch", data);
+          }
+        });
+        //   } else {
+        //     alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
+        // }
       } else {
-        if (
-          this.editedItem.name_committee1 &&
-          this.editedItem.name_committee2 &&
-          this.editedItem.name_committee3 &&
-          this.editedItem.name_committee4 &&
-          this.editedItem.name_committee5 &&
-          this.editedItem.name_committee6
-        ) {
-          let data = {
-            name_committee1: this.editedItem.name_committee1,
-            name_committee2: this.editedItem.name_committee2,
-            name_committee3: this.editedItem.name_committee3,
-            name_committee4: this.editedItem.name_committee4,
-            name_committee5: this.editedItem.name_committee5,
-            name_committee6: this.editedItem.name_committee6,
-          };
-          this.$fixedKeyApi.post(`/committee/`, data).then((response) => {
-            if (response.data) {
-              console.log("post", response.data);
-              this.close();
-              this.getCommittee();
-            }
-          });
-        } else {
-          alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
-        }
+        // if (
+        //   this.editedItem.name_committee1 &&
+        //   this.editedItem.name_committee2 &&
+        //   this.editedItem.name_committee3 &&
+        //   this.editedItem.name_committee4 &&
+        //   this.editedItem.name_committee5 &&
+        //   this.editedItem.name_committee6
+        // ) {
+        let data = {
+          name_committee1: this.editedItem.name_committee1,
+          name_committee2: this.editedItem.name_committee2,
+          name_committee3: this.editedItem.name_committee3,
+          name_committee4: this.editedItem.name_committee4,
+          name_committee5: this.editedItem.name_committee5,
+          name_committee6: this.editedItem.name_committee6,
+        };
+        this.$fixedKeyApi.post(`/committee/`, data).then((response) => {
+          if (response.data) {
+            console.log("post", response.data);
+            this.close();
+            this.getCommittee();
+          }
+        });
+        // } else {
+        //   alert("กรุณาใส่ข้อมูลกรรมการให้ครบ");
+        // }
       }
     },
   },

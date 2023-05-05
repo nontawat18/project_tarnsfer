@@ -26,7 +26,7 @@
                 </v-icon>
               </div>
               <div v-else>
-                <v-icon small disabled color="grey" @click="deleteItem(item)">
+                <v-icon small color="grey" @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
               </div>
@@ -802,7 +802,12 @@
             </div>
             <div class="mt-10">
               <v-row class="pr-16 pl-16">
-                <v-col cols="6" sm="6" class="pr-0 pb-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee1 != null"
+                  cols="6"
+                  sm="6"
+                  class="pr-0 pb-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     1.
                     ....................................................................................
@@ -823,7 +828,12 @@
                     </v-col>
                   </v-sheet>
                 </v-col>
-                <v-col cols="6" sm="6" class="pl-0 pb-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee2 != null"
+                  cols="6"
+                  sm="6"
+                  class="pl-0 pb-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     2.
                     ....................................................................................
@@ -844,7 +854,12 @@
                     </v-col>
                   </v-sheet>
                 </v-col>
-                <v-col cols="6" sm="6" class="pr-0 pt-0 pb-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee3 != null"
+                  cols="6"
+                  sm="6"
+                  class="pr-0 pt-0 pb-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     3.
                     ....................................................................................
@@ -863,7 +878,12 @@
                     </v-col>
                   </v-sheet>
                 </v-col>
-                <v-col cols="6" sm="6" class="pl-0 pt-0 pb-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee4 != null"
+                  cols="6"
+                  sm="6"
+                  class="pl-0 pt-0 pb-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     4.
                     ....................................................................................
@@ -883,7 +903,12 @@
                     </v-col>
                   </v-sheet>
                 </v-col>
-                <v-col cols="6" sm="6" class="pr-0 pt-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee5 != null"
+                  cols="6"
+                  sm="6"
+                  class="pr-0 pt-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     5.
                     ....................................................................................
@@ -903,7 +928,12 @@
                     </v-col>
                   </v-sheet>
                 </v-col>
-                <v-col cols="6" sm="6" class="pl-0 pt-0 pb-0">
+                <v-col
+                  v-if="equivalentCourseByID.name_committee6 != null"
+                  cols="6"
+                  sm="6"
+                  class="pl-0 pt-0 pb-0"
+                >
                   <v-sheet class="pa-6" outlined>
                     6.
                     ....................................................................................
