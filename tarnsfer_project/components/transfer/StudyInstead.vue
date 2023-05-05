@@ -3,7 +3,7 @@
     <v-stepper v-model="e1">
       <v-stepper-header elevation="0">
         <v-stepper-step :complete="e1 > 1" step="1">
-          เพิ่มรายวิชาที่จะเทียบ
+          เพิ่มรายวิชาที่ขอเทียบ
         </v-stepper-step>
 
         <v-divider></v-divider>
@@ -25,7 +25,7 @@
             <v-row>
               <v-col cols="12" sm="6" class="pt-0 pb-0">
                 <v-combobox
-                  label="วิชาเดิมที่ขอเทียบ"
+                  label="รายวิชาที่ขอเทียบ"
                   outlined
                   :items="schoolCourse"
                   item-text="course_title"
@@ -115,7 +115,6 @@
             </v-row>
           </v-col>
           <v-btn color="grey" dark @click="e1 = 2"> Next </v-btn>
-
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -208,7 +207,6 @@
         </v-stepper-content>
         <v-stepper-content step="3">
           <v-col>
-    
             <v-col>
               <v-row>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
@@ -287,8 +285,6 @@
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
-
-
   </div>
 </template>
 <script>
@@ -341,7 +337,7 @@ export default {
       },
       set() {},
     },
-        userId: {
+    userId: {
       get() {
         if (this.$store.state.users.userId) {
           return this.$store.state.users.userId;

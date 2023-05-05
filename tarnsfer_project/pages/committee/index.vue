@@ -237,7 +237,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "เพิ่มคณะกรรมการ" : "แก้ไขคณะกรรมการ";
     },
     schoolCourse: {
       get() {

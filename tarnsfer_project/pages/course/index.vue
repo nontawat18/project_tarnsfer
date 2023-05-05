@@ -113,7 +113,6 @@
           mdi-delete
         </v-icon>
       </template>
-
     </v-data-table>
   </div>
 </template>
@@ -161,7 +160,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "เพิ่มหลักสูตร" : "แก้ไขหลักสูตร";
     },
     myCourse: {
       get() {
@@ -184,7 +183,6 @@ export default {
     },
   },
 
-
   mounted() {
     this.getMyCourse();
   },
@@ -192,7 +190,6 @@ export default {
     ...mapActions({
       getMyCourse: "subject/getMyCourse",
     }),
-
 
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);

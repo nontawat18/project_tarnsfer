@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
-            label="วิชาที่จะเทียบที่ 1"
+            label="รายวิชาที่ขอเทียบที่ 1"
             :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
@@ -25,7 +25,7 @@
         </v-col>
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
-            label="วิชาที่จะเทียบที่ 2"
+            label="รายวิชาที่ขอเทียบที่ 2"
             :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
@@ -46,7 +46,7 @@
         </v-col>
         <v-col cols="4" class="pl-2 pr-2 pt-2 pb-0">
           <v-combobox
-            label="วิชาที่จะเทียบที 3"
+            label="รายวิชาที่ขอเทียบที่ 3"
             :items="MyCourseCheck"
             item-text="course_title"
             item-value="id"
@@ -65,9 +65,13 @@
             v-model="gradeThere"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0" v-if="nameSubjectTransfer != null">
+        <v-col
+          cols="6"
+          class="pl-2 pr-2 pt-2 pb-0"
+          v-if="nameSubjectTransfer != null"
+        >
           <v-combobox
-            label="วิชาตามหลักสูตร"
+            label="รายวิชาที่ต้องการเทียบ"
             outlined
             :items="schoolCourse"
             item-text="course_title"
@@ -79,7 +83,7 @@
         </v-col>
         <v-col cols="6" class="pl-2 pr-2 pt-2 pb-0" v-else>
           <v-combobox
-            label="วิชาตามหลักสูตร"
+            label="รายวิชาที่ต้องการเทียบ"
             outlined
             :items="schoolCourse"
             item-text="course_title"
@@ -130,7 +134,6 @@ export default {
     };
   },
   computed: {
-  
     schoolCourse: {
       get() {
         if (this.$store.state.subject.schoolCourse) {
@@ -177,10 +180,8 @@ export default {
     this.getMyCourse();
     this.getEquivalentCourse();
     this.getMyCourseCheck();
-  
   },
   methods: {
-    
     ...mapActions({
       getSchoolCourse: "subject/getSchoolCourse",
       getMyCourseCheck: "subject/getMyCourseCheck",

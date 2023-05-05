@@ -3,7 +3,7 @@
     <v-stepper v-model="e1">
       <v-stepper-header elevation="0">
         <v-stepper-step :complete="e1 > 1" step="1">
-          เพิ่มรายวิชาที่จะเทียบ
+          เพิ่มรายวิชาที่ขอเทียบ
         </v-stepper-step>
 
         <v-divider></v-divider>
@@ -125,7 +125,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" class="pt-0 pb-0">
                   <v-combobox
-                    label=" เจ้าหน้าที่ทะเบียน"
+                    label="เจ้าหน้าที่ทะเบียน"
                     outlined
                     dense
                     :items="teacher"
@@ -305,7 +305,7 @@ export default {
       ],
       headers: [
         {
-          text: "รายวิชาที่จะเทียบ",
+          text: "รายวิชาที่ขอเทียบ",
           align: "start",
           sortable: false,
           value: "nameSubjecttext",

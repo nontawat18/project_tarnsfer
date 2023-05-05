@@ -26,7 +26,7 @@
                 </v-icon>
               </div>
               <div v-else>
-                <v-icon small color="grey" @click="deleteItem(item)">
+                <v-icon small disabled color="grey" @click="deleteItem(item)">
                   mdi-pencil
                 </v-icon>
               </div>
@@ -1074,7 +1074,7 @@ export default {
     _uuid: "",
     headers: [
       {
-        text: "รายวิชาที่จะเทียบ",
+        text: "รายวิชาที่ขอเทียบ",
         align: "start",
         sortable: false,
         value: "course_enroll.course_title",

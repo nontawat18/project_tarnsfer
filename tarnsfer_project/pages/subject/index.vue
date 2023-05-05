@@ -8,69 +8,69 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>คลังวิชา</v-toolbar-title>
+          <v-toolbar-title>คลังรายวิชาที่ขอเทียบ</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="90%">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  color=""
-                  elevation="0"
-                  fab
-                  small
-                  class="mb-2"
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  <v-icon> mdi-plus</v-icon>
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formTitle }}</span>
-                </v-card-title>
+          <v-dialog v-model="dialog" max-width="90%">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color=""
+                elevation="0"
+                fab
+                small
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon> mdi-plus</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
 
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.course_code"
-                          label="รหัสวิชา"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.course_title"
-                          label="ชื่อวิชา"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.course_code"
+                        label="รหัสวิชา"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.course_title"
+                        label="ชื่อวิชา"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
 
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          v-model="editedItem.credit_type"
-                          label="ประเภทรายวิชา"
-                          :items="type"
-                          item-text="name"
-                          item-value="id"
-                          outlined
-                          dense
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.credit"
-                          label="หน่วยกิจ"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <!-- <v-col cols="12" sm="6" md="4">
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        v-model="editedItem.credit_type"
+                        label="ประเภทรายวิชา"
+                        :items="type"
+                        item-text="name"
+                        item-value="id"
+                        outlined
+                        dense
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.credit"
+                        label="หน่วยกิจ"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <!-- <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.grade"
                           label="เกรด"
@@ -78,64 +78,66 @@
                           dense
                         ></v-text-field>
                       </v-col> -->
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.school"
-                          label="วิทยาลัย/มหาวิทยาลัย"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.course_year"
-                          label="ปี พ.ศ"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4" v-if="formTitle == 'Edit Item'">
-                        <v-text-field
-                          v-model="editedItem.status"
-                          label="สถานะ"
-                          outlined
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <!-- <v-text-field
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.school"
+                        label="วิทยาลัย/มหาวิทยาลัย"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.course_year"
+                        label="ปี พ.ศ"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                      v-if="formTitle == 'แก้ไขรายวิชาที่ขอเทียบ'"
+                    >
+                      <v-text-field
+                        v-model="editedItem.status"
+                        label="สถานะ"
+                        outlined
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12">
+                      <!-- <v-text-field
                         v-model="editedItem.description_file"
                         label="คำอธิบายรายวิชา"
                         outlined
                         dense
                       ></v-text-field> -->
-                        <!-- <v-file-input
+                      <!-- <v-file-input
                         outlined
                         dense
                         label="คำอธิบายรายวิชา"
                         v-model="image"
                         @change="uploadImage(image)"
                       ></v-file-input> -->
-                        <v-textarea
-                          outlined
-                          dense
-                          label="คำอธิบายรายวิชา"
-                          v-model="editedItem.description_file"
-                        ></v-textarea>
-                      </v-col>
-
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
-                  <v-btn color="blue darken-1" text @click="save">
-                    บันทึก
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+                      <v-textarea
+                        outlined
+                        dense
+                        label="คำอธิบายรายวิชา"
+                        v-model="editedItem.description_file"
+                      ></v-textarea>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="close"> ยกเลิก </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> บันทึก </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -172,7 +174,13 @@
           </v-icon>
         </div>
         <div v-else>
-          <v-icon small color="primary" disabled class="mr-2" @click="editItem(item)">
+          <v-icon
+            small
+            color="primary"
+            disabled
+            class="mr-2"
+            @click="editItem(item)"
+          >
             mdi-pencil
           </v-icon>
           <v-icon small color="red" disabled @click="deleteItem(item)">
@@ -180,8 +188,6 @@
           </v-icon>
         </div>
       </template>
-    
-
     </v-data-table>
   </div>
 </template>
@@ -280,7 +286,7 @@ export default {
       description_file: "",
       grade: "",
       school: "",
-      status:""
+      status: "",
     },
     defaultItem: {
       id: 0,
@@ -292,14 +298,15 @@ export default {
       description_file: "",
       grade: "",
       school: "",
-      status:""
-
+      status: "",
     },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1
+        ? "เพิ่มรายวิชาที่ขอเทียบ"
+        : "แก้ไขรายวิชาที่ขอเทียบ";
     },
     schoolCourse: {
       get() {
@@ -352,7 +359,6 @@ export default {
     },
   },
 
-
   mounted() {
     this.getSchoolCourse();
     this.getMyCourse();
@@ -364,7 +370,6 @@ export default {
     }),
     download(item) {
       console.log("item", item);
-
 
       const linkSource = item.description_file;
       const downloadLink = document.createElement("a");
@@ -378,7 +383,7 @@ export default {
       console.log("image", image);
       if (image) {
         let file = await image;
-       
+
         const reader = new FileReader();
         reader.readAsDataURL(file);
 
@@ -392,7 +397,6 @@ export default {
         console.log("base64", this.base64);
       }
     },
- 
 
     editItem(item) {
       this.editedIndex = this.myCourse.indexOf(item);
@@ -409,8 +413,6 @@ export default {
       this.idSubject = item.id;
       console.log("item", this.idSubject, item);
     },
-
-
 
     close() {
       this.dialog = false;

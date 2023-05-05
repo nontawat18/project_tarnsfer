@@ -75,7 +75,7 @@
                         sm="6"
                         cols="12"
                         md="4"
-                        v-if="formTitle == 'New Item'"
+                        v-if="formTitle == 'เพิ่มข้อมูลผู้ใช้'"
                       >
                         <v-text-field
                           v-model="editedItem.password"
@@ -94,7 +94,7 @@
                         sm="6"
                         cols="12"
                         md="4"
-                        v-if="formTitle == 'New Item'"
+                        v-if="formTitle == 'เพิ่มข้อมูลผู้ใช้'"
                       >
                         <v-text-field
                           v-model="editedItem.confirm_password"
@@ -292,7 +292,9 @@ export default {
       set() {},
     },
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1
+        ? "เพิ่มข้อมูลผู้ใช้"
+        : "แก้ไขช้อมูลผู้ใช้";
     },
     schoolCourse: {
       get() {
